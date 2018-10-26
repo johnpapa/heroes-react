@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 
 class HeroList extends Component {
-  constructor(props) {
-    super(props);
-    const { handleSelectHero } = props;
-    this.handleSelectHero = handleSelectHero;
-    // this.selectHero = this.selectHero.bind(this);
-  }
-
   selectHero = e => {
     // console.log(e.currentTarget);
-    const index = +e.currentTarget.dataset.id;
+    const index = +e.currentTarget.dataset.index;
     const { heroes } = this.props;
     const selectedHero = heroes[index];
     // console.log(selectedHero);
-    this.handleSelectHero(selectedHero);
+    this.props.handleSelectHero(selectedHero);
   };
 
   render() {
@@ -23,7 +16,7 @@ class HeroList extends Component {
     return (
       <ul className="list">
         {heroes.map((hero, index) => (
-          <li key={hero.id} data-id={index} onClick={this.selectHero}>
+          <li key={hero.id} data-index={index} onClick={this.selectHero} role="button">
             <div className="columns is-variable is-2">
               <div className="column is-narrow icons">
                 <nav className="level is-mobile">

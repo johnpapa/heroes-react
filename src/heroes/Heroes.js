@@ -13,13 +13,9 @@ class Heroes extends Component {
     this.state = {
       heroes: [],
       selectedHero: {}
-      // person: {
-      //   title: 'my title',
-      //   age: 24
-      // }
     };
-    // this.getHeroes = this.getHeroes.bind(this);
-    // this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleCancelHero = this.handleCancelHero.bind(this);
+    this.handleSaveHero = this.handleSaveHero.bind(this);
     this.handleSelectHero = this.handleSelectHero.bind(this);
   }
 
@@ -35,10 +31,23 @@ class Heroes extends Component {
   };
 
   getHeroesApi = async () => {
-    // let index = 1;
     const response = await axios.get(`${API}/heroes`);
     if (response.status !== 200) throw Error(response.message);
     return response.data;
+  };
+
+  putHeroesApi = async hero => {
+    const response = await axios.put(`${API}/heroes/${hero.id}`, { hero });
+    if (response.status !== 200) throw Error(response.message);
+    return response.data;
+  };
+
+  handleCancelHero = () => {
+    this.setState({ selectedHero: {} });
+  };
+
+  handleSaveHero = hero => {
+    this.putHeroesApi(hero);
   };
 
   handleSelectHero = selectedHero => {
@@ -56,7 +65,6 @@ class Heroes extends Component {
   // }
 
   render() {
-    // let { heroes, person: p } = this.state;
     let { heroes, selectedHero } = this.state;
 
     return (
@@ -98,7 +106,11 @@ class Heroes extends Component {
               <div className="panel">
                 <p className="panel-heading">Details</p>
                 <div className="panel-block">
-                  <HeroDetail hero={selectedHero} />
+                  <HeroDetail
+                    hero={selectedHero}
+                    handleCancelHero={this.handleCancelHero}
+                    handleSaveHero={this.handleSaveHero}
+                  />
                 </div>
               </div>
             ) : null}
