@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class HeroList extends Component {
   constructor(props) {
@@ -9,24 +9,23 @@ class HeroList extends Component {
   selectHero = e => {
     // console.log(e.currentTarget);
     const index = +e.currentTarget.dataset.id;
-    const {heroes} = this.props
+    const { heroes } = this.props;
     const selectedHero = heroes[index];
     // console.log(selectedHero);
-  }
+  };
 
   render() {
-    let {heroes} = this.props;
+    let { heroes } = this.props;
 
     return (
       <ul className="list">
-      {
-        heroes.map((hero, index) =>
+        {heroes.map((hero, index) => (
           <li key={hero.id} data-id={index} onClick={this.selectHero}>
             <div className="columns is-variable is-2">
               <div className="column">
                 <article className="box content">
                   <div className="name">{hero.name}</div>
-                  <div className="saying">{hero.saying}</div>
+                  <div className="description">{hero.description}</div>
                 </article>
               </div>
               <div className="column is-narrow icons">
@@ -34,7 +33,7 @@ class HeroList extends Component {
                   <div className="level-right">
                     <a className="level-item" aria-label="delete">
                       <span className="icon is-small">
-                        <i className="fas fa-trash-alt" aria-hidden="true"></i>
+                        <i className="fas fa-trash-alt" aria-hidden="true" />
                       </span>
                     </a>
                   </div>
@@ -42,8 +41,7 @@ class HeroList extends Component {
               </div>
             </div>
           </li>
-        )
-      }
+        ))}
       </ul>
     );
   }

@@ -1,4 +1,4 @@
-import { Router, Link } from "@reach/router";
+import { Link, Router } from '@reach/router';
 import 'bulma/css/bulma.css';
 import React, { Component } from 'react';
 import Header from './Header';
@@ -10,8 +10,7 @@ const NavLink = props => (
     {...props}
     getProps={({ isCurrent }) => {
       return {
-        className:
-          isCurrent ? "activeLink" : ""
+        className: isCurrent ? 'activeLink' : ''
       };
     }}
   />
@@ -21,14 +20,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header></Header>
+        <Header />
         <div className="section">
           <div className="columns">
             <aside className="column is-2">
               <nav className="menu">
-                <p className="menu-label">
-                  Menu
-                </p>
+                <p className="menu-label">Menu</p>
                 <ul className="menu-list">
                   {/* <li><a className="is-active">Heroes</a></li> */}
                   <NavLink to="heroes">Heroes</NavLink>
@@ -39,12 +36,10 @@ class App extends Component {
             </aside>
 
             <main className="column">
-              {/* <Heroes path="/heroes" /> */}
               <Router>
-              <Heroes path="/heroes" />
-            </Router>
+                <Heroes path="/heroes" />
+              </Router>
             </main>
-
           </div>
         </div>
       </div>
