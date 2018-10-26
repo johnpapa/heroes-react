@@ -3,6 +3,11 @@ $primary: #00b3e6;
 $link: #ff4081;
 @import 'bulma/bulma.sass';
 
+.menu-list a.activeLink {
+  color: #fff;
+  background-color: $link;
+}
+
 // * {
 //   font-family: Arial;
 // }

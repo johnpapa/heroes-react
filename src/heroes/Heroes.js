@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import HeroList from './HeroList';
 import HeroDetail from './HeroDetail';
+import HeroList from './HeroList';
 
 // changin css classes - use {} to put a ternary in here
 // pass args to clic  https://reactjs.org/docs/handling-events.html
@@ -64,51 +64,50 @@ class Heroes extends Component {
     let {heroes, person: p} = this.state;
 
     return (
-      <main className="column">
-        <div className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <div className="title">Heroes</div>
-            </div>
-          </div>
-          {/* <div className="level-right">
-            <div className="level-item">
-              <button type="button" className="button is-small">
-                March 8, 2017 - April 6, 2017
-              </button>
-            </div>
-          </div> */}
-        </div>
-
       <div>
-        <div className="columns is-multiline is-8 is-variable">
-          <div className="column is-6">
-            <div className="field is-grouped is-grouped-left">
-              <div className="control">
-                <button className="button is-light">Add</button>
-              </div>
-            </div>
-            <HeroList heroes={heroes}></HeroList>
+
+      <div className="level">
+        <div className="level-left">
+          <div className="level-item">
+            <div className="title">Heroes</div>
           </div>
-          <div className="column is-6">
-            <div className="panel">
-              <p className="panel-heading">
-                Details
-              </p>
-              <div className="panel-block">
-                <HeroDetail></HeroDetail>
-              </div>
+        </div>
+        {/* <div className="level-right">
+          <div className="level-item">
+            <button type="button" className="button is-small">
+              March 8, 2017 - April 6, 2017
+            </button>
+          </div>
+        </div> */}
+      </div>
+
+      <div className="columns is-multiline is-8 is-variable">
+        <div className="column is-6">
+          <div className="field is-grouped is-grouped-left">
+            <div className="control">
+              <button className="button is-light">Add</button>
+            </div>
+          </div>
+          <HeroList heroes={heroes}></HeroList>
+        </div>
+        <div className="column is-6">
+          <div className="panel">
+            <p className="panel-heading">
+              Details
+            </p>
+            <div className="panel-block">
+              <HeroDetail></HeroDetail>
             </div>
           </div>
         </div>
+      </div>
 
         {/* <button onClick={this.getMoreHeroes}>Refresh</button>
         <input value={p.title} onChange={this.handleTitleChange}></input>
         <span>{p.title}</span>
         {(this.props.isVillain) ? 'IS VILLAIN' : 'IS HERO'} */}
-
       </div>
-      </main>
+
     );
   }
 }

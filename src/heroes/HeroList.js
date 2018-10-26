@@ -21,8 +21,7 @@ class HeroList extends Component {
       <ul className="list">
       {
         heroes.map((hero, index) =>
-          <li key={hero.id}>
-            <a data-id={index} onClick={this.selectHero} aria-label="select" href="/">
+          <li key={hero.id} data-id={index} onClick={this.selectHero}>
             <div className="columns is-variable is-2">
               <div className="column">
                 <article className="box content">
@@ -42,7 +41,6 @@ class HeroList extends Component {
                 </nav>
               </div>
             </div>
-            </a>
           </li>
         )
       }
