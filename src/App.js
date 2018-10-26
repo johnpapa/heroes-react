@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import React, { Component } from 'react';
 import logo from './globe.png';
-import Heroes from './Heroes';
+import Heroes from './heroes/Heroes';
 import './styles.scss';
 
 class App extends Component {

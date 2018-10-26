@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 
-// changin css classes - use {} to put a ternary in here
-// pass args to clic  https://reactjs.org/docs/handling-events.html
-// routing & navigation (reach router)
-// use obejct literal, not a class (or look at prop types or a type def)
-// look up prop types for validation of props
-
 class HeroDetail extends Component {
   render() {
     return (

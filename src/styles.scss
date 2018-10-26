@@ -14,7 +14,6 @@ $link: #ff4081;
 //   margin: 2em;
 // }
 
-
 // body,
 // input[text],
 // button {
@@ -82,7 +81,7 @@ $link: #ff4081;
       margin-bottom: 1em;
       &:hover {
         color: #fff;
-        background-color: $primary;
+        background-color: $link;
         // left: 0.1em;
         a {
           color: #fff;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HeroList from './HeroList';
 import HeroDetail from './HeroDetail';
 
 // changin css classes - use {} to put a ternary in here
@@ -19,7 +20,6 @@ class Heroes extends Component {
     };
     this.getMoreHeroes = this.getMoreHeroes.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.selectHero = this.selectHero.bind(this);
   }
 
   componentDidMount() {
@@ -60,16 +60,8 @@ class Heroes extends Component {
     this.setState(newState);
   }
 
-  selectHero(e) {
-    // const heroId = +e.target.dataset.heroId;
-    const index = +e.target.dataset.index;
-    const selectedHero = this.state.heroes[index];
-    // const selectedHero = this.state.heroes.filter(h => h.id === heroId)[0];
-    console.log(selectedHero);
-  }
-
   render() {
-    let {heroes: h, person: p} = this.state;
+    let {heroes, person: p} = this.state;
 
     return (
       <main className="column">
@@ -79,62 +71,29 @@ class Heroes extends Component {
               <div className="title">Heroes</div>
             </div>
           </div>
-          <div className="level-right">
+          {/* <div className="level-right">
             <div className="level-item">
               <button type="button" className="button is-small">
                 March 8, 2017 - April 6, 2017
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
 
       <div>
         <div className="columns is-multiline is-8 is-variable">
           <div className="column is-6">
-                <div className="field is-grouped is-grouped-left">
-                  <div className="control">
-                    <button className="button is-light">Add</button>
-                  </div>
-                </div>
-                <ul className="list">
-                {
-                  h.map((hero, index) =>
-                      /* <button className="delete-button">X</button> */
-                        <li key={hero.id} data-index={index} onClick={this.selectHero}>
-                          <div className="columns is-variable is-2">
-                            <div className="column">
-                              <article className="box">
-                                <div className="content">
-                                  <p>
-                                  <div className="name">{hero.name}</div>
-                                  {/* <div className="badge">{hero.id}</div> */}
-
-                                  <div className="saying">{hero.saying}</div>
-                                  </p>
-                                </div>
-                              </article>
-                            </div>
-                            <div className="column is-narrow icons">
-                              <nav className="level is-mobile">
-                                <div className="level-right">
-                                  <a className="level-item" aria-label="delete">
-                                    <span className="icon is-small">
-                                      <i className="fas fa-trash-alt" aria-hidden="true"></i>
-                                    </span>
-                                  </a>
-                                </div>
-                              </nav>
-                            </div>
-                          </div>
-                        </li>
-                  )
-                }
-                </ul>
+            <div className="field is-grouped is-grouped-left">
+              <div className="control">
+                <button className="button is-light">Add</button>
+              </div>
+            </div>
+            <HeroList heroes={heroes}></HeroList>
           </div>
           <div className="column is-6">
             <div className="panel">
               <p className="panel-heading">
-                  Details
+                Details
               </p>
               <div className="panel-block">
                 <HeroDetail></HeroDetail>
