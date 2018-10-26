@@ -24,9 +24,11 @@ class Heroes extends Component {
     this.getHeroes();
   }
 
+  addHero = () => {};
+
   getHeroes = async () => {
     const newHeroes = await this.getHeroesApi();
-    const heroes = [...this.state.heroes, ...newHeroes];
+    const heroes = [...newHeroes];
     this.setState({ heroes }, () => captains.log(this.state));
   };
 
@@ -49,6 +51,7 @@ class Heroes extends Component {
   handleSaveHero = hero => {
     this.putHeroesApi(hero).then(() => {
       this.handleCancelHero();
+      this.getHeroes();
     });
   };
 
@@ -56,15 +59,6 @@ class Heroes extends Component {
     captains.log(`you selected ${selectedHero.name}`);
     this.setState({ selectedHero });
   };
-
-  // handleTitleChange(event) {
-  //   const newTitle = event.target.value;
-  //   const newPerson = {
-  //     person: Object.assign(this.state.person, { title: newTitle })
-  //   };
-  //   captains.log(newPerson);
-  //   this.setState(newPerson);
-  // }
 
   render() {
     let { heroes, selectedHero } = this.state;
@@ -77,18 +71,16 @@ class Heroes extends Component {
               <div className="title">Heroes</div>
               <div className="field is-grouped is-grouped-left">
                 <div className="control">
-                  <button className="button is-light">Add</button>
+                  <button className="button is-light" onClick={this.addHero}>
+                    Add
+                  </button>
+                  <button className="button is-light" onClick={this.getHeroes}>
+                    Refresh
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="level-right">
-            <div className="level-item">
-              <button type="button" className="button is-small">
-                March 8, 2017 - April 6, 2017
-              </button>
-            </div>
-          </div> */}
         </div>
 
         <div className="columns is-multiline is-8 is-variable">
@@ -119,11 +111,6 @@ class Heroes extends Component {
             ) : null}
           </div>
         </div>
-
-        {/* <button onClick={this.getMoreHeroes}>Refresh</button>
-          <input value={p.title} onChange={this.handleTitleChange}></input>
-          <span>{p.title}</span>
-          {(this.props.isVillain) ? 'IS VILLAIN' : 'IS HERO'} */}
       </div>
     );
   }
