@@ -14,9 +14,9 @@ class Heroes extends Component {
       heroes: [],
       selectedHero: {}
     };
-    this.handleCancelHero = this.handleCancelHero.bind(this);
-    this.handleSaveHero = this.handleSaveHero.bind(this);
-    this.handleSelectHero = this.handleSelectHero.bind(this);
+    // this.handleCancelHero = this.handleCancelHero.bind(this); // dont need these if you use arrow functions
+    // this.handleSaveHero = this.handleSaveHero.bind(this);
+    // this.handleSelectHero = this.handleSelectHero.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +37,7 @@ class Heroes extends Component {
   };
 
   putHeroesApi = async hero => {
-    const response = await axios.put(`${API}/heroes/${hero.id}`, { hero });
+    const response = await axios.put(`${API}/hero/${hero.id}`, hero);
     if (response.status !== 200) throw Error(response.message);
     return response.data;
   };
@@ -47,7 +47,9 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    this.putHeroesApi(hero);
+    this.putHeroesApi(hero).then(() => {
+      this.handleCancelHero();
+    });
   };
 
   handleSelectHero = selectedHero => {
@@ -110,6 +112,7 @@ class Heroes extends Component {
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
                     handleSaveHero={this.handleSaveHero}
+                    key={selectedHero.id}
                   />
                 </div>
               </div>

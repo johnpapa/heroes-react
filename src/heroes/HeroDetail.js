@@ -1,35 +1,18 @@
 import React, { Component } from 'react';
-// const captains = console;
+const captains = console;
 
 class HeroDetail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hero: props.hero
-    };
-  }
-
-  static getDerivedStateFromProps(props /*, state */) {
-    return {hero: props.hero};
-  }
-
-  handleHeroChange = newHeroFragment => {
+  handleSave = () => {
     const hero = {
-      hero: Object.assign(this.state.hero, newHeroFragment)
+      id: this.idEl.value,
+      name: this.nameEl.value,
+      description: this.descriptionEl.value
     };
-    this.setState({ hero });
+    this.props.handleSaveHero(hero);
   };
 
-  // handleIdChange = event => this.handleHeroChange({ id: event.target.value });
-
-  handleDescriptionChange = event =>
-    this.handleHeroChange({ description: event.target.value });
-
-  handleNameChange = event =>
-    this.handleHeroChange({ name: event.target.value });
-
   render() {
-    let { hero } = this.state;
+    let { hero } = this.props;
 
     return (
       <div className="editarea">
@@ -37,7 +20,12 @@ class HeroDetail extends Component {
           <div className="field">
             <label className="label">id: </label>
             <div className="control">
-              <input className="input" type="text" readOnly value={hero.id} />
+              <input
+                className="input"
+                type="text"
+                defaultValue={hero.id}
+                ref={el => (this.idEl = el)}
+              />
             </div>
           </div>
           <div className="field">
@@ -47,8 +35,8 @@ class HeroDetail extends Component {
                 className="input"
                 type="text"
                 placeholder="e.g Colleen"
-                value={hero.name}
-                onChange={this.handleNameChange}
+                defaultValue={hero.name}
+                ref={el => (this.nameEl = el)}
               />
             </div>
           </div>
@@ -59,8 +47,8 @@ class HeroDetail extends Component {
                 className="input"
                 type="text"
                 placeholder="e.g dance fight!"
-                value={hero.description}
-                onChange={this.handleDescriptionChange}
+                defaultValue={hero.description}
+                ref={el => (this.descriptionEl = el)}
               />
             </div>
           </div>
@@ -74,10 +62,7 @@ class HeroDetail extends Component {
               </button>
             </div>
             <div className="control">
-              <button
-                className="button is-primary"
-                onClick={this.props.handleSaveHero}
-              >
+              <button className="button is-primary" onClick={this.handleSave}>
                 Save
               </button>
             </div>
