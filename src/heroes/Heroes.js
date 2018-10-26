@@ -7,24 +7,20 @@ import HeroList from './HeroList';
 const API = '/api';
 const captains = console;
 
-// changin css classes - use {} to put a ternary in here
-// pass args to clic  https://reactjs.org/docs/handling-events.html
-// routing & navigation (reach router)
-// use obejct literal, not a class (or look at prop types or a type def)
-// look up prop types for validation of props
-
 class Heroes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       heroes: [],
-      person: {
-        title: 'my title',
-        age: 24
-      }
+      selectedHero: {}
+      // person: {
+      //   title: 'my title',
+      //   age: 24
+      // }
     };
     // this.getHeroes = this.getHeroes.bind(this);
     // this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleSelectHero = this.handleSelectHero.bind(this);
   }
 
   componentDidMount() {
@@ -45,17 +41,23 @@ class Heroes extends Component {
     return response.data;
   };
 
-  handleTitleChange(event) {
-    const newTitle = event.target.value;
-    const newPerson = {
-      person: Object.assign(this.state.person, { title: newTitle })
-    };
-    captains.log(newPerson);
-    this.setState(newPerson);
-  }
+  handleSelectHero = selectedHero => {
+    captains.log(`you selected ${selectedHero.name}`);
+    this.setState({ selectedHero });
+  };
+
+  // handleTitleChange(event) {
+  //   const newTitle = event.target.value;
+  //   const newPerson = {
+  //     person: Object.assign(this.state.person, { title: newTitle })
+  //   };
+  //   captains.log(newPerson);
+  //   this.setState(newPerson);
+  // }
 
   render() {
-    let { heroes, person: p } = this.state;
+    // let { heroes, person: p } = this.state;
+    let { heroes, selectedHero } = this.state;
 
     return (
       <div>
@@ -63,6 +65,11 @@ class Heroes extends Component {
           <div className="level-left">
             <div className="level-item">
               <div className="title">Heroes</div>
+              <div className="field is-grouped is-grouped-left">
+                <div className="control">
+                  <button className="button is-light">Add</button>
+                </div>
+              </div>
             </div>
           </div>
           {/* <div className="level-right">
@@ -76,20 +83,25 @@ class Heroes extends Component {
 
         <div className="columns is-multiline is-8 is-variable">
           <div className="column is-6">
-            <div className="field is-grouped is-grouped-left">
-              <div className="control">
-                <button className="button is-light">Add</button>
+            <div className="panel">
+              <p className="panel-heading">Hero List</p>
+              <div className="panel-block">
+                <HeroList
+                  heroes={heroes}
+                  handleSelectHero={this.handleSelectHero}
+                />
               </div>
             </div>
-            <HeroList heroes={heroes} />
           </div>
           <div className="column is-6">
-            <div className="panel">
-              <p className="panel-heading">Details</p>
-              <div className="panel-block">
-                <HeroDetail />
+            {selectedHero && selectedHero.name ? (
+              <div className="panel">
+                <p className="panel-heading">Details</p>
+                <div className="panel-block">
+                  <HeroDetail hero={selectedHero} />
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
 

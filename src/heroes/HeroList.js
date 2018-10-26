@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class HeroList extends Component {
   constructor(props) {
     super(props);
-    this.selectHero = this.selectHero.bind(this);
+    const { handleSelectHero } = props;
+    this.handleSelectHero = handleSelectHero;
+    // this.selectHero = this.selectHero.bind(this);
   }
 
   selectHero = e => {
@@ -12,6 +14,7 @@ class HeroList extends Component {
     const { heroes } = this.props;
     const selectedHero = heroes[index];
     // console.log(selectedHero);
+    this.handleSelectHero(selectedHero);
   };
 
   render() {
@@ -22,6 +25,18 @@ class HeroList extends Component {
         {heroes.map((hero, index) => (
           <li key={hero.id} data-id={index} onClick={this.selectHero}>
             <div className="columns is-variable is-2">
+              <div className="column is-narrow icons">
+                <nav className="level is-mobile">
+                  <div className="level-right">
+                    <a className="level-item" aria-label="delete">
+                      <span className="icon is-small">
+                        {/* <i className="fas fa-trash-alt" aria-hidden="true" /> */}
+                        &nbsp;
+                      </span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
               <div className="column">
                 <article className="box content">
                   <div className="name">{hero.name}</div>

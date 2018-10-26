@@ -19,6 +19,10 @@ $link: #ff4081;
 //   margin: 2em;
 // }
 
+button {
+  margin: 1em;
+}
+
 // body,
 // input[text],
 // button {
@@ -66,106 +70,33 @@ $link: #ff4081;
 }
 
 .list {
-  // float: left;
-  // margin: 0 0 2em 0;
-  // list-style-type: none;
-  // padding: 0;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
   width: 100%;
   box-shadow: none;
   li {
     cursor: pointer;
-    // position: relative;
-    // left: 0;
-    // background-color: #eee;
-    // margin: 0.5em;
-    // padding: 0.5em;
-    // height: 3em;
-    // border-radius: 4px;
-    // width: 100%;
     .box {
       margin-bottom: 1em;
       &:hover {
         color: #fff;
         background-color: $link;
-        // left: 0.1em;
         a {
           color: #fff;
         }
       }
       &.selected:hover {
-        /*background-color: #BBD8DC !important;*/
         color: white;
       }
     }
   }
-  .saying {
+  .description {
     margin: 5px 0;
   }
   .name {
     font-weight: bold;
   }
-  // .badge {
-  //   /* display: inline-block; */
-  //   float: left;
-  //   font-size: small;
-  //   color: white;
-  //   padding: 0.7em 0.7em 0 0.5em;
-  //   background-color: #607d8b;
-  //   background-color: rgb(0, 120, 215);
-  //   background-color: rgb(134, 183, 221);
-  //   line-height: 1em;
-  //   position: relative;
-  //   left: -1px;
-  //   top: -4px;
-  //   height: 3em;
-  //   margin-right: 0.8em;
-  //   border-radius: 4px 0 0 4px;
-  //   width: 1.2em;
-  // }
 }
-
-// .header-bar {
-//   background-color: rgb(0, 120, 215);
-//   height: 4px;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-// }
-
-// label {
-//   display: inline-block;
-//   width: 4em;
-//   margin: 0.5em 0;
-//   color: #888;
-//   &.value {
-//     margin-left: 10px;
-//     font-size: 14px;
-//   }
-// }
-
-// input {
-//   height: 2em;
-//   font-size: 1em;
-//   padding-left: 0.4em;
-//   &::placeholder {
-//     color: lightgray;
-//     font-weight: normal;
-//     font-size: 12px;
-//     letter-spacing: 3px;
-//   }
-// }
-
 .editarea {
-  //   float: left;
-  //   input {
-  //     margin: 4px;
-  //     height: 20px;
-  //     color: rgb(0, 120, 215);
-  //   }
-  //   button {
-  //     margin: 8px;
-  //   }
-  //   .editfields {
-  //     margin-left: 12px;
-  //   }
   width: 100%;
 }

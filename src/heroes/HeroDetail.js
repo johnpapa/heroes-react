@@ -1,37 +1,42 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class HeroDetail extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    let { hero } = this.props;
+
     return (
       <div className="editarea">
         <div>
-          <div className="editfields">
-            <div className="field">
-              <label className="label">id: </label>
-              <div className="control">
-                <input className="input" type="text" placeholder="e.g 275" />
-                <label className="value">selectedHero.id</label>
-              </div>
+          <div className="field">
+            <label className="label">id: </label>
+            <div className="control">
+              <input className="input" type="text" readOnly value={hero.id} />
             </div>
-            <div className="field">
-              <label className="label">name: </label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="e.g Colleen"
-                />
-              </div>
+          </div>
+          <div className="field">
+            <label className="label">name: </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                placeholder="e.g Colleen"
+                value={hero.name}
+              />
             </div>
-            <div className="field">
-              <label className="label">saying: </label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="e.g dance fight!"
-                />
-              </div>
+          </div>
+          <div className="field">
+            <label className="label">description: </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                placeholder="e.g dance fight!"
+                value={hero.description}
+              />
             </div>
           </div>
           <div className="field is-grouped is-grouped-right">
