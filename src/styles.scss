@@ -1,83 +1,98 @@
-/* You can add global styles to this file, and also import other style files */
+// @import "bulma/utilities.sass";
+$primary: #00b3e6;
+$link: #ff4081;
+@import 'bulma/bulma.sass';
 
-* {
-  font-family: Arial;
-}
-h2 {
-  color: #444;
-  font-weight: lighter;
-}
-body {
-  margin: 2em;
+// * {
+//   font-family: Arial;
+// }
+// h2 {
+//   color: #444;
+//   font-weight: lighter;
+// }
+// body {
+//   margin: 2em;
+// }
+
+
+// body,
+// input[text],
+// button {
+//   color: #888;
+//   // font-family: Cambria, Georgia;
+// }
+// button {
+//   font-size: 14px;
+//   font-family: Arial;
+//   background-color: #eee;
+//   border: none;
+//   padding: 5px 10px;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   cursor: hand;
+//   &:hover {
+//     background-color: #cfd8dc;
+//   }
+//   &.delete-button {
+//     float: right;
+//     background-color: gray !important;
+//     background-color: rgb(216, 59, 1) !important;
+//     color: white;
+//     padding: 4px;
+//     position: relative;
+//     font-size: 12px;
+//   }
+// }
+// div {
+//   margin: 0.1em;
+// }
+
+// .selected {
+//   background-color: #cfd8dc !important;
+//   background-color: rgb(0, 120, 215) !important;
+//   color: white;
+// }
+
+.content {
+  border: 0px red solid;
 }
 
-body,
-input[text],
-button {
-  color: #888;
-  // font-family: Cambria, Georgia;
-}
-button {
-  font-size: 14px;
-  font-family: Arial;
-  background-color: #eee;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  cursor: hand;
-  &:hover {
-    background-color: #cfd8dc;
-  }
-  &.delete-button {
-    float: right;
-    background-color: gray !important;
-    background-color: rgb(216, 59, 1) !important;
-    color: white;
-    padding: 4px;
-    position: relative;
-    font-size: 12px;
-  }
-}
-div {
-  margin: 0.1em;
+.column.is-narrow.icons {
+  display: flex;
 }
 
-.selected {
-  background-color: #cfd8dc !important;
-  background-color: rgb(0, 120, 215) !important;
-  color: white;
-}
-
-.heroes {
-  float: left;
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
+.list {
+  // float: left;
+  // margin: 0 0 2em 0;
+  // list-style-type: none;
+  // padding: 0;
+  width: 100%;
+  box-shadow: none;
   li {
     cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #eee;
-    margin: 0.5em;
-    padding: 0.5em;
-    height: 3em;
-    border-radius: 4px;
-    width: 17em;
-    &:hover {
-      color: #607d8b;
-      color: rgb(0, 120, 215);
-      background-color: #ddd;
-      left: 0.1em;
+    // position: relative;
+    // left: 0;
+    // background-color: #eee;
+    // margin: 0.5em;
+    // padding: 0.5em;
+    // height: 3em;
+    // border-radius: 4px;
+    // width: 100%;
+    .box {
+      margin-bottom: 1em;
+      &:hover {
+        color: #fff;
+        background-color: $primary;
+        // left: 0.1em;
+        a {
+          color: #fff;
+        }
+      }
+      &.selected:hover {
+        /*background-color: #BBD8DC !important;*/
+        color: white;
+      }
     }
-    &.selected:hover {
-      /*background-color: #BBD8DC !important;*/
-      color: white;
-    }
-  }
-  .text {
-    position: relative;
-    top: -3px;
   }
   .saying {
     margin: 5px 0;
@@ -85,67 +100,68 @@ div {
   .name {
     font-weight: bold;
   }
-  .badge {
-    /* display: inline-block; */
-    float: left;
-    font-size: small;
-    color: white;
-    padding: 0.7em 0.7em 0 0.5em;
-    background-color: #607d8b;
-    background-color: rgb(0, 120, 215);
-    background-color: rgb(134, 183, 221);
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 3em;
-    margin-right: 0.8em;
-    border-radius: 4px 0 0 4px;
-    width: 1.2em;
-  }
+  // .badge {
+  //   /* display: inline-block; */
+  //   float: left;
+  //   font-size: small;
+  //   color: white;
+  //   padding: 0.7em 0.7em 0 0.5em;
+  //   background-color: #607d8b;
+  //   background-color: rgb(0, 120, 215);
+  //   background-color: rgb(134, 183, 221);
+  //   line-height: 1em;
+  //   position: relative;
+  //   left: -1px;
+  //   top: -4px;
+  //   height: 3em;
+  //   margin-right: 0.8em;
+  //   border-radius: 4px 0 0 4px;
+  //   width: 1.2em;
+  // }
 }
 
-.header-bar {
-  background-color: rgb(0, 120, 215);
-  height: 4px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+// .header-bar {
+//   background-color: rgb(0, 120, 215);
+//   height: 4px;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+// }
 
-label {
-  display: inline-block;
-  width: 4em;
-  margin: 0.5em 0;
-  color: #888;
-  &.value {
-    margin-left: 10px;
-    font-size: 14px;
-  }
-}
+// label {
+//   display: inline-block;
+//   width: 4em;
+//   margin: 0.5em 0;
+//   color: #888;
+//   &.value {
+//     margin-left: 10px;
+//     font-size: 14px;
+//   }
+// }
 
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.4em;
-  &::placeholder {
-    color: lightgray;
-    font-weight: normal;
-    font-size: 12px;
-    letter-spacing: 3px;
-  }
-}
+// input {
+//   height: 2em;
+//   font-size: 1em;
+//   padding-left: 0.4em;
+//   &::placeholder {
+//     color: lightgray;
+//     font-weight: normal;
+//     font-size: 12px;
+//     letter-spacing: 3px;
+//   }
+// }
 
 .editarea {
-  float: left;
-  input {
-    margin: 4px;
-    height: 20px;
-    color: rgb(0, 120, 215);
-  }
-  button {
-    margin: 8px;
-  }
-  .editfields {
-    margin-left: 12px;
-  }
+  //   float: left;
+  //   input {
+  //     margin: 4px;
+  //     height: 20px;
+  //     color: rgb(0, 120, 215);
+  //   }
+  //   button {
+  //     margin: 8px;
+  //   }
+  //   .editfields {
+  //     margin-left: 12px;
+  //   }
+  width: 100%;
 }

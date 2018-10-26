@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HeroDetail from './HeroDetail';
 
 // changin css classes - use {} to put a ternary in here
 // pass args to clic  https://reactjs.org/docs/handling-events.html
@@ -71,28 +72,84 @@ class Heroes extends Component {
     let {heroes: h, person: p} = this.state;
 
     return (
+      <main className="column">
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">
+              <div className="title">Heroes</div>
+            </div>
+          </div>
+          <div className="level-right">
+            <div className="level-item">
+              <button type="button" className="button is-small">
+                March 8, 2017 - April 6, 2017
+              </button>
+            </div>
+          </div>
+        </div>
+
       <div>
-        <ul className="heroes">
-        {
-          h.map((hero, index) =>
-              <div className="hero-element">
-              <button className="delete-button">X</button>
-                <li key={hero.id} data-index={index} onClick={this.selectHero}>
-                  <div className="badge">{hero.id}</div>
-                  <div className="name">{hero.name}</div>
-                  <div className="saying">{hero.saying}</div>
-                </li>
+        <div className="columns is-multiline is-8 is-variable">
+          <div className="column is-6">
+                <div className="field is-grouped is-grouped-left">
+                  <div className="control">
+                    <button className="button is-light">Add</button>
+                  </div>
+                </div>
+                <ul className="list">
+                {
+                  h.map((hero, index) =>
+                      /* <button className="delete-button">X</button> */
+                        <li key={hero.id} data-index={index} onClick={this.selectHero}>
+                          <div className="columns is-variable is-2">
+                            <div className="column">
+                              <article className="box">
+                                <div className="content">
+                                  <p>
+                                  <div className="name">{hero.name}</div>
+                                  {/* <div className="badge">{hero.id}</div> */}
+
+                                  <div className="saying">{hero.saying}</div>
+                                  </p>
+                                </div>
+                              </article>
+                            </div>
+                            <div className="column is-narrow icons">
+                              <nav className="level is-mobile">
+                                <div className="level-right">
+                                  <a className="level-item" aria-label="delete">
+                                    <span className="icon is-small">
+                                      <i className="fas fa-trash-alt" aria-hidden="true"></i>
+                                    </span>
+                                  </a>
+                                </div>
+                              </nav>
+                            </div>
+                          </div>
+                        </li>
+                  )
+                }
+                </ul>
+          </div>
+          <div className="column is-6">
+            <div className="panel">
+              <p className="panel-heading">
+                  Details
+              </p>
+              <div className="panel-block">
+                <HeroDetail></HeroDetail>
               </div>
-          )
-        }
-        </ul>
-        <hr/>
-        <button onClick={this.getMoreHeroes}>Refresh</button>
+            </div>
+          </div>
+        </div>
+
+        {/* <button onClick={this.getMoreHeroes}>Refresh</button>
         <input value={p.title} onChange={this.handleTitleChange}></input>
         <span>{p.title}</span>
-        {(this.props.isVillain) ? 'IS VILLAIN' : 'IS HERO'}
+        {(this.props.isVillain) ? 'IS VILLAIN' : 'IS HERO'} */}
 
       </div>
+      </main>
     );
   }
 }
