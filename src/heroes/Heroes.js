@@ -22,15 +22,16 @@ class Heroes extends Component {
     this.getHeroes();
   }
 
+  addHero = () => {
+    this.setState({ selectedHero: {} });
+  };
+
   deleteHeroApi = async hero => {
     const response = await axios.delete(`${API}/hero/${hero.id}`);
     if (response.status !== 200) throw Error(response.message);
     return response.data;
   };
 
-  addHero = () => {
-    this.setState({ selectedHero: {} });
-  };
 
   getHeroes = async () => {
     const newHeroes = await this.getHeroesApi();
@@ -51,6 +52,12 @@ class Heroes extends Component {
     return response.data;
   };
 
+  postHeroesApi = async hero => {
+    const response = await axios.post(`${API}/hero`, hero);
+    if (response.status !== 201) throw Error(response.message);
+    return response.data;
+  };
+
   handleCancelHero = () => {
     this.setState({ selectedHero: null, heroToDelete: null });
   };
@@ -60,10 +67,17 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    this.putHeroesApi(hero).then(() => {
-      this.handleCancelHero();
-      this.getHeroes();
-    });
+    if (this.selectedHero) {
+      this.putHeroesApi(hero).then(() => {
+        this.handleCancelHero();
+        this.getHeroes();
+      });
+    } else {
+      this.postHeroesApi(hero).then(() => {
+        this.handleCancelHero();
+        this.getHeroes();
+      });
+    }
   };
 
   handleSelectHero = selectedHero => {

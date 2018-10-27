@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-const captains = console;
 
 class HeroDetail extends Component {
   handleSave = () => {
     const hero = {
-      id: this.idEl.value,
+      id: this.idEl ? this.idEl.value : null,
       name: this.nameEl.value,
       description: this.descriptionEl.value
     };
@@ -17,25 +16,22 @@ class HeroDetail extends Component {
     return (
       <div className="editarea">
         <div>
+          {hero.id ?
           <div className="field">
-            <label className="label" htmlFor="id">
-              id:{' '}
-            </label>
+            <label className="label" htmlFor="id">id</label>
             <div className="control">
               <input
                 name="id"
                 className="input"
                 type="text"
                 defaultValue={hero.id}
-                readOnly={hero.id}
+                readOnly
                 ref={el => (this.idEl = el)}
               />
             </div>
-          </div>
+          </div> : ''}
           <div className="field">
-            <label className="label" htmlFor="name">
-              name:{' '}
-            </label>
+            <label className="label" htmlFor="name">name</label>
             <div className="control">
               <input
                 name="name"
