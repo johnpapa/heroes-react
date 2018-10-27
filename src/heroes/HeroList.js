@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 
 class HeroList extends Component {
   selectHero = e => {
-    // console.log(e.currentTarget);
     const index = +e.currentTarget.dataset.index;
     const { heroes } = this.props;
     const hero = heroes[index];
-    // console.log(hero);
     this.props.handleSelectHero(hero);
   };
 
