@@ -11,9 +11,9 @@ class Heroes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      heroToDelete: {},
+      heroToDelete: null,
       heroes: [],
-      selectedHero: {},
+      selectedHero: null,
       showModal: false
     };
   }
@@ -22,20 +22,21 @@ class Heroes extends Component {
     this.getHeroes();
   }
 
-  addHero = () => {
-    // TODO - add
-  };
-
   deleteHeroApi = async hero => {
     const response = await axios.delete(`${API}/hero/${hero.id}`);
     if (response.status !== 200) throw Error(response.message);
     return response.data;
   };
 
+  addHero = () => {
+    this.setState({ selectedHero: {} });
+  };
+
   getHeroes = async () => {
     const newHeroes = await this.getHeroesApi();
     const heroes = [...newHeroes];
     this.setState({ heroes }, () => captains.log(this.state));
+    this.handleCancelHero();
   };
 
   getHeroesApi = async () => {
@@ -51,11 +52,11 @@ class Heroes extends Component {
   };
 
   handleCancelHero = () => {
-    this.setState({ selectedHero: {}, heroToDelete: {} });
+    this.setState({ selectedHero: null, heroToDelete: null });
   };
 
   handleDeleteHero = hero => {
-    this.setState({ showModal: true, heroToDelete: hero, selectedHero: {} });
+    this.setState({ showModal: true, heroToDelete: hero, selectedHero: null });
   };
 
   handleSaveHero = hero => {
@@ -119,7 +120,7 @@ class Heroes extends Component {
           </div>
 
           <div className="column is-6">
-            {selectedHero && selectedHero.name ? (
+            {selectedHero ? (
               <div className="panel">
                 <p className="panel-heading">Details</p>
                 <div className="panel-block">

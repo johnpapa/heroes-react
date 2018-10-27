@@ -18,20 +18,27 @@ class HeroDetail extends Component {
       <div className="editarea">
         <div>
           <div className="field">
-            <label className="label">id: </label>
+            <label className="label" htmlFor="id">
+              id:{' '}
+            </label>
             <div className="control">
               <input
+                name="id"
                 className="input"
                 type="text"
                 defaultValue={hero.id}
+                readOnly={hero.id}
                 ref={el => (this.idEl = el)}
               />
             </div>
           </div>
           <div className="field">
-            <label className="label">name: </label>
+            <label className="label" htmlFor="name">
+              name:{' '}
+            </label>
             <div className="control">
               <input
+                name="name"
                 className="input"
                 type="text"
                 placeholder="e.g Colleen"
@@ -41,9 +48,10 @@ class HeroDetail extends Component {
             </div>
           </div>
           <div className="field">
-            <label className="label">description: </label>
+            <label className="label" htmlFor="description">description: </label>
             <div className="control">
               <input
+                name="description"
                 className="input"
                 type="text"
                 placeholder="e.g dance fight!"
