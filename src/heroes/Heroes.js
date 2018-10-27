@@ -66,7 +66,7 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    if (this.selectedHero) {
+    if (this.state.selectedHero) {
       this.putHeroesApi(hero).then(() => {
         this.handleCancelHero();
         this.getHeroes();
@@ -140,7 +140,7 @@ class Heroes extends Component {
                   <HeroDetail
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
-                    handleSaveHero={this.handleSaveHero}
+                    handleSaveHero={this.handleSaveHero.bind(this)}
                     key={selectedHero.id}
                   />
                 </div>
