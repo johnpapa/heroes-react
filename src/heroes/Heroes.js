@@ -39,7 +39,7 @@ class Heroes extends Component {
   };
 
   putHeroesApi = async hero => {
-    const response = await axios.put(`${API}/heroes/${hero.id}`, hero);
+    const response = await axios.put(`${API}/hero/${hero.id}`, hero);
     if (response.status !== 200) throw Error(response.message);
     return response.data;
   };
