@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
 
-// const API = 'http://localhost:8626/api';
 const API = '/api';
 const captains = console;
 
@@ -11,20 +11,20 @@ class Heroes extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      heroToDelete: {},
       heroes: [],
-      selectedHero: {}
+      selectedHero: {},
+      showModal: false
     };
-    // this.handleCancelHero = this.handleCancelHero.bind(this); // dont need these if you use arrow functions
-    // this.handleSaveHero = this.handleSaveHero.bind(this);
-    // this.handleSelectHero = this.handleSelectHero.bind(this);
   }
 
   componentDidMount() {
-    // this.props.isVillain = true; // this will throw
     this.getHeroes();
   }
 
-  addHero = () => {};
+  addHero = () => {
+    // TODO - add
+  };
 
   deleteHeroApi = async hero => {
     const response = await axios.delete(`${API}/hero/${hero.id}`);
@@ -51,14 +51,11 @@ class Heroes extends Component {
   };
 
   handleCancelHero = () => {
-    this.setState({ selectedHero: {} });
+    this.setState({ selectedHero: {}, heroToDelete: {} });
   };
 
   handleDeleteHero = hero => {
-    this.deleteHeroApi(hero).then(() => {
-      this.handleCancelHero();
-      this.getHeroes();
-    });
+    this.setState({ showModal: true, heroToDelete: hero, selectedHero: {} });
   };
 
   handleSaveHero = hero => {
@@ -73,8 +70,19 @@ class Heroes extends Component {
     this.setState({ selectedHero });
   };
 
+  handleModalReponse = e => {
+    const confirmDelete = e.target.dataset.modalResponse == 'yes';
+    this.setState({ showModal: false });
+    if (confirmDelete) {
+      this.deleteHeroApi(this.state.heroToDelete).then(() => {
+        this.handleCancelHero();
+        this.getHeroes();
+      });
+    }
+  };
+
   render() {
-    let { heroes, selectedHero } = this.state;
+    let { heroes, heroToDelete, selectedHero, showModal } = this.state;
 
     return (
       <div>
@@ -109,6 +117,7 @@ class Heroes extends Component {
               </div>
             </div>
           </div>
+
           <div className="column is-6">
             {selectedHero && selectedHero.name ? (
               <div className="panel">
@@ -125,6 +134,28 @@ class Heroes extends Component {
             ) : null}
           </div>
         </div>
+
+        {showModal ? (
+          <Modal>
+            <h1>Would you like to delete {heroToDelete.name}?</h1>
+            <div className="buttons">
+              <button
+                className="button is-light"
+                data-modal-response="yes"
+                onClick={this.handleModalReponse}
+              >
+                Yes
+              </button>
+              <button
+                className="button is-light"
+                data-modal-response="no"
+                onClick={this.handleModalReponse}
+              >
+                No
+              </button>
+            </div>
+          </Modal>
+        ) : null}
       </div>
     );
   }

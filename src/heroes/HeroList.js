@@ -23,13 +23,7 @@ class HeroList extends Component {
     return (
       <ul className="list">
         {heroes.map((hero, index) => (
-          <li
-            key={hero.id}
-            data-index={index}
-            onClick={this.selectHero}
-            aria-label="select"
-            role="presentation"
-          >
+          <li key={hero.id} role="presentation">
             <div className="columns is-variable is-2">
               <div className="column is-narrow icons">
                 <nav className="level is-mobile">
@@ -37,10 +31,17 @@ class HeroList extends Component {
                 </nav>
               </div>
               <div className="column">
-                <article className="box content">
-                  <div className="name">{hero.name}</div>
-                  <div className="description">{hero.description}</div>
-                </article>
+                <a
+                  data-index={index}
+                  onClick={this.selectHero}
+                  aria-label="select"
+                  role="button"
+                >
+                  <article className="box content">
+                    <div className="name">{hero.name}</div>
+                    <div className="description">{hero.description}</div>
+                  </article>
+                </a>
               </div>
               <div className="column is-narrow icons">
                 <nav className="level is-mobile">
