@@ -1,4 +1,3 @@
-// @import "bulma/utilities.sass";
 $primary: #00b3e6;
 $link: #ff4081;
 @import 'bulma/bulma.sass';
@@ -12,12 +11,21 @@ button {
   margin: 1em;
 }
 
+// button.button-icon {
+//   border: none;
+//   margin: 0;
+//   padding: 0;
+//   cursor: pointer;
+//   color: $link;
+// }
+
 .content {
   border: 0px red solid;
 }
 
 .column.is-narrow.icons {
   display: flex;
+  width: 2em;
 }
 
 .list {
@@ -26,8 +34,8 @@ button {
   width: 100%;
   box-shadow: none;
   li {
-    cursor: pointer;
     .box {
+      cursor: pointer;
       margin-bottom: 1em;
       &:hover {
         color: #fff;

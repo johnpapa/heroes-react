@@ -24,18 +24,15 @@ class HeroList extends Component {
       <ul className="list">
         {heroes.map((hero, index) => (
           <li key={hero.id} role="presentation">
-            <div className="columns is-variable is-2">
-              <div className="column is-narrow icons">
-                <nav className="level is-mobile">
-                  <div className="level-right">&nbsp;</div>
-                </nav>
-              </div>
+            <div className="columns is-variable is-2 is-single-line">
+              <div className="column is-narrow icons"></div>
               <div className="column">
                 <a
                   data-index={index}
                   onClick={this.selectHero}
                   aria-label="select"
                   role="button"
+                  tabIndex={0}
                 >
                   <article className="box content">
                     <div className="name">{hero.name}</div>
@@ -47,12 +44,12 @@ class HeroList extends Component {
                 <nav className="level is-mobile">
                   <div className="level-right">
                     <a
-                      className="level-item"
+                      className="level-item button-icon"
                       data-index={index}
-                      aria-label="delete"
-                      className="level-item"
                       onClick={this.deleteHero}
+                      aria-label="delete"
                       role="button"
+                      tabIndex={0}
                     >
                       <span className="icon is-small">
                         <i className="fas fa-trash-alt" aria-hidden="true" />
