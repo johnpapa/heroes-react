@@ -5,9 +5,16 @@ class HeroList extends Component {
     // console.log(e.currentTarget);
     const index = +e.currentTarget.dataset.index;
     const { heroes } = this.props;
-    const selectedHero = heroes[index];
-    // console.log(selectedHero);
-    this.props.handleSelectHero(selectedHero);
+    const hero = heroes[index];
+    // console.log(hero);
+    this.props.handleSelectHero(hero);
+  };
+
+  deleteHero = e => {
+    const index = +e.currentTarget.dataset.index;
+    const { heroes } = this.props;
+    const hero = heroes[index];
+    this.props.handleDeleteHero(hero);
   };
 
   render() {
@@ -16,18 +23,17 @@ class HeroList extends Component {
     return (
       <ul className="list">
         {heroes.map((hero, index) => (
-          <li key={hero.id} data-index={index} onClick={this.selectHero} role="button">
+          <li
+            key={hero.id}
+            data-index={index}
+            onClick={this.selectHero}
+            aria-label="select"
+            role="presentation"
+          >
             <div className="columns is-variable is-2">
               <div className="column is-narrow icons">
                 <nav className="level is-mobile">
-                  <div className="level-right">
-                    <a className="level-item" aria-label="delete">
-                      <span className="icon is-small">
-                        {/* <i className="fas fa-trash-alt" aria-hidden="true" /> */}
-                        &nbsp;
-                      </span>
-                    </a>
-                  </div>
+                  <div className="level-right">&nbsp;</div>
                 </nav>
               </div>
               <div className="column">
@@ -39,7 +45,14 @@ class HeroList extends Component {
               <div className="column is-narrow icons">
                 <nav className="level is-mobile">
                   <div className="level-right">
-                    <a className="level-item" aria-label="delete">
+                    <a
+                      className="level-item"
+                      data-index={index}
+                      aria-label="delete"
+                      className="level-item"
+                      onClick={this.deleteHero}
+                      role="button"
+                    >
                       <span className="icon is-small">
                         <i className="fas fa-trash-alt" aria-hidden="true" />
                       </span>

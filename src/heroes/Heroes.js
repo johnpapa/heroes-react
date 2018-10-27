@@ -26,6 +26,12 @@ class Heroes extends Component {
 
   addHero = () => {};
 
+  deleteHeroApi = async hero => {
+    const response = await axios.delete(`${API}/hero/${hero.id}`);
+    if (response.status !== 200) throw Error(response.message);
+    return response.data;
+  };
+
   getHeroes = async () => {
     const newHeroes = await this.getHeroesApi();
     const heroes = [...newHeroes];
@@ -46,6 +52,13 @@ class Heroes extends Component {
 
   handleCancelHero = () => {
     this.setState({ selectedHero: {} });
+  };
+
+  handleDeleteHero = hero => {
+    this.deleteHeroApi(hero).then(() => {
+      this.handleCancelHero();
+      this.getHeroes();
+    });
   };
 
   handleSaveHero = hero => {
@@ -91,6 +104,7 @@ class Heroes extends Component {
                 <HeroList
                   heroes={heroes}
                   handleSelectHero={this.handleSelectHero}
+                  handleDeleteHero={this.handleDeleteHero}
                 />
               </div>
             </div>
