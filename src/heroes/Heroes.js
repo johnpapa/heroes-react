@@ -1,35 +1,42 @@
-import axios from "axios";
-import React, { Component } from "react";
-import HeroDetail from "./HeroDetail";
-import HeroList from "./HeroList";
+import axios from 'axios';
+import React, { Component } from 'react';
+import Modal from '../Modal';
+import HeroDetail from './HeroDetail';
+import HeroList from './HeroList';
 
-// const API = 'http://localhost:8626/api';
-const API = "/api";
+const API = '/api';
 const captains = console;
 
 class Heroes extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      heroToDelete: null,
       heroes: [],
-      selectedHero: {}
+      selectedHero: null,
+      showModal: false
     };
-    // this.handleCancelHero = this.handleCancelHero.bind(this); // dont need these if you use arrow functions
-    // this.handleSaveHero = this.handleSaveHero.bind(this);
-    // this.handleSelectHero = this.handleSelectHero.bind(this);
   }
 
   componentDidMount() {
-    // this.props.isVillain = true; // this will throw
     this.getHeroes();
   }
 
-  addHero = () => {};
+  addHero = () => {
+    this.setState({ selectedHero: {} });
+  };
+
+  deleteHeroApi = async hero => {
+    const response = await axios.delete(`${API}/hero/${hero.id}`);
+    if (response.status !== 200) throw Error(response.message);
+    return response.data;
+  };
 
   getHeroes = async () => {
     const newHeroes = await this.getHeroesApi();
     const heroes = [...newHeroes];
     this.setState({ heroes }, () => captains.log(this.state));
+    this.handleCancelHero();
   };
 
   getHeroesApi = async () => {
@@ -44,15 +51,32 @@ class Heroes extends Component {
     return response.data;
   };
 
+  postHeroesApi = async hero => {
+    const response = await axios.post(`${API}/hero`, hero);
+    if (response.status !== 201) throw Error(response.message);
+    return response.data;
+  };
+
   handleCancelHero = () => {
-    this.setState({ selectedHero: {} });
+    this.setState({ selectedHero: null, heroToDelete: null });
+  };
+
+  handleDeleteHero = hero => {
+    this.setState({ showModal: true, heroToDelete: hero, selectedHero: null });
   };
 
   handleSaveHero = hero => {
-    this.putHeroesApi(hero).then(() => {
-      this.handleCancelHero();
-      this.getHeroes();
-    });
+    if (this.selectedHero) {
+      this.putHeroesApi(hero).then(() => {
+        this.handleCancelHero();
+        this.getHeroes();
+      });
+    } else {
+      this.postHeroesApi(hero).then(() => {
+        this.handleCancelHero();
+        this.getHeroes();
+      });
+    }
   };
 
   handleSelectHero = selectedHero => {
@@ -60,8 +84,19 @@ class Heroes extends Component {
     this.setState({ selectedHero });
   };
 
+  handleModalReponse = e => {
+    const confirmDelete = e.target.dataset.modalResponse == 'yes';
+    this.setState({ showModal: false });
+    if (confirmDelete) {
+      this.deleteHeroApi(this.state.heroToDelete).then(() => {
+        this.handleCancelHero();
+        this.getHeroes();
+      });
+    }
+  };
+
   render() {
-    let { heroes, selectedHero } = this.state;
+    let { heroes, heroToDelete, selectedHero, showModal } = this.state;
 
     return (
       <div>
@@ -91,12 +126,14 @@ class Heroes extends Component {
                 <HeroList
                   heroes={heroes}
                   handleSelectHero={this.handleSelectHero}
+                  handleDeleteHero={this.handleDeleteHero}
                 />
               </div>
             </div>
           </div>
+
           <div className="column is-6">
-            {selectedHero && selectedHero.name ? (
+            {selectedHero ? (
               <div className="panel">
                 <p className="panel-heading">Details</p>
                 <div className="panel-block">
@@ -111,6 +148,28 @@ class Heroes extends Component {
             ) : null}
           </div>
         </div>
+
+        {showModal ? (
+          <Modal>
+            <h1>Would you like to delete {heroToDelete.name}?</h1>
+            <div className="buttons">
+              <button
+                className="button is-light"
+                data-modal-response="yes"
+                onClick={this.handleModalReponse}
+              >
+                Yes
+              </button>
+              <button
+                className="button is-light"
+                data-modal-response="no"
+                onClick={this.handleModalReponse}
+              >
+                No
+              </button>
+            </div>
+          </Modal>
+        ) : null}
       </div>
     );
   }
