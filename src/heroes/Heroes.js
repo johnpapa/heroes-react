@@ -1,10 +1,10 @@
-import axios from 'axios';
-import React, { Component } from 'react';
-import HeroDetail from './HeroDetail';
-import HeroList from './HeroList';
+import axios from "axios";
+import React, { Component } from "react";
+import HeroDetail from "./HeroDetail";
+import HeroList from "./HeroList";
 
 // const API = 'http://localhost:8626/api';
-const API = '/api';
+const API = "/api";
 const captains = console;
 
 class Heroes extends Component {
@@ -39,7 +39,7 @@ class Heroes extends Component {
   };
 
   putHeroesApi = async hero => {
-    const response = await axios.put(`${API}/hero/${hero.id}`, hero);
+    const response = await axios.put(`${API}/heroes/${hero.id}`, hero);
     if (response.status !== 200) throw Error(response.message);
     return response.data;
   };

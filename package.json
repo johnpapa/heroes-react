@@ -21,7 +21,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "backend": "json-server --watch db.json --routes routes.json --port 3004"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,7 +33,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8626/",
+  "proxy": "http://localhost:3004/",
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
