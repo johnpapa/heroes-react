@@ -1,10 +1,12 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
 
-const API = '/api';
+import {connect} from 'react-redux';
+import { selectHero, loadHeroes } from './hero.actions';
+import { putHeroesApi, postHeroesApi, deleteHeroApi } from './hero.api';
+
 const captains = console;
 
 class Heroes extends Component {
@@ -12,91 +14,64 @@ class Heroes extends Component {
     super(props);
     this.state = {
       heroToDelete: null,
-      heroes: [],
-      selectedHero: null,
       showModal: false
     };
   }
 
   componentDidMount() {
-    this.getHeroes();
+    this.props.getHeroes();
   }
 
   addHero = () => {
-    this.setState({ selectedHero: {} });
-  };
-
-  deleteHeroApi = async hero => {
-    const response = await axios.delete(`${API}/hero/${hero.id}`);
-    if (response.status !== 200) throw Error(response.message);
-    return response.data;
-  };
-
-  getHeroes = async () => {
-    const newHeroes = await this.getHeroesApi();
-    const heroes = [...newHeroes];
-    this.setState({ heroes }, () => captains.log(this.state));
-    this.handleCancelHero();
-  };
-
-  getHeroesApi = async () => {
-    const response = await axios.get(`${API}/heroes`);
-    if (response.status !== 200) throw Error(response.message);
-    return response.data;
-  };
-
-  putHeroesApi = async hero => {
-    const response = await axios.put(`${API}/hero/${hero.id}`, hero);
-    if (response.status !== 200) throw Error(response.message);
-    return response.data;
-  };
-
-  postHeroesApi = async hero => {
-    const response = await axios.post(`${API}/hero`, hero);
-    if (response.status !== 201) throw Error(response.message);
-    return response.data;
+    // this.setState({ selectedHero: {} });
+    this.props.selectHero(null);
   };
 
   handleCancelHero = () => {
-    this.setState({ selectedHero: null, heroToDelete: null });
+    this.props.selectHero(null);
+    this.setState({ heroToDelete: null });
   };
 
   handleDeleteHero = hero => {
-    this.setState({ showModal: true, heroToDelete: hero, selectedHero: null });
+    this.props.selectHero(null);
+    this.setState({ showModal: true, heroToDelete: hero });
   };
 
   handleSaveHero = hero => {
-    if (this.state.selectedHero) {
-      this.putHeroesApi(hero).then(() => {
+    const { selectedHero, getHeroes } = this.props;
+    if (selectedHero) {
+      putHeroesApi(hero).then(() => {
         this.handleCancelHero();
-        this.getHeroes();
+        getHeroes();
       });
     } else {
-      this.postHeroesApi(hero).then(() => {
+      postHeroesApi(hero).then(() => {
         this.handleCancelHero();
-        this.getHeroes();
+        getHeroes();
       });
     }
   };
 
   handleSelectHero = selectedHero => {
+    this.props.selectHero(selectedHero);
     captains.log(`you selected ${selectedHero.name}`);
-    this.setState({ selectedHero });
   };
 
   handleModalReponse = e => {
+    const { getHeroes } = this.props;
     const confirmDelete = e.target.dataset.modalResponse == 'yes';
     this.setState({ showModal: false });
     if (confirmDelete) {
-      this.deleteHeroApi(this.state.heroToDelete).then(() => {
+      deleteHeroApi(this.state.heroToDelete).then(() => {
         this.handleCancelHero();
-        this.getHeroes();
+        getHeroes();
       });
     }
   };
 
   render() {
-    let { heroes, heroToDelete, selectedHero, showModal } = this.state;
+    const { heroToDelete, showModal } = this.state;
+    const { heroes, selectedHero, getHeroes } = this.props;
 
     return (
       <div>
@@ -109,7 +84,7 @@ class Heroes extends Component {
                   <button className="button is-light" onClick={this.addHero}>
                     Add
                   </button>
-                  <button className="button is-light" onClick={this.getHeroes}>
+                  <button className="button is-light" onClick={getHeroes}>
                     Refresh
                   </button>
                 </div>
@@ -133,7 +108,7 @@ class Heroes extends Component {
           </div>
 
           <div className="column is-6">
-            {selectedHero ? (
+            {this.props.selectedHero && 
               <div className="panel">
                 <p className="panel-heading">Details</p>
                 <div className="panel-block">
@@ -145,11 +120,19 @@ class Heroes extends Component {
                   />
                 </div>
               </div>
-            ) : null}
+            }
           </div>
         </div>
 
-        {showModal ? (
+        {this.props.heroesLoading && 
+          <div>show a spinner here...</div>
+        }
+
+        {this.props.heroesLoadingError &&
+          <div>something went wrong loading heroes</div>
+        }
+
+        {showModal &&
           <Modal>
             <h1>Would you like to delete {heroToDelete.name}?</h1>
             <div className="buttons">
@@ -169,10 +152,37 @@ class Heroes extends Component {
               </button>
             </div>
           </Modal>
-        ) : null}
+        }
       </div>
     );
   }
 }
 
-export default Heroes;
+// whatever is exposed here will become part of the components `props`
+const mapStateToProps = (state) => {
+  return {
+    heroes: state.heroes.data,
+    heroesLoading: state.heroes.loading,
+    heroesLoadingError: state.heroes.error,
+    selectedHero: state.selectedHero
+  };
+}
+
+// whatever is exposed here will become part of the components `props`
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getHeroes: () => {
+      dispatch(loadHeroes())
+    },
+    selectHero: hero => {
+      dispatch(selectHero(hero))
+    }
+  };
+}
+
+const HeroesContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Heroes);
+
+export default HeroesContainer;
