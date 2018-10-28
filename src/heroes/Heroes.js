@@ -101,6 +101,7 @@ class Heroes extends Component {
               <div className="panel-block">
                 <HeroList
                   heroes={heroes}
+                  selectedHero={selectedHero}
                   handleSelectHero={this.handleSelectHero}
                   handleDeleteHero={this.handleDeleteHero}
                 />
@@ -117,6 +118,7 @@ class Heroes extends Component {
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
                     handleSaveHero={this.handleSaveHero}
+      // todo
                     key={selectedHero.id}
                   />
                 </div>
