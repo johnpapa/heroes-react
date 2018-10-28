@@ -31,7 +31,7 @@ These apps contain:
 1. Set the appropriate `.env` file settings
 
    ```bash
-   npm start
+   npm run quick
    ```
 
 ## Problems or Suggestions

@@ -7,6 +7,7 @@
     "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
+    "concurrently": "^4.0.1",
     "node-sass": "^4.9.4",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -17,12 +18,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "quick": "concurrently \"npm run backend\" \"npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "backend": "json-server --watch db.json --routes routes.json --port 3004"
+    "backend": "json-server --watch db.json --routes routes.json --port 8626"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,7 +35,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3004/",
+  "proxy": "http://localhost:8626/",
   "devDependencies": {
     "cypress": "^3.1.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -42,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "json-server": "^0.14.0",
     "prettier": "^1.14.3"
   }
 }
