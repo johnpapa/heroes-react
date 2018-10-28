@@ -1,26 +1,35 @@
-context('Heroes', function() {
+context('Heroes', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
-    cy.get('nav ul.menu-list a').contains('Heroes').click();
+    cy.get('nav ul.menu-list a')
+      .contains('Heroes')
+      .click();
   });
 
-  specify('Contains Ragnar', function() {
+  specify('Contains Ragnar', () => {
     cy.get('.list .name').contains('Ragnar Lothbrok');
   });
 
-  specify('Contains 6 heroes', function() {
+  specify('Contains 6 heroes', () => {
     cy.get('.list .name').should('have.length', 6);
   });
 
-  specify('Selects Ragnar', function() {
-    cy.get('.list .name')
-      .contains('Ragnar')
-      .click();
-    cy.get('.list li .box')
-      .filter('.selected')
-      .should('have.length', 1);
+  context('Ragnar Details', () => {
+    beforeEach(() => {
+      cy.get('.list .name')
+        .contains('Ragnar')
+        .click();
+    });
 
-    // cy.get('.editarea input.name').contains('Ragnar');
-    // cy.get('.editarea input.name').should('be.visible');
+    specify('Highlights Ragnar', () => {
+      cy.get('.list li .box')
+        .filter('.selected')
+        .should('have.length', 1);
+    });
+
+    specify('Shows Details for Ragnar', () => {
+      // cy.get('.editarea input.name').contains('Ragnar');
+      cy.get('.editarea input.name').should('be.visible');
+    });
   });
 });
