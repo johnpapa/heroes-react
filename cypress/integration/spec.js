@@ -35,15 +35,13 @@ context('Heroes', () => {
         .should('have.length', 1);
     });
 
-    specify('Shows Details for ${hero.name}', () => {
+    specify(`Shows Details for ${hero.name}`, () => {
       // this works
       cy.get('body').contains('Details');
-
+      const match = new RegExp(hero.id);
       cy.get('.editarea input[name=id]').should('be.visible');
-      cy.get('.editarea input[name=id]').should(
-        'have.value',
-        hero.id
-      );
+      cy.get('.editarea input[name=id]').invoke('val')
+        .should('match', match);
     });
   });
 });
