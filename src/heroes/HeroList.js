@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
 class HeroList extends Component {
+  state = {
+    selectedHero: {}
+  };
+
   selectHero = e => {
     const index = +e.currentTarget.dataset.index;
     const { heroes } = this.props;
-    const hero = heroes[index];
-    this.props.handleSelectHero(hero);
+    const selectedHero = heroes[index];
+    this.setState({ selectedHero });
+
+    this.props.handleSelectHero(selectedHero);
   };
 
   deleteHero = e => {
@@ -23,7 +29,7 @@ class HeroList extends Component {
         {heroes.map((hero, index) => (
           <li key={hero.id} role="presentation">
             <div className="columns is-variable is-2 is-single-line">
-              <div className="column is-narrow icons"></div>
+              <div className="column is-narrow icons" />
               <div className="column">
                 <a
                   data-index={index}
@@ -32,7 +38,9 @@ class HeroList extends Component {
                   role="button"
                   tabIndex={0}
                 >
-                  <article className="box content">
+                  <article
+                    className={'box content ' + (this.state.selectedHero.id === hero.id ? 'selected' : '')}
+                  >
                     <div className="name">{hero.name}</div>
                     <div className="description">{hero.description}</div>
                   </article>
