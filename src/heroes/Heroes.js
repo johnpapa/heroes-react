@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
+import { deleteHeroApi, getHeroesApi, postHeroesApi, putHeroesApi } from './heroes.api';
 import HeroList from './HeroList';
 
-const API = '/api';
 const captains = console;
 
 class Heroes extends Component {
@@ -26,35 +25,11 @@ class Heroes extends Component {
     this.setState({ selectedHero: {} });
   };
 
-  deleteHeroApi = async hero => {
-    const response = await axios.delete(`${API}/hero/${hero.id}`);
-    if (response.status !== 200) throw Error(response.message);
-    return response.data;
-  };
-
   getHeroes = async () => {
-    const newHeroes = await this.getHeroesApi();
+    const newHeroes = await getHeroesApi();
     const heroes = [...newHeroes];
     this.setState({ heroes }, () => captains.log(this.state));
     this.handleCancelHero();
-  };
-
-  getHeroesApi = async () => {
-    const response = await axios.get(`${API}/heroes`);
-    if (response.status !== 200) throw Error(response.message);
-    return response.data;
-  };
-
-  putHeroesApi = async hero => {
-    const response = await axios.put(`${API}/hero/${hero.id}`, hero);
-    if (response.status !== 200) throw Error(response.message);
-    return response.data;
-  };
-
-  postHeroesApi = async hero => {
-    const response = await axios.post(`${API}/hero`, hero);
-    if (response.status !== 201) throw Error(response.message);
-    return response.data;
   };
 
   handleCancelHero = () => {
@@ -67,12 +42,12 @@ class Heroes extends Component {
 
   handleSaveHero = hero => {
     if (this.state.selectedHero) {
-      this.putHeroesApi(hero).then(() => {
+      putHeroesApi(hero).then(() => {
         this.handleCancelHero();
         this.getHeroes();
       });
     } else {
-      this.postHeroesApi(hero).then(() => {
+      postHeroesApi(hero).then(() => {
         this.handleCancelHero();
         this.getHeroes();
       });
@@ -88,7 +63,7 @@ class Heroes extends Component {
     const confirmDelete = e.target.dataset.modalResponse == 'yes';
     this.setState({ showModal: false });
     if (confirmDelete) {
-      this.deleteHeroApi(this.state.heroToDelete).then(() => {
+      deleteHeroApi(this.state.heroToDelete).then(() => {
         this.handleCancelHero();
         this.getHeroes();
       });
@@ -141,7 +116,7 @@ class Heroes extends Component {
                   <HeroDetail
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
-                    handleSaveHero={this.handleSaveHero.bind(this)}
+                    handleSaveHero={this.handleSaveHero}
                     // TODO
                     key={selectedHero.id}
                   />
