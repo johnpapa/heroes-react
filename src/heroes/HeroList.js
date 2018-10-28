@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 
 class HeroList extends Component {
-  state = {
-    selectedHero: {}
-  };
-
   selectHero = e => {
     const index = +e.currentTarget.dataset.index;
     const { heroes } = this.props;
-    const selectedHero = heroes[index];
-    this.setState({ selectedHero });
+    const hero = heroes[index];
 
-    this.props.handleSelectHero(selectedHero);
+    this.props.handleSelectHero(hero);
   };
 
   deleteHero = e => {
@@ -22,7 +17,7 @@ class HeroList extends Component {
   };
 
   render() {
-    let { heroes } = this.props;
+    let { heroes, selectedHero } = this.props;
 
     return (
       <ul className="list">
@@ -39,7 +34,12 @@ class HeroList extends Component {
                   tabIndex={0}
                 >
                   <article
-                    className={'box content ' + (this.state.selectedHero.id === hero.id ? 'selected' : '')}
+                    className={
+                      'box content ' +
+                      (selectedHero && selectedHero.id === hero.id
+                        ? 'selected'
+                        : '')
+                    }
                   >
                     <div className="name">{hero.name}</div>
                     <div className="description">{hero.description}</div>
