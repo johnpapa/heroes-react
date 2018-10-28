@@ -37,6 +37,7 @@ button {
     .box {
       cursor: pointer;
       margin-bottom: 1em;
+      &.selected,
       &:hover {
         color: #fff;
         background-color: $link;
