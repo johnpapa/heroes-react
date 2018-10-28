@@ -1,3 +1,11 @@
+/// <reference types="cypress" />
+
+const hero = {
+  id: 'HeroLagertha',
+  name: 'Lagertha the Shieldmaiden',
+  description: 'aka Hlaðgerðr',
+};
+
 context('Heroes', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
@@ -6,8 +14,8 @@ context('Heroes', () => {
       .click();
   });
 
-  specify('Contains Ragnar', () => {
-    cy.get('.list .name').contains('Ragnar Lothbrok');
+  specify(`Contains ${hero.name}`, () => {
+    cy.get('.list .name').contains(hero.name);
   });
 
   specify('Contains 6 heroes', () => {
@@ -17,7 +25,7 @@ context('Heroes', () => {
   context('Ragnar Details', () => {
     beforeEach(() => {
       cy.get('.list .name')
-        .contains('Ragnar')
+        .contains(hero.name)
         .click();
     });
 
@@ -27,9 +35,15 @@ context('Heroes', () => {
         .should('have.length', 1);
     });
 
-    specify('Shows Details for Ragnar', () => {
-      // cy.get('.editarea input.name').contains('Ragnar');
-      cy.get('.editarea input.name').should('be.visible');
+    specify('Shows Details for ${hero.name}', () => {
+      // this works
+      cy.get('body').contains('Details');
+
+      cy.get('.editarea input[name=id]').should('be.visible');
+      cy.get('.editarea input[name=id]').should(
+        'have.value',
+        hero.id
+      );
     });
   });
 });
