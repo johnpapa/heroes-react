@@ -10,12 +10,13 @@ import { putHeroesApi, postHeroesApi, deleteHeroApi } from './hero.api';
 const captains = console;
 
 class Heroes extends Component {
+  state = {
+    heroToDelete: null,
+    showModal: false
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      heroToDelete: null,
-      showModal: false
-    };
   }
 
   componentDidMount() {
@@ -115,7 +116,7 @@ class Heroes extends Component {
                   <HeroDetail
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
-                    handleSaveHero={this.handleSaveHero.bind(this)}
+                    handleSaveHero={this.handleSaveHero}
                     key={selectedHero.id}
                   />
                 </div>

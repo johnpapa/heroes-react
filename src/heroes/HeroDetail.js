@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class HeroDetail extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   handleSave = () => {
     const hero = {
       id: this.idEl ? this.idEl.value : null,
@@ -66,7 +70,7 @@ class HeroDetail extends Component {
               </button>
             </div>
             <div className="control">
-              <button className="button is-primary" onClick={this.handleSave}>
+              <button className="button is-primary" onClick={() => this.handleSave()}>
                 Save
               </button>
             </div>
