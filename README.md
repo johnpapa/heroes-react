@@ -28,10 +28,18 @@ These apps contain:
    npm install
    ```
 
-1. Set the appropriate `.env` file settings
+1. Run the app!
 
    ```bash
    npm run quick
+   ```
+
+## Cypress Tests
+
+1. You can execute all of the UI tests by running the following steps
+
+   ```bash
+   npm run cypress
    ```
 
 ## Problems or Suggestions
