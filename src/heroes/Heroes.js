@@ -9,7 +9,7 @@ import {
 import HeroList from './HeroList';
 
 import { connect } from 'react-redux';
-import { selectHero, loadHeroes } from './hero.actions';
+import { selectHeroAction, loadHeroesAction } from './hero.actions';
 
 const captains = console;
 
@@ -28,7 +28,7 @@ class Heroes extends Component {
   }
 
   addHero = () => {
-    this.props.selectHero(null);
+    this.props.selectHero({});
   };
 
   handleCancelHero = () => {
@@ -176,10 +176,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getHeroes: () => {
-      dispatch(loadHeroes());
+      dispatch(loadHeroesAction());
     },
     selectHero: hero => {
-      dispatch(selectHero(hero));
+      dispatch(selectHeroAction(hero));
     }
   };
 };

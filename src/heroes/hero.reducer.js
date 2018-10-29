@@ -24,7 +24,7 @@ let initialHero = null;
 export const heroReducer = (state = initialHero, action) => {
   switch(action.type) {
     case HERO_SELECT:
-      return {...action.payload};
+      return action.payload ? {...action.payload} : null;
     default:
       return state;
   }
