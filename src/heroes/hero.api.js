@@ -1,5 +1,4 @@
 import axios from 'axios';
-import fetch from 'node-fetch';
 const API = '/api';
 
 export const deleteHeroApi = async hero => {

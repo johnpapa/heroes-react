@@ -1,16 +1,13 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import fetch from 'node-fetch';
 import { HEROES_LOADED, HEROES_LOADED_ERROR, HEROES_LOADING } from './hero.actions';
 import { loadHeroesApi } from './hero.api';
 const API = '/api';
 const captains = console;
 
-
-
 // Our worker Saga: will perform the async increment task
 export function* loadingHeroesAsync() {
   try {
-    const data = yield call(loadHeroesApi); 
+    const data = yield call(loadHeroesApi);
     const heroes = [...data]
 
     captains.log('Done with async work, dispatch data');

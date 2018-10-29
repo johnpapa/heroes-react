@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-const captains = console;
-
 class HeroDetail extends Component {
   constructor(props) {
     super(props);

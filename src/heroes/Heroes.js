@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
-import { deleteHeroApi, getHeroesApi, postHeroesApi, putHeroesApi } from './heroes.api';
+import {
+  deleteHeroApi,
+  postHeroesApi,
+  putHeroesApi
+} from './hero.api';
 import HeroList from './HeroList';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { selectHero, loadHeroes } from './hero.actions';
 
 const captains = console;
@@ -24,15 +28,7 @@ class Heroes extends Component {
   }
 
   addHero = () => {
-    // this.setState({ selectedHero: {} });
     this.props.selectHero(null);
-  };
-
-  getHeroes = async () => {
-    const newHeroes = await getHeroesApi();
-    const heroes = [...newHeroes];
-    this.setState({ heroes }, () => captains.log(this.state));
-    this.handleCancelHero();
   };
 
   handleCancelHero = () => {
@@ -48,7 +44,7 @@ class Heroes extends Component {
   handleSaveHero = hero => {
     const { selectedHero, getHeroes } = this.props;
     if (selectedHero && selectedHero.name) {
-    captains.log(this.state.selectedHero);
+      captains.log(this.state.selectedHero);
       putHeroesApi(hero).then(() => {
         this.handleCancelHero();
         getHeroes();
@@ -118,7 +114,7 @@ class Heroes extends Component {
           </div>
 
           <div className="column is-6">
-            {this.props.selectedHero && 
+            {this.props.selectedHero && (
               <div className="panel">
                 <p className="panel-heading">Details</p>
                 <div className="panel-block">
@@ -130,19 +126,17 @@ class Heroes extends Component {
                   />
                 </div>
               </div>
-            }
+            )}
           </div>
         </div>
 
-        {this.props.heroesLoading && 
-          <div>show a spinner here...</div>
-        }
+        {this.props.heroesLoading && <div>show a spinner here...</div>}
 
-        {this.props.heroesLoadingError &&
+        {this.props.heroesLoadingError && (
           <div>something went wrong loading heroes</div>
-        }
+        )}
 
-        {showModal &&
+        {showModal && (
           <Modal>
             <h1>Would you like to delete {heroToDelete.name}?</h1>
             <div className="buttons">
@@ -162,33 +156,33 @@ class Heroes extends Component {
               </button>
             </div>
           </Modal>
-        }
+        )}
       </div>
     );
   }
 }
 
 // whatever is exposed here will become part of the components `props`
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     heroes: state.heroes.data,
     heroesLoading: state.heroes.loading,
     heroesLoadingError: state.heroes.error,
     selectedHero: state.selectedHero
   };
-}
+};
 
 // whatever is exposed here will become part of the components `props`
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getHeroes: () => {
-      dispatch(loadHeroes())
+      dispatch(loadHeroes());
     },
     selectHero: hero => {
-      dispatch(selectHero(hero))
+      dispatch(selectHero(hero));
     }
   };
-}
+};
 
 const HeroesContainer = connect(
   mapStateToProps,
