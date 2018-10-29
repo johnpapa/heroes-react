@@ -21,12 +21,21 @@ $primary: #00b3e6;
       color: $link;
     }
   }
+  .card-footer a {
+    i {
+      margin-right: 10px;
+    }
+    color: #999;
+    &:hover {
+      color: $link;
+    }
+  }
 }
 
 .list {
-  margin-top: 1.5em;
-  margin-bottom: 1em;
-  width: 100%;
+  // margin-top: 1.5em;
+  // margin-bottom: 1em;
+  // width: 100%;
   box-shadow: none;
   .card-content {
     .name {
@@ -37,24 +46,9 @@ $primary: #00b3e6;
       color: #999;
     }
   }
-  .card-footer {
-    i {
-      margin-right: 20px;
-    }
-    * {
-      color: #999;
-      &:hover * {
-        color: $link;
-      }
-    }
-  }
   li .card {
     margin-bottom: 2em;
   }
-}
-
-.editarea {
-  width: 100%;
 }
 
 #modal {
