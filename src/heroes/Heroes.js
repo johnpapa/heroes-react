@@ -48,6 +48,7 @@ class Heroes extends Component {
   handleSaveHero = hero => {
     const { selectedHero, getHeroes } = this.props;
     if (selectedHero && selectedHero.name) {
+    captains.log(this.state.selectedHero);
       putHeroesApi(hero).then(() => {
         this.handleCancelHero();
         getHeroes();
