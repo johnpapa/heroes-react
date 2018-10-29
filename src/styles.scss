@@ -7,20 +7,29 @@ $link: #ff4081;
   background-color: $link;
 }
 
-button {
-  margin: 1em;
-}
-
-// button.button-icon {
-//   border: none;
-//   margin: 0;
-//   padding: 0;
-//   cursor: pointer;
-//   color: $link;
+// button {
+//   margin: 1em;
 // }
 
-.content {
-  border: 0px red solid;
+.content-container {
+  h2 {
+    padding-top: 16px;
+    display: inline-block;
+  }
+}
+
+.content-container {
+  h2 {
+    padding-right: 15px;
+  }
+  button.button {
+    border: 0;
+    color: #999;
+    margin-top: 18px;
+    &:hover {
+      color: #333;
+    }
+  }
 }
 
 .column.is-narrow.icons {

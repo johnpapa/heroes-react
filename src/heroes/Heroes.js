@@ -75,23 +75,15 @@ class Heroes extends Component {
     const { heroes, selectedHero, getHeroes } = this.props;
 
     return (
-      <div className="heroes-container">
-        <div className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <div className="title">Heroes</div>
-              <div className="field is-grouped is-grouped-left">
-                <div className="control">
-                  <button className="button is-light" onClick={this.addHero}>
-                    Add
-                  </button>
-                  <button className="button is-light" onClick={getHeroes}>
-                    Refresh
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="content-container">
+        <div>
+          <h2 className="title">Heroes</h2>
+          <button className="button" onClick={this.addHero} aria-label="add">
+            <i className="fas fa-plus" aria-hidden="true" />
+          </button>
+          <button className="button" onClick={getHeroes} aria-label="refresh">
+            <i className="fas fa-sync" aria-hidden="true" />
+          </button>
         </div>
 
         <div className="columns is-multiline is-8 is-variable">
