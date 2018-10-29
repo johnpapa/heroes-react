@@ -76,6 +76,7 @@ class Heroes extends Component {
 
     return (
       <div className="content-container">
+
         <div className="content-title-group">
           <h2 className="title">Heroes</h2>
           <button className="button" onClick={this.addHero} aria-label="add">
@@ -86,7 +87,7 @@ class Heroes extends Component {
           </button>
         </div>
 
-        <div className="columns is-multiline is-8 is-variable">
+        <div className="columns is-multiline is-variable">
           <div className="column is-6">
             <div className="panel">
               <p className="panel-heading">Hero List</p>
@@ -101,7 +102,7 @@ class Heroes extends Component {
             </div>
           </div>
 
-          <div className="column is-6">
+          <div className={this.props.selectedHero ? 'column is-6' : ''}>
             {this.props.selectedHero && (
               <div className="panel">
                 <p className="panel-heading">Details</p>
@@ -117,12 +118,6 @@ class Heroes extends Component {
             )}
           </div>
         </div>
-
-        {this.props.heroesLoading && <div>show a spinner here...</div>}
-
-        {this.props.heroesLoadingError && (
-          <div>something went wrong loading heroes</div>
-        )}
 
         {showModal && (
           <Modal>
