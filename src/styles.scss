@@ -7,6 +7,23 @@ $primary: #00b3e6;
   background-color: $link;
 }
 
+header {
+  font-weight: bold;
+  font-family: Arial;
+  span {
+    letter-spacing: 0px;
+    &.tour {
+      color: #fff;
+    }
+    &.of {
+      color: #ccc;
+    }
+    &.heroes {
+      color: #00b3e6;
+    }
+  }
+}
+
 .content-container {
   h2 {
     padding-top: 16px;
@@ -21,6 +38,23 @@ $primary: #00b3e6;
       color: $link;
     }
   }
+  .list {
+    box-shadow: none;
+    .card-content {
+      .name {
+        font-size: 28px;
+        color: #000;
+      }
+      .description {
+        font-size: 20px;
+        color: #999;
+      }
+      background-color: #fafafa;
+    }
+    .card {
+      margin-bottom: 2em;
+    }
+  }
   .card-footer a {
     i {
       margin-right: 10px;
@@ -29,25 +63,6 @@ $primary: #00b3e6;
     &:hover {
       color: $link;
     }
-  }
-}
-
-.list {
-  // margin-top: 1.5em;
-  // margin-bottom: 1em;
-  // width: 100%;
-  box-shadow: none;
-  .card-content {
-    .name {
-      font-size: 28px;
-    }
-    .description {
-      font-size: 20px;
-      color: #999;
-    }
-  }
-  li .card {
-    margin-bottom: 2em;
   }
 }
 

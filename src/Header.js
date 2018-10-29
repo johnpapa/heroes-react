@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import logo from "./globe.png";
+import React, { Component } from 'react';
+import logo from './globe.png';
 
 class Header extends Component {
   render() {
@@ -12,10 +12,9 @@ class Header extends Component {
         >
           <div className="navbar-brand">
             <a className="navbar-item" href="/">
-              <img src={logo} width="28" height="28" />
-            </a>
-            <a className="navbar-item" href="/">
-              Vikings
+              <span className="tour">TOUR</span>
+              <span className="of">OF</span>
+              <span className="heroes">HEROES</span>
             </a>
             <a
               role="button"
@@ -30,10 +29,6 @@ class Header extends Component {
             </a>
           </div>
           <div id="navbarBasicExample" className="navbar-menu">
-            <div className="navbar-start">
-              <a className="navbar-item" />
-            </div>
-
             <div className="navbar-end">
               <div className="navbar-item">
                 <div className="buttons">

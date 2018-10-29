@@ -34,17 +34,6 @@ class HeroList extends Component {
                 <a
                   className="card-footer-item"
                   data-index={index}
-                  onClick={this.selectHero}
-                  aria-label="select"
-                  role="button"
-                  tabIndex={0}
-                >
-                  <i className="fas fa-edit" />
-                  <span>Edit</span>
-                </a>
-                <a
-                  className="card-footer-item"
-                  data-index={index}
                   data-hero-id={hero.id}
                   onClick={this.deleteHero}
                   aria-label="delete"
@@ -54,6 +43,17 @@ class HeroList extends Component {
                   <i className="fas fa-trash" />
                   <span>Delete</span>
                 </a>
+                <a
+                  className="card-footer-item"
+                  data-index={index}
+                  onClick={this.selectHero}
+                  aria-label="edit"
+                  role="button"
+                  tabIndex={0}
+                >
+                  <i className="fas fa-edit" />
+                  <span>Edit</span>
+                </a>{' '}
               </footer>
             </div>
           </li>
