@@ -2,7 +2,7 @@ import { HERO_SELECT, HEROES_LOADED, HEROES_LOADING, HEROES_LOADED_ERROR } from 
 
 let initState = {
   loading: false,
-  data: [],
+  data: [], // heroes go here
   error: void 0
 }
 
@@ -19,9 +19,9 @@ export const heroesReducer = (state = initState, action) => {
   }
 }
 
-let initialHero = null;
+let initialSelectedHero = null;
 
-export const heroReducer = (state = initialHero, action) => {
+export const heroReducer = (state = initialSelectedHero, action) => {
   switch(action.type) {
     case HERO_SELECT:
       return action.payload ? {...action.payload} : null;

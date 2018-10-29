@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const API = '/api';
 
 export const deleteHeroApi = async hero => {

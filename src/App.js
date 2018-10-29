@@ -28,7 +28,6 @@ class App extends Component {
               <nav className="menu">
                 <p className="menu-label">Menu</p>
                 <ul className="menu-list">
-                  {/* <li><a className="is-active">Heroes</a></li> */}
                   <NavLink to="heroes">Heroes</NavLink>
                   <NavLink to="villains">Villains</NavLink>
                   <NavLink to="about">About</NavLink>
