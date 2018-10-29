@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API = '/api';
+const captains = console;
 
 export const deleteHeroApi = async hero => {
   const response = await axios.delete(`${API}/hero/${hero.id}`);
@@ -8,7 +9,8 @@ export const deleteHeroApi = async hero => {
   return response.data;
 };
 
-export const putHeroesApi = async hero => {
+export const updateHeroApi = async hero => {
+  captains.log(hero.id);
   const response = await axios.put(`${API}/hero/${hero.id}`, hero);
   if (response.status !== 200) throw Error(response.message);
   return response.data;

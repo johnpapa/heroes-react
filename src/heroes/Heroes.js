@@ -3,13 +3,17 @@ import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
 import {
   deleteHeroApi,
-  postHeroesApi,
-  putHeroesApi
+  postHeroesApi
+  // putHeroesApi
 } from './hero.api';
 import HeroList from './HeroList';
 
 import { connect } from 'react-redux';
-import { selectHeroAction, loadHeroesAction } from './hero.actions';
+import {
+  loadHeroesAction,
+  selectHeroAction,
+  updateHeroAction
+} from './hero.actions';
 
 const captains = console;
 
@@ -42,13 +46,14 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    const { selectedHero, getHeroes } = this.props;
+    const { selectedHero, getHeroes, updateHero } = this.props;
     if (selectedHero && selectedHero.name) {
-      captains.log(this.state.selectedHero);
-      putHeroesApi(hero).then(() => {
-        this.handleCancelHero();
-        getHeroes();
-      });
+      // captains.log(this.state.selectedHero);
+      captains.log(hero);
+      updateHero(hero);
+      // putHeroesApi(hero).then(() => {
+      this.handleCancelHero();
+      // getHeroes();
     } else {
       postHeroesApi(hero).then(() => {
         this.handleCancelHero();
@@ -180,6 +185,9 @@ const mapDispatchToProps = dispatch => {
     },
     selectHero: hero => {
       dispatch(selectHeroAction(hero));
+    },
+    updateHero: hero => {
+      dispatch(updateHeroAction(hero));
     }
   };
 };
