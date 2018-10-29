@@ -9,7 +9,7 @@ import {
   selectHeroAction,
   updateHeroAction,
   deleteHeroAction,
-  addHeroAction,
+  addHeroAction
 } from './hero.actions';
 
 const captains = console;
