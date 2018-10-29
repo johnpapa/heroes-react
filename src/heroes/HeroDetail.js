@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
 
+const captains = console;
+
 class HeroDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hero: Object.assign({}, this.props.hero)
+    };
+  }
+
   handleSave = () => {
     const hero = {
-      id: this.idEl ? this.idEl.value : null,
-      name: this.nameEl.value,
-      description: this.descriptionEl.value
+      id: this.state.hero.id || null,
+      name: this.state.hero.name,
+      description: this.state.hero.description
     };
     this.props.handleSaveHero(hero);
+  };
+
+  handleNameChange = e => {
+    let hero = Object.assign({}, this.state.hero, { name: e.target.value });
+    this.setState({ hero });
+  };
+
+  handleDescriptionChange = e => {
+    let hero = Object.assign({}, this.state.hero, {
+      description: e.target.value
+    });
+    this.setState({ hero });
   };
 
   render() {
@@ -16,22 +37,28 @@ class HeroDetail extends Component {
     return (
       <div className="editarea">
         <div>
-          {hero.id ?
-          <div className="field">
-            <label className="label" htmlFor="id">id</label>
-            <div className="control">
-              <input
-                name="id"
-                className="input"
-                type="text"
-                defaultValue={hero.id}
-                readOnly
-                ref={el => (this.idEl = el)}
-              />
+          {hero.id ? (
+            <div className="field">
+              <label className="label" htmlFor="id">
+                id
+              </label>
+              <div className="control">
+                <input
+                  name="id"
+                  className="input"
+                  type="text"
+                  defaultValue={hero.id}
+                  readOnly
+                />
+              </div>
             </div>
-          </div> : ''}
+          ) : (
+            ''
+          )}
           <div className="field">
-            <label className="label" htmlFor="name">name</label>
+            <label className="label" htmlFor="name">
+              name
+            </label>
             <div className="control">
               <input
                 name="name"
@@ -39,12 +66,14 @@ class HeroDetail extends Component {
                 type="text"
                 placeholder="e.g Colleen"
                 defaultValue={hero.name}
-                ref={el => (this.nameEl = el)}
+                onChange={this.handleNameChange}
               />
             </div>
           </div>
           <div className="field">
-            <label className="label" htmlFor="description">description: </label>
+            <label className="label" htmlFor="description">
+              description:{' '}
+            </label>
             <div className="control">
               <input
                 name="description"
@@ -52,7 +81,7 @@ class HeroDetail extends Component {
                 type="text"
                 placeholder="e.g dance fight!"
                 defaultValue={hero.description}
-                ref={el => (this.descriptionEl = el)}
+                onChange={this.handleDescriptionChange}
               />
             </div>
           </div>

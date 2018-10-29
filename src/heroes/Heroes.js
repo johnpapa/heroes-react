@@ -41,7 +41,6 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    debugger;
     captains.log(this.state.selectedHero);
     if (this.state.selectedHero && this.state.selectedHero.name) {
       putHeroesApi(hero).then(() => {
