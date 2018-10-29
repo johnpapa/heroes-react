@@ -30,17 +30,20 @@ class HeroDetail extends Component {
   };
 
   render() {
-    let { hero } = this.props;
+    let { hero, handleCancelHero } = this.props;
 
     return (
-      <div className="editarea">
-        <div>
-          {hero.id ? (
-            <div className="field">
-              <label className="label" htmlFor="id">
-                id
-              </label>
-              <div className="control">
+      <div className="card editarea">
+        <header className="card-header">
+          <p className="card-header-title">{hero.name} Details</p>
+        </header>
+        <div className="card-content">
+          <div className="content">
+            {hero.id ? (
+              <div className="field">
+                <label className="label" htmlFor="id">
+                  id
+                </label>
                 <input
                   name="id"
                   className="input"
@@ -49,15 +52,13 @@ class HeroDetail extends Component {
                   readOnly
                 />
               </div>
-            </div>
-          ) : (
-            ''
-          )}
-          <div className="field">
-            <label className="label" htmlFor="name">
-              name
-            </label>
-            <div className="control">
+            ) : (
+              ''
+            )}
+            <div className="field">
+              <label className="label" htmlFor="name">
+                name
+              </label>
               <input
                 name="name"
                 className="input"
@@ -67,12 +68,10 @@ class HeroDetail extends Component {
                 onChange={this.handleNameChange}
               />
             </div>
-          </div>
-          <div className="field">
-            <label className="label" htmlFor="description">
-              description:{' '}
-            </label>
-            <div className="control">
+            <div className="field">
+              <label className="label" htmlFor="description">
+                description:
+              </label>
               <input
                 name="description"
                 className="input"
@@ -83,22 +82,29 @@ class HeroDetail extends Component {
               />
             </div>
           </div>
-          <div className="field is-grouped is-grouped-right">
-            <div className="control">
-              <button
-                className="button is-light"
-                onClick={this.props.handleCancelHero}
-              >
-                Cancel
-              </button>
-            </div>
-            <div className="control">
-              <button className="button is-primary" onClick={() => this.handleSave()}>
-                Save
-              </button>
-            </div>
-          </div>
         </div>
+        <footer className="card-footer ">
+          <a
+            className="card-footer-item cancel-button"
+            onClick={handleCancelHero}
+            aria-label="select"
+            role="button"
+            tabIndex={0}
+          >
+            <i className="fas fa-undo" />
+            <span>Cancel</span>
+          </a>
+          <a
+            className="card-footer-item save-button"
+            onClick={() => this.handleSave()}
+            aria-label="delete"
+            role="button"
+            tabIndex={0}
+          >
+            <i className="fas fa-save" />
+            <span>Save</span>
+          </a>
+        </footer>
       </div>
     );
   }

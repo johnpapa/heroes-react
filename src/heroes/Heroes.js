@@ -75,62 +75,39 @@ class Heroes extends Component {
     const { heroes, selectedHero, getHeroes } = this.props;
 
     return (
-      <div className="heroes-container">
-        <div className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <div className="title">Heroes</div>
-              <div className="field is-grouped is-grouped-left">
-                <div className="control">
-                  <button className="button is-light" onClick={this.addHero}>
-                    Add
-                  </button>
-                  <button className="button is-light" onClick={getHeroes}>
-                    Refresh
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="content-container">
+
+        <div className="content-title-group">
+          <h2 className="title">Heroes</h2>
+          <button className="button add-button" onClick={this.addHero} aria-label="add">
+            <i className="fas fa-plus" aria-hidden="true" />
+          </button>
+          <button className="button" onClick={getHeroes} aria-label="refresh">
+            <i className="fas fa-sync" aria-hidden="true" />
+          </button>
         </div>
 
-        <div className="columns is-multiline is-8 is-variable">
+        <div className="columns is-multiline is-variable">
           <div className="column is-6">
-            <div className="panel">
-              <p className="panel-heading">Hero List</p>
-              <div className="panel-block">
-                <HeroList
-                  heroes={heroes}
-                  selectedHero={selectedHero}
-                  handleSelectHero={this.handleSelectHero}
-                  handleDeleteHero={this.handleDeleteHero}
-                />
-              </div>
-            </div>
+            <HeroList
+              heroes={heroes}
+              selectedHero={selectedHero}
+              handleSelectHero={this.handleSelectHero}
+              handleDeleteHero={this.handleDeleteHero}
+            />
           </div>
 
-          <div className="column is-6">
+          <div className={this.props.selectedHero ? 'column is-6' : ''}>
             {this.props.selectedHero && (
-              <div className="panel">
-                <p className="panel-heading">Details</p>
-                <div className="panel-block">
-                  <HeroDetail
-                    hero={selectedHero}
-                    handleCancelHero={this.handleCancelHero}
-                    handleSaveHero={this.handleSaveHero}
-                    key={selectedHero.id}
-                  />
-                </div>
-              </div>
+              <HeroDetail
+                hero={selectedHero}
+                handleCancelHero={this.handleCancelHero}
+                handleSaveHero={this.handleSaveHero}
+                key={selectedHero.id}
+              />
             )}
           </div>
         </div>
-
-        {this.props.heroesLoading && <div>show a spinner here...</div>}
-
-        {this.props.heroesLoadingError && (
-          <div>something went wrong loading heroes</div>
-        )}
 
         {showModal && (
           <Modal>

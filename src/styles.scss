@@ -1,5 +1,5 @@
 $primary: #00b3e6;
-$link: #ff4081;
+// $link: #ff4081;
 @import 'bulma/bulma.sass';
 
 .menu-list a.activeLink {
@@ -7,58 +7,76 @@ $link: #ff4081;
   background-color: $link;
 }
 
-button {
-  margin: 1em;
-}
-
-// button.button-icon {
-//   border: none;
-//   margin: 0;
-//   padding: 0;
-//   cursor: pointer;
-//   color: $link;
-// }
-
-.content {
-  border: 0px red solid;
-}
-
-.column.is-narrow.icons {
-  display: flex;
-  width: 2em;
-}
-
-.list {
-  margin-top: 1.5em;
-  margin-bottom: 1em;
-  width: 100%;
-  box-shadow: none;
-  li {
-    .box {
-      cursor: pointer;
-      margin-bottom: 1em;
-      &.selected,
+header {
+  font-weight: bold;
+  font-family: Arial;
+  span {
+    letter-spacing: 0px;
+    &.tour {
+      color: #fff;
+    }
+    &.of {
+      color: #ccc;
+    }
+    &.heroes {
+      color: #00b3e6;
+    }
+  }
+  .fa-react {
+    color: #61dafb;
+  }
+  .buttons {
+    i.fab {
+      color: #fff;
+      margin-left: 20px;
+      margin-right: 10px;
       &:hover {
-        color: #fff;
-        background-color: $link;
-        a {
-          color: #fff;
-        }
-      }
-      &.selected:hover {
-        color: white;
+        color: $primary;
       }
     }
   }
-  .description {
-    margin: 5px 0;
-  }
-  .name {
-    font-weight: bold;
-  }
 }
-.editarea {
-  width: 100%;
+
+.content-container {
+  h2 {
+    padding-top: 16px;
+    padding-right: 15px;
+    display: inline-block;
+  }
+  .content-title-group button.button {
+    border: 0;
+    color: #999;
+    margin-top: 18px;
+    &:hover {
+      color: $link;
+    }
+  }
+  .list {
+    box-shadow: none;
+    .card-content {
+      .name {
+        font-size: 28px;
+        color: #000;
+      }
+      .description {
+        font-size: 20px;
+        color: #999;
+      }
+      background-color: #fafafa;
+    }
+    .card {
+      margin-bottom: 2em;
+    }
+  }
+  .card-footer a {
+    i {
+      margin-right: 10px;
+    }
+    color: #999;
+    &:hover {
+      color: $link;
+    }
+  }
 }
 
 #modal {
