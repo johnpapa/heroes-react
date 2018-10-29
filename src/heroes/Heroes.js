@@ -90,7 +90,7 @@ class Heroes extends Component {
         <div className="columns is-multiline is-variable">
           <div className="column is-6">
             <div className="panel">
-              <p className="panel-heading">Hero List</p>
+              <h3 className="panel-heading">Hero List</h3>
               <div className="panel-block">
                 <HeroList
                   heroes={heroes}
@@ -105,7 +105,7 @@ class Heroes extends Component {
           <div className={this.props.selectedHero ? 'column is-6' : ''}>
             {this.props.selectedHero && (
               <div className="panel">
-                <p className="panel-heading">Details</p>
+                <h3 className="panel-heading">Details</h3>
                 <div className="panel-block">
                   <HeroDetail
                     hero={selectedHero}
