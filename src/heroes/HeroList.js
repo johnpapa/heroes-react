@@ -58,9 +58,7 @@ class HeroList extends Component {
                       role="button"
                       tabIndex={0}
                     >
-                      <span className="icon is-small">
-                        <i className="fas fa-trash-alt" aria-hidden="true" />
-                      </span>
+                      <i className="fas fa-trash-alt" aria-hidden="true" />
                     </a>
                   </div>
                 </nav>
