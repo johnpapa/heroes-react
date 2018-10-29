@@ -1,17 +1,35 @@
 /// <reference types="cypress" />
 
-const hero = {
-  id: 'HeroLagertha',
-  name: 'Lagertha the Shieldmaiden',
-  description: 'aka Hlaðgerðr',
+import data from '../../db';
+
+const hero = data.heroes[3];
+const heroCount = 6;
+const heroToDelete = data.heroes[5];
+const newHero = {
+  id: 'heroMadelyn',
+  name: 'Madelyn',
+  description: 'chief of theatre props'
+};
+
+const resetData = () =>
+  cy.request('POST', 'http://localhost:3000/api/reset', data);
+
+const containsHeroes = count =>
+  cy.get('.list .name').should('have.length', count);
+
+const detailsAreVisible = visible => {
+  const val = visible ? '' : 'not.';
+  return cy.get('.editarea input[name=id]').should(`${val}be.visible`);
 };
 
 context('Heroes', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
-    cy.get('nav ul.menu-list a')
-      .contains('Heroes')
-      .click();
+    resetData().then(() => {
+      cy.visit('http://localhost:3000');
+      cy.get('nav ul.menu-list a')
+        .contains('Heroes')
+        .click();
+    });
   });
 
   specify(`Contains ${hero.name}`, () => {
@@ -19,31 +37,100 @@ context('Heroes', () => {
   });
 
   specify('Contains 6 heroes', () => {
-    cy.get('.list .name').should('have.length', 6);
+    containsHeroes(heroCount);
   });
 
-  context('Ragnar Details', () => {
+  specify(`Deletes ${heroToDelete.name}`, () => {
+    cy.get(`.list .delete-item [data-hero-id=${heroToDelete.id}]`).click();
+    cy.get(`#modal [data-modal-response=yes]`).click();
+
+    containsHeroes(heroCount - 1);
+
+    // cy.get('.list .name')
+    //   .contains(heroToDelete.name)
+    //   .should('not.be.visible');
+  });
+
+  context(`${hero.name} Details`, () => {
     beforeEach(() => {
-      cy.get('.list .name')
-        .contains(hero.name)
-        .click();
+      resetData().then(() => {
+        cy.get('.list .name')
+          .contains(hero.name)
+          .click();
+      });
     });
 
-    specify('Highlights Ragnar', () => {
+    specify(`Highlights ${hero.name}`, () => {
       cy.get('.list li .box')
         .filter('.selected')
         .should('have.length', 1);
     });
 
-    specify('Shows Details for ${hero.name}', () => {
-      // this works
-      cy.get('body').contains('Details');
+    specify(`Shows Details for ${hero.name}`, () => {
+      const match = new RegExp(hero.id);
+      detailsAreVisible(true);
+      cy.get('.editarea input[name=id]')
+        .invoke('val')
+        .should('match', match);
+    });
 
-      cy.get('.editarea input[name=id]').should('be.visible');
-      cy.get('.editarea input[name=id]').should(
-        'have.value',
-        hero.id
-      );
+    specify(`Saves changes to ${hero.name}`, () => {
+      const newDescription = 'slayer of javascript';
+      cy.get('.editarea input[name=description]')
+        .clear()
+        .type(newDescription);
+      cy.get('.editarea input[name=description]')
+        .invoke('val')
+        .should('not.match', new RegExp(hero.description))
+        .and('match', new RegExp(newDescription));
+      cy.get('.editarea button')
+        .contains('Save')
+        .click();
+      detailsAreVisible(false);
+      cy.get('.list .description').contains(newDescription);
+      containsHeroes(heroCount);
+    });
+
+    specify(`Cancels changes to ${hero.name}`, () => {
+      const newDescription = 'slayer of javascript';
+      cy.get('.editarea input[name=description]')
+        .clear()
+        .type(newDescription);
+      cy.get('.editarea input[name=description]')
+        .invoke('val')
+        .should('not.match', new RegExp(hero.description))
+        .and('match', new RegExp(newDescription));
+      cy.get('.editarea button')
+        .contains('Cancel')
+        .click();
+      detailsAreVisible(false);
+      cy.get('.list .description').contains(hero.description);
+      containsHeroes(heroCount);
+    });
+  });
+
+  context(`Add New Hero`, () => {
+    beforeEach(() => {
+      resetData().then(() => {
+        cy.get('.heroes-container button')
+          .contains('Add')
+          .click();
+      });
+    });
+
+    specify(`Saves changes to ${newHero.name}`, () => {
+      cy.get('.editarea input[name=name]')
+        .clear()
+        .type(newHero.name);
+      cy.get('.editarea input[name=description]')
+        .clear()
+        .type(newHero.description);
+      cy.get('.editarea button')
+        .contains('Save')
+        .click();
+      detailsAreVisible(false);
+      cy.get('.list .description').contains(newHero.description);
+      containsHeroes(heroCount + 1);
     });
   });
 });

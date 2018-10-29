@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
+import { deleteHeroApi, getHeroesApi, postHeroesApi, putHeroesApi } from './heroes.api';
 import HeroList from './HeroList';
 
 import {connect} from 'react-redux';
 import { selectHero, loadHeroes } from './hero.actions';
-import { putHeroesApi, postHeroesApi, deleteHeroApi } from './hero.api';
 
 const captains = console;
 
@@ -28,6 +28,13 @@ class Heroes extends Component {
     this.props.selectHero(null);
   };
 
+  getHeroes = async () => {
+    const newHeroes = await getHeroesApi();
+    const heroes = [...newHeroes];
+    this.setState({ heroes }, () => captains.log(this.state));
+    this.handleCancelHero();
+  };
+
   handleCancelHero = () => {
     this.props.selectHero(null);
     this.setState({ heroToDelete: null });
@@ -40,7 +47,7 @@ class Heroes extends Component {
 
   handleSaveHero = hero => {
     const { selectedHero, getHeroes } = this.props;
-    if (selectedHero) {
+    if (selectedHero && selectedHero.name) {
       putHeroesApi(hero).then(() => {
         this.handleCancelHero();
         getHeroes();
@@ -60,7 +67,7 @@ class Heroes extends Component {
 
   handleModalReponse = e => {
     const { getHeroes } = this.props;
-    const confirmDelete = e.target.dataset.modalResponse == 'yes';
+    const confirmDelete = e.target.dataset.modalResponse === 'yes';
     this.setState({ showModal: false });
     if (confirmDelete) {
       deleteHeroApi(this.state.heroToDelete).then(() => {
@@ -75,7 +82,7 @@ class Heroes extends Component {
     const { heroes, selectedHero, getHeroes } = this.props;
 
     return (
-      <div>
+      <div className="heroes-container">
         <div className="level">
           <div className="level-left">
             <div className="level-item">
@@ -118,7 +125,6 @@ class Heroes extends Component {
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
                     handleSaveHero={this.handleSaveHero}
-      // todo
                     key={selectedHero.id}
                   />
                 </div>

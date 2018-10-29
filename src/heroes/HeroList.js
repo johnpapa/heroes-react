@@ -32,10 +32,10 @@ class HeroList extends Component {
                   aria-label="select"
                   role="button"
                   tabIndex={0}
-                >
+                  >
                   <article
                     className={
-                      'box content ' +
+                      'box content list-item ' +
                       (selectedHero && selectedHero.id === hero.id
                         ? 'selected'
                         : '')
@@ -48,10 +48,11 @@ class HeroList extends Component {
               </div>
               <div className="column is-narrow icons">
                 <nav className="level is-mobile">
-                  <div className="level-right">
+                  <div className="level-right delete-item">
                     <a
                       className="level-item button-icon"
                       data-index={index}
+                      data-hero-id={hero.id}
                       onClick={this.deleteHero}
                       aria-label="delete"
                       role="button"
