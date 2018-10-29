@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
-import { deleteHeroApi, getHeroesApi, postHeroesApi, putHeroesApi } from './heroes.api';
+import {
+  deleteHeroApi,
+  getHeroesApi,
+  postHeroesApi,
+  putHeroesApi
+} from './heroes.api';
 import HeroList from './HeroList';
 
 const captains = console;
@@ -41,7 +46,7 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    if (this.state.selectedHero) {
+    if (this.state.selectedHero && this.state.selectedHero.name) {
       putHeroesApi(hero).then(() => {
         this.handleCancelHero();
         this.getHeroes();
@@ -74,7 +79,7 @@ class Heroes extends Component {
     let { heroes, heroToDelete, selectedHero, showModal } = this.state;
 
     return (
-      <div>
+      <div className="heroes-container">
         <div className="level">
           <div className="level-left">
             <div className="level-item">
@@ -117,7 +122,6 @@ class Heroes extends Component {
                     hero={selectedHero}
                     handleCancelHero={this.handleCancelHero}
                     handleSaveHero={this.handleSaveHero}
-                    // TODO
                     key={selectedHero.id}
                   />
                 </div>
