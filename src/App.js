@@ -22,26 +22,22 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div className="section">
-          <div className="columns">
-            <aside className="column is-2">
-              <nav className="menu">
-                <p className="menu-label">Menu</p>
-                <ul className="menu-list">
-                  <NavLink to="heroes">Heroes</NavLink>
-                  <NavLink to="villains">Villains</NavLink>
-                  <NavLink to="about">About</NavLink>
-                </ul>
-              </nav>
-            </aside>
+        <div className="section columns">
+          <nav className="column is-2 menu">
+            <p className="menu-label">Menu</p>
+            <ul className="menu-list">
+              <NavLink to="heroes">Heroes</NavLink>
+              <NavLink to="villains">Villains</NavLink>
+              <NavLink to="about">About</NavLink>
+            </ul>
+          </nav>
 
-            <main className="column">
-              <Router>
-                <Heroes path="/heroes" />
-                <List path="/villains" />
-              </Router>
-            </main>
-          </div>
+          <main className="column">
+            <Router>
+              <Heroes path="/heroes" />
+              <List path="/villains" />
+            </Router>
+          </main>
         </div>
       </div>
     );
