@@ -80,41 +80,31 @@ class Heroes extends Component {
         <div className="content-title-group">
           <h2 className="title">Heroes</h2>
           <button className="button" onClick={this.addHero} aria-label="add">
-            <i className="fas fa-plus" aria-hidden="true" />
+            <i className="fas fa-plus"/>
           </button>
           <button className="button" onClick={getHeroes} aria-label="refresh">
-            <i className="fas fa-sync" aria-hidden="true" />
+            <i className="fas fa-sync"/>
           </button>
         </div>
 
         <div className="columns is-multiline is-variable">
           <div className="column is-6">
-            <div className="panel">
-              <h3 className="panel-heading">Hero List</h3>
-              <div className="panel-block">
-                <HeroList
-                  heroes={heroes}
-                  selectedHero={selectedHero}
-                  handleSelectHero={this.handleSelectHero}
-                  handleDeleteHero={this.handleDeleteHero}
-                />
-              </div>
-            </div>
+            <HeroList
+              heroes={heroes}
+              selectedHero={selectedHero}
+              handleSelectHero={this.handleSelectHero}
+              handleDeleteHero={this.handleDeleteHero}
+            />
           </div>
 
           <div className={this.props.selectedHero ? 'column is-6' : ''}>
             {this.props.selectedHero && (
-              <div className="panel">
-                <h3 className="panel-heading">Details</h3>
-                <div className="panel-block">
-                  <HeroDetail
-                    hero={selectedHero}
-                    handleCancelHero={this.handleCancelHero}
-                    handleSaveHero={this.handleSaveHero}
-                    key={selectedHero.id}
-                  />
-                </div>
-              </div>
+              <HeroDetail
+                hero={selectedHero}
+                handleCancelHero={this.handleCancelHero}
+                handleSaveHero={this.handleSaveHero}
+                key={selectedHero.id}
+              />
             )}
           </div>
         </div>

@@ -20,6 +20,9 @@ class HeroList extends Component {
     let { heroes, selectedHero } = this.props;
 
     return (
+      <div className="panel">
+        <h3 className="panel-heading">Hero List</h3>
+        <div className="panel-block">
       <ul className="list">
         {heroes.map((hero, index) => (
           <li key={hero.id} role="presentation">
@@ -67,6 +70,8 @@ class HeroList extends Component {
           </li>
         ))}
       </ul>
+      </div>
+      </div>
     );
   }
 }

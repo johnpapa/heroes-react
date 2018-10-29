@@ -33,6 +33,9 @@ class HeroDetail extends Component {
     let { hero } = this.props;
 
     return (
+      <div className="panel">
+        <h3 className="panel-heading">Details</h3>
+        <div className="panel-block">
       <div className="editarea">
         <div>
           {hero.id ? (
@@ -99,6 +102,8 @@ class HeroDetail extends Component {
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     );
   }
