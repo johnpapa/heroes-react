@@ -95,7 +95,7 @@ class HeroDetail extends Component {
               </button>
             </div>
             <div className="control">
-              <button className="button is-primary" onClick={this.handleSave}>
+              <button className="button is-primary" onClick={() => this.handleSave()}>
                 Save
               </button>
             </div>

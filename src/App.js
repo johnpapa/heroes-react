@@ -3,6 +3,7 @@ import 'bulma/css/bulma.css';
 import React, { Component } from 'react';
 import Header from './Header';
 import Heroes from './heroes/Heroes';
+import List from './containers/List';
 import './styles.scss';
 
 const NavLink = props => (
@@ -38,6 +39,7 @@ class App extends Component {
             <main className="column">
               <Router>
                 <Heroes path="/heroes" />
+                <List path="/villains" />
               </Router>
             </main>
           </div>

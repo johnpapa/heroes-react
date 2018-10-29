@@ -4,25 +4,28 @@ import HeroDetail from './HeroDetail';
 import { deleteHeroApi, getHeroesApi, postHeroesApi, putHeroesApi } from './heroes.api';
 import HeroList from './HeroList';
 
+import {connect} from 'react-redux';
+import { selectHero, loadHeroes } from './hero.actions';
+
 const captains = console;
 
 class Heroes extends Component {
+  state = {
+    heroToDelete: null,
+    showModal: false
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      heroToDelete: null,
-      heroes: [],
-      selectedHero: null,
-      showModal: false
-    };
   }
 
   componentDidMount() {
-    this.getHeroes();
+    this.props.getHeroes();
   }
 
   addHero = () => {
-    this.setState({ selectedHero: {} });
+    // this.setState({ selectedHero: {} });
+    this.props.selectHero(null);
   };
 
   getHeroes = async () => {
@@ -33,46 +36,51 @@ class Heroes extends Component {
   };
 
   handleCancelHero = () => {
-    this.setState({ selectedHero: null, heroToDelete: null });
+    this.props.selectHero(null);
+    this.setState({ heroToDelete: null });
   };
 
   handleDeleteHero = hero => {
-    this.setState({ showModal: true, heroToDelete: hero, selectedHero: null });
+    this.props.selectHero(null);
+    this.setState({ showModal: true, heroToDelete: hero });
   };
 
   handleSaveHero = hero => {
+    const { selectedHero, getHeroes } = this.props;
+    if (selectedHero && selectedHero.name) {
     captains.log(this.state.selectedHero);
-    if (this.state.selectedHero && this.state.selectedHero.name) {
       putHeroesApi(hero).then(() => {
         this.handleCancelHero();
-        this.getHeroes();
+        getHeroes();
       });
     } else {
       postHeroesApi(hero).then(() => {
         this.handleCancelHero();
-        this.getHeroes();
+        getHeroes();
       });
     }
   };
 
   handleSelectHero = selectedHero => {
+    this.props.selectHero(selectedHero);
     captains.log(`you selected ${selectedHero.name}`);
-    this.setState({ selectedHero });
   };
 
   handleModalReponse = e => {
+    const { getHeroes } = this.props;
     const confirmDelete = e.target.dataset.modalResponse === 'yes';
     this.setState({ showModal: false });
     if (confirmDelete) {
       deleteHeroApi(this.state.heroToDelete).then(() => {
         this.handleCancelHero();
-        this.getHeroes();
+        getHeroes();
       });
     }
   };
 
   render() {
-    let { heroes, heroToDelete, selectedHero, showModal } = this.state;
+    const { heroToDelete, showModal } = this.state;
+    const { heroes, selectedHero, getHeroes } = this.props;
 
     return (
       <div className="heroes-container">
@@ -85,7 +93,7 @@ class Heroes extends Component {
                   <button className="button is-light" onClick={this.addHero}>
                     Add
                   </button>
-                  <button className="button is-light" onClick={this.getHeroes}>
+                  <button className="button is-light" onClick={getHeroes}>
                     Refresh
                   </button>
                 </div>
@@ -110,7 +118,7 @@ class Heroes extends Component {
           </div>
 
           <div className="column is-6">
-            {selectedHero ? (
+            {this.props.selectedHero && 
               <div className="panel">
                 <p className="panel-heading">Details</p>
                 <div className="panel-block">
@@ -122,11 +130,19 @@ class Heroes extends Component {
                   />
                 </div>
               </div>
-            ) : null}
+            }
           </div>
         </div>
 
-        {showModal ? (
+        {this.props.heroesLoading && 
+          <div>show a spinner here...</div>
+        }
+
+        {this.props.heroesLoadingError &&
+          <div>something went wrong loading heroes</div>
+        }
+
+        {showModal &&
           <Modal>
             <h1>Would you like to delete {heroToDelete.name}?</h1>
             <div className="buttons">
@@ -146,10 +162,37 @@ class Heroes extends Component {
               </button>
             </div>
           </Modal>
-        ) : null}
+        }
       </div>
     );
   }
 }
 
-export default Heroes;
+// whatever is exposed here will become part of the components `props`
+const mapStateToProps = (state) => {
+  return {
+    heroes: state.heroes.data,
+    heroesLoading: state.heroes.loading,
+    heroesLoadingError: state.heroes.error,
+    selectedHero: state.selectedHero
+  };
+}
+
+// whatever is exposed here will become part of the components `props`
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getHeroes: () => {
+      dispatch(loadHeroes())
+    },
+    selectHero: hero => {
+      dispatch(selectHero(hero))
+    }
+  };
+}
+
+const HeroesContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Heroes);
+
+export default HeroesContainer;

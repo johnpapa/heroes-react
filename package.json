@@ -10,9 +10,10 @@
     "node-sass": "^4.9.4",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "^5.1.0",
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
+    "redux-saga": "^0.16.2",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
