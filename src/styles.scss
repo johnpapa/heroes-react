@@ -1,5 +1,5 @@
 $primary: #00b3e6;
-$link: #ff4081;
+// $link: #ff4081;
 @import 'bulma/bulma.sass';
 
 .menu-list a.activeLink {
@@ -7,34 +7,20 @@ $link: #ff4081;
   background-color: $link;
 }
 
-// button {
-//   margin: 1em;
-// }
-
 .content-container {
   h2 {
     padding-top: 16px;
-    display: inline-block;
-  }
-}
-
-.content-container {
-  h2 {
     padding-right: 15px;
+    display: inline-block;
   }
   .content-title-group button.button {
     border: 0;
     color: #999;
     margin-top: 18px;
     &:hover {
-      color: #333;
+      color: $link;
     }
   }
-}
-
-.column.is-narrow.icons {
-  display: flex;
-  width: 2em;
 }
 
 .list {
@@ -42,30 +28,31 @@ $link: #ff4081;
   margin-bottom: 1em;
   width: 100%;
   box-shadow: none;
-  li {
-    .box {
-      cursor: pointer;
-      margin-bottom: 1em;
-      &.selected,
-      &:hover {
-        color: #fff;
-        background-color: $link;
-        a {
-          color: #fff;
-        }
-      }
-      &.selected:hover {
-        color: white;
+  .card-content {
+    .name {
+      font-size: 28px;
+    }
+    .description {
+      font-size: 20px;
+      color: #999;
+    }
+  }
+  .card-footer {
+    i {
+      margin-right: 20px;
+    }
+    * {
+      color: #999;
+      &:hover * {
+        color: $link;
       }
     }
   }
-  .description {
-    margin: 5px 0;
-  }
-  .name {
-    font-weight: bold;
+  li .card {
+    margin-bottom: 2em;
   }
 }
+
 .editarea {
   width: 100%;
 }

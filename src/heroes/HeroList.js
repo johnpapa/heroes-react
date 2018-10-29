@@ -17,7 +17,7 @@ class HeroList extends Component {
   };
 
   render() {
-    let { heroes, selectedHero } = this.props;
+    let { heroes /* , selectedHero */ } = this.props;
 
     return (
       <div className="panel">
@@ -26,46 +26,38 @@ class HeroList extends Component {
           <ul className="list">
             {heroes.map((hero, index) => (
               <li key={hero.id} role="presentation">
-                <div className="columns is-variable is-2 is-single-line">
-                  <div className="column is-narrow icons" />
-                  <div className="column">
+                <div className="card">
+                  <div className="card-content">
+                    <div className="content">
+                      <div className="name">{hero.name}</div>
+                      <div className="description">{hero.description}</div>
+                    </div>
+                  </div>
+                  <footer className="card-footer ">
                     <a
+                      className="card-footer-item"
                       data-index={index}
                       onClick={this.selectHero}
                       aria-label="select"
                       role="button"
                       tabIndex={0}
                     >
-                      <article
-                        className={
-                          'box content list-item ' +
-                          (selectedHero && selectedHero.id === hero.id
-                            ? 'selected'
-                            : '')
-                        }
-                      >
-                        <div className="name">{hero.name}</div>
-                        <div className="description">{hero.description}</div>
-                      </article>
+                      <i className="fas fa-edit" />
+                      Edit
                     </a>
-                  </div>
-                  <div className="column is-narrow icons">
-                    <nav className="level is-mobile">
-                      <div className="level-right delete-item">
-                        <a
-                          className="level-item button-icon"
-                          data-index={index}
-                          data-hero-id={hero.id}
-                          onClick={this.deleteHero}
-                          aria-label="delete"
-                          role="button"
-                          tabIndex={0}
-                        >
-                          <i className="fas fa-trash-alt" aria-hidden="true" />
-                        </a>
-                      </div>
-                    </nav>
-                  </div>
+                    <a
+                      className="card-footer-item"
+                      data-index={index}
+                      data-hero-id={hero.id}
+                      onClick={this.deleteHero}
+                      aria-label="delete"
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <i className="fas fa-trash" />
+                      Delete
+                    </a>
+                  </footer>
                 </div>
               </li>
             ))}
