@@ -41,29 +41,17 @@ context('Heroes', () => {
   });
 
   specify(`Deletes ${heroToDelete.name}`, () => {
-    cy.get(`.list .delete-item [data-hero-id=${heroToDelete.id}]`).click();
+    cy.get(`.list .delete-item[data-hero-id=${heroToDelete.id}]`).click();
     cy.get(`#modal [data-modal-response=yes]`).click();
 
     containsHeroes(heroCount - 1);
-
-    // cy.get('.list .name')
-    //   .contains(heroToDelete.name)
-    //   .should('not.be.visible');
   });
 
   context(`${hero.name} Details`, () => {
     beforeEach(() => {
       resetData().then(() => {
-        cy.get('.list .name')
-          .contains(hero.name)
-          .click();
+        cy.get(`.list .edit-item[data-hero-id=${hero.id}]`).click();
       });
-    });
-
-    specify(`Highlights ${hero.name}`, () => {
-      cy.get('.list li .box')
-        .filter('.selected')
-        .should('have.length', 1);
     });
 
     specify(`Shows Details for ${hero.name}`, () => {
@@ -83,9 +71,7 @@ context('Heroes', () => {
         .invoke('val')
         .should('not.match', new RegExp(hero.description))
         .and('match', new RegExp(newDescription));
-      cy.get('.editarea button')
-        .contains('Save')
-        .click();
+      cy.get('.editarea .save-button').click();
       detailsAreVisible(false);
       cy.get('.list .description').contains(newDescription);
       containsHeroes(heroCount);
@@ -100,9 +86,7 @@ context('Heroes', () => {
         .invoke('val')
         .should('not.match', new RegExp(hero.description))
         .and('match', new RegExp(newDescription));
-      cy.get('.editarea button')
-        .contains('Cancel')
-        .click();
+      cy.get('.editarea .cancel-button').click();
       detailsAreVisible(false);
       cy.get('.list .description').contains(hero.description);
       containsHeroes(heroCount);
@@ -112,10 +96,9 @@ context('Heroes', () => {
   context(`Add New Hero`, () => {
     beforeEach(() => {
       resetData().then(() => {
-        cy.get('.heroes-container button')
-          .contains('Add')
+        cy.get('.content-container .add-button')
           .click();
-      });
+        });
     });
 
     specify(`Saves changes to ${newHero.name}`, () => {
@@ -125,9 +108,7 @@ context('Heroes', () => {
       cy.get('.editarea input[name=description]')
         .clear()
         .type(newHero.description);
-      cy.get('.editarea button')
-        .contains('Save')
-        .click();
+      cy.get('.editarea .save-button').click();
       detailsAreVisible(false);
       cy.get('.list .description').contains(newHero.description);
       containsHeroes(heroCount + 1);

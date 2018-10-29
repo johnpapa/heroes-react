@@ -30,9 +30,9 @@ class HeroList extends Component {
                   <div className="description">{hero.description}</div>
                 </div>
               </div>
-              <footer className="card-footer ">
+              <footer className="card-footer">
                 <a
-                  className="card-footer-item"
+                  className="card-footer-item delete-item"
                   data-index={index}
                   data-hero-id={hero.id}
                   onClick={this.deleteHero}
@@ -40,20 +40,21 @@ class HeroList extends Component {
                   role="button"
                   tabIndex={0}
                 >
-                  <i className="fas fa-trash" />
+                  <i className="fas fa-trash" aria-hidden="true"/>
                   <span>Delete</span>
                 </a>
                 <a
-                  className="card-footer-item"
+                  className="card-footer-item edit-item"
                   data-index={index}
+                  data-hero-id={hero.id}
                   onClick={this.selectHero}
                   aria-label="edit"
                   role="button"
                   tabIndex={0}
                 >
-                  <i className="fas fa-edit" />
+                  <i className="fas fa-edit" aria-hidden="true"/>
                   <span>Edit</span>
-                </a>{' '}
+                </a>
               </footer>
             </div>
           </li>

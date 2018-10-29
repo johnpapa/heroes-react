@@ -33,80 +33,78 @@ class HeroDetail extends Component {
     let { hero, handleCancelHero } = this.props;
 
     return (
-      <div>
-        <div className="card">
-          <header className="card-header">
-            <p className="card-header-title">{hero.name} Details</p>
-          </header>
-          <div className="card-content">
-            <div className="content">
-              {hero.id ? (
-                <div className="field">
-                  <label className="label" htmlFor="id">
-                    id
-                  </label>
-                  <input
-                    name="id"
-                    className="input"
-                    type="text"
-                    defaultValue={hero.id}
-                    readOnly
-                  />
-                </div>
-              ) : (
-                ''
-              )}
+      <div className="card editarea">
+        <header className="card-header">
+          <p className="card-header-title">{hero.name} Details</p>
+        </header>
+        <div className="card-content">
+          <div className="content">
+            {hero.id ? (
               <div className="field">
-                <label className="label" htmlFor="name">
-                  name
+                <label className="label" htmlFor="id">
+                  id
                 </label>
                 <input
-                  name="name"
+                  name="id"
                   className="input"
                   type="text"
-                  placeholder="e.g Colleen"
-                  defaultValue={hero.name}
-                  onChange={this.handleNameChange}
+                  defaultValue={hero.id}
+                  readOnly
                 />
               </div>
-              <div className="field">
-                <label className="label" htmlFor="description">
-                  description:{' '}
-                </label>
-                <input
-                  name="description"
-                  className="input"
-                  type="text"
-                  placeholder="e.g dance fight!"
-                  defaultValue={hero.description}
-                  onChange={this.handleDescriptionChange}
-                />
-              </div>
+            ) : (
+              ''
+            )}
+            <div className="field">
+              <label className="label" htmlFor="name">
+                name
+              </label>
+              <input
+                name="name"
+                className="input"
+                type="text"
+                placeholder="e.g Colleen"
+                defaultValue={hero.name}
+                onChange={this.handleNameChange}
+              />
+            </div>
+            <div className="field">
+              <label className="label" htmlFor="description">
+                description:
+              </label>
+              <input
+                name="description"
+                className="input"
+                type="text"
+                placeholder="e.g dance fight!"
+                defaultValue={hero.description}
+                onChange={this.handleDescriptionChange}
+              />
             </div>
           </div>
-          <footer className="card-footer ">
-            <a
-              className="card-footer-item"
-              onClick={handleCancelHero}
-              aria-label="select"
-              role="button"
-              tabIndex={0}
-            >
-              <i className="fas fa-undo" />
-              <span>Cancel</span>
-            </a>
-            <a
-              className="card-footer-item"
-              onClick={() => this.handleSave()}
-              aria-label="delete"
-              role="button"
-              tabIndex={0}
-            >
-              <i className="fas fa-save" />
-              <span>Save</span>
-            </a>
-          </footer>
         </div>
+        <footer className="card-footer ">
+          <a
+            className="card-footer-item cancel-button"
+            onClick={handleCancelHero}
+            aria-label="select"
+            role="button"
+            tabIndex={0}
+          >
+            <i className="fas fa-undo" />
+            <span>Cancel</span>
+          </a>
+          <a
+            className="card-footer-item save-button"
+            onClick={() => this.handleSave()}
+            aria-label="delete"
+            role="button"
+            tabIndex={0}
+          >
+            <i className="fas fa-save" />
+            <span>Save</span>
+          </a>
+        </footer>
       </div>
     );
   }
