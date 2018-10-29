@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
-import {
-  deleteHeroApi,
-  getHeroesApi,
-  postHeroesApi,
-  putHeroesApi
-} from './heroes.api';
+import { deleteHeroApi, getHeroesApi, postHeroesApi, putHeroesApi } from './heroes.api';
 import HeroList from './HeroList';
 
 const captains = console;
@@ -46,6 +41,8 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
+    debugger;
+    captains.log(this.state.selectedHero);
     if (this.state.selectedHero && this.state.selectedHero.name) {
       putHeroesApi(hero).then(() => {
         this.handleCancelHero();
