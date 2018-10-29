@@ -48,12 +48,10 @@ class Heroes extends Component {
       // captains.log(this.state.selectedHero);
       captains.log(hero);
       updateHero(hero);
-      this.handleCancelHero(); // TODO - need this?
-      // getHeroes();
+      this.handleCancelHero();
     } else {
       addHero(hero);
-      this.handleCancelHero(); // TODO - need this?
-      // getHeroes();
+      this.handleCancelHero();
     }
   };
 
@@ -69,7 +67,6 @@ class Heroes extends Component {
     if (confirmDelete) {
       deleteHero(this.state.heroToDelete);
       this.handleCancelHero();
-      // getHeroes(); // TODO : need this?
     }
   };
 
