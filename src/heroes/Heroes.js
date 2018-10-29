@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import HeroDetail from './HeroDetail';
-import {
-  deleteHeroApi,
-  postHeroesApi
-  // putHeroesApi
-} from './hero.api';
 import HeroList from './HeroList';
 
 import { connect } from 'react-redux';
 import {
   loadHeroesAction,
   selectHeroAction,
-  updateHeroAction
+  updateHeroAction,
+  deleteHeroAction,
+  addHeroAction,
 } from './hero.actions';
 
 const captains = console;
@@ -46,19 +43,17 @@ class Heroes extends Component {
   };
 
   handleSaveHero = hero => {
-    const { selectedHero, getHeroes, updateHero } = this.props;
+    const { addHero, selectedHero, updateHero } = this.props;
     if (selectedHero && selectedHero.name) {
       // captains.log(this.state.selectedHero);
       captains.log(hero);
       updateHero(hero);
-      // putHeroesApi(hero).then(() => {
-      this.handleCancelHero();
+      this.handleCancelHero(); // TODO - need this?
       // getHeroes();
     } else {
-      postHeroesApi(hero).then(() => {
-        this.handleCancelHero();
-        getHeroes();
-      });
+      addHero(hero);
+      this.handleCancelHero(); // TODO - need this?
+      // getHeroes();
     }
   };
 
@@ -68,14 +63,13 @@ class Heroes extends Component {
   };
 
   handleModalReponse = e => {
-    const { getHeroes } = this.props;
+    const { deleteHero } = this.props;
     const confirmDelete = e.target.dataset.modalResponse === 'yes';
     this.setState({ showModal: false });
     if (confirmDelete) {
-      deleteHeroApi(this.state.heroToDelete).then(() => {
-        this.handleCancelHero();
-        getHeroes();
-      });
+      deleteHero(this.state.heroToDelete);
+      this.handleCancelHero();
+      // getHeroes(); // TODO : need this?
     }
   };
 
@@ -188,6 +182,12 @@ const mapDispatchToProps = dispatch => {
     },
     updateHero: hero => {
       dispatch(updateHeroAction(hero));
+    },
+    deleteHero: hero => {
+      dispatch(deleteHeroAction(hero));
+    },
+    addHero: hero => {
+      dispatch(addHeroAction(hero));
     }
   };
 };

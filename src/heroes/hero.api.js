@@ -16,7 +16,7 @@ export const updateHeroApi = async hero => {
   return response.data;
 };
 
-export const postHeroesApi = async hero => {
+export const addHeroApi = async hero => {
   const response = await axios.post(`${API}/hero`, hero);
   if (response.status !== 201) throw Error(response.message);
   return response.data;

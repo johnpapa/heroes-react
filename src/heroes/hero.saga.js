@@ -1,13 +1,24 @@
 import { put, takeEvery, call, fork } from 'redux-saga/effects';
 import {
-  HEROES_LOADED,
-  HEROES_LOAD_ERROR,
-  HEROES_LOADING,
-  HEROES_UPDATING,
-  HEROES_UPDATED,
-  HEROES_UPDATE_ERROR
+  LOAD_HERO,
+  LOAD_HERO_SUCCESS,
+  LOAD_HERO_ERROR,
+  UPDATE_HERO,
+  UPDATE_HERO_SUCCESS,
+  UPDATE_HERO_ERROR,
+  DELETE_HERO,
+  DELETE_HERO_SUCCESS,
+  DELETE_HERO_ERROR,
+  ADD_HERO,
+  ADD_HERO_SUCCESS,
+  ADD_HERO_ERROR
 } from './hero.actions';
-import { loadHeroesApi, updateHeroApi } from './hero.api';
+import {
+  addHeroApi,
+  deleteHeroApi,
+  loadHeroesApi,
+  updateHeroApi
+} from './hero.api';
 const captains = console;
 
 // Our worker Saga: will perform the async increment task
@@ -17,38 +28,71 @@ export function* loadingHeroesAsync() {
     const heroes = [...data];
 
     captains.log('Done with async work, dispatch data');
-    yield put({ type: HEROES_LOADED, payload: heroes });
+    yield put({ type: LOAD_HERO_SUCCESS, payload: heroes });
   } catch (err) {
-    yield put({ type: HEROES_LOAD_ERROR, payload: err.message });
+    yield put({ type: LOAD_HERO_ERROR, payload: err.message });
   }
 }
 
 // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
 export function* watchLoadingHeroesAsync() {
   captains.log(`I'm hit first`);
-  yield takeEvery(HEROES_LOADING, loadingHeroesAsync);
+  yield takeEvery(LOAD_HERO, loadingHeroesAsync);
 }
 
-export function* updatingHeroAsync({payload}) {
+export function* updatingHeroAsync({ payload }) {
   try {
-    const data = yield call(updateHeroApi, payload );
-    const updatedHero = data
+    const data = yield call(updateHeroApi, payload);
+    const updatedHero = data;
 
     captains.log('Done with async work, dispatch data');
-    yield put({ type: HEROES_UPDATED, payload: updatedHero });
+    yield put({ type: UPDATE_HERO_SUCCESS, payload: updatedHero });
   } catch (err) {
-    yield put({ type: HEROES_UPDATE_ERROR, payload: err.message });
+    yield put({ type: UPDATE_HERO_ERROR, payload: err.message });
   }
 }
 
 export function* watchUpdatingHeroAsync() {
   captains.log(`I'm hit too`);
-  yield takeEvery(HEROES_UPDATING, updatingHeroAsync);
+  yield takeEvery(UPDATE_HERO, updatingHeroAsync);
+}
+
+export function* deletingHeroAsync({ payload }) {
+  try {
+    yield call(deleteHeroApi, payload);
+
+    captains.log('Done with async work, dispatch data');
+    yield put({ type: DELETE_HERO_SUCCESS, payload: null });
+  } catch (err) {
+    yield put({ type: DELETE_HERO_ERROR, payload: err.message });
+  }
+}
+
+export function* watchDeletingHeroAsync() {
+  yield takeEvery(DELETE_HERO, deletingHeroAsync);
+}
+
+export function* addingHeroAsync({ payload }) {
+  try {
+    const data = yield call(addHeroApi, payload);
+    const addedHero = data;
+
+    captains.log('Done with async work, dispatch data');
+    yield put({ type: ADD_HERO_SUCCESS, payload: addedHero });
+  } catch (err) {
+    yield put({ type: ADD_HERO_ERROR, payload: err.message });
+  }
+}
+
+export function* watchAddingHeroAsync() {
+  yield takeEvery(ADD_HERO, addingHeroAsync);
 }
 
 export function* rootSaga() {
   yield [
     fork(watchLoadingHeroesAsync),
-    fork(watchUpdatingHeroAsync)
+    fork(watchUpdatingHeroAsync),
+    fork(watchDeletingHeroAsync),
+    fork(watchAddingHeroAsync)
   ];
 }
