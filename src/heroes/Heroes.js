@@ -60,7 +60,7 @@ class Heroes extends Component {
   };
 
   handleModalReponse = e => {
-    const confirmDelete = e.target.dataset.modalResponse == 'yes';
+    const confirmDelete = e.target.dataset.modalResponse === 'yes';
     this.setState({ showModal: false });
     if (confirmDelete) {
       deleteHeroApi(this.state.heroToDelete).then(() => {
