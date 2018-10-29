@@ -22,6 +22,19 @@ header {
       color: #00b3e6;
     }
   }
+  .fa-react {
+    color: #61dafb;
+  }
+  .buttons {
+    i.fab {
+      color: #fff;
+      margin-left: 20px;
+      margin-right: 10px;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
 }
 
 .content-container {

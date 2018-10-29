@@ -11,6 +11,9 @@ class Header extends Component {
           aria-label="main navigation"
         >
           <div className="navbar-brand">
+            <a className="navbar-item" href="https://reactjs.org/">
+              <i className="fab fa-react fa-2x" aria-hidden="true" />
+            </a>
             <a className="navbar-item" href="/">
               <span className="tour">TOUR</span>
               <span className="of">OF</span>
@@ -32,10 +35,20 @@ class Header extends Component {
             <div className="navbar-end">
               <div className="navbar-item">
                 <div className="buttons">
-                  <a className="button is-primary">
-                    <strong>Github</strong>
+                  <a
+                    href="https://github.com/johnpapa/heroes-react"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-github fa-2x" aria-hidden="true" />
                   </a>
-                  <a className="button is-light">JohnPapa.net</a>
+                  <a
+                    href="https://twitter.com/john_papa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-twitter fa-2x" aria-hidden="true" />
+                  </a>
                 </div>
               </div>
             </div>
