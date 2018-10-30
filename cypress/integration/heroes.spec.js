@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+/* eslint-env mocha */
+/* global cy */
 
 import data from '../../db';
 
@@ -96,9 +98,8 @@ context('Heroes', () => {
   context(`Add New Hero`, () => {
     beforeEach(() => {
       resetData().then(() => {
-        cy.get('.content-container .add-button')
-          .click();
-        });
+        cy.get('.content-container .add-button').click();
+      });
     });
 
     specify(`Saves changes to ${newHero.name}`, () => {
