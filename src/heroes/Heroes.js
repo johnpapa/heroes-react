@@ -85,7 +85,11 @@ class Heroes extends Component {
           >
             <i className="fas fa-plus" aria-hidden="true" />
           </button>
-          <button className="button" onClick={getHeroes} aria-label="refresh">
+          <button
+            className="button refresh-button"
+            onClick={getHeroes}
+            aria-label="refresh"
+          >
             <i className="fas fa-sync" aria-hidden="true" />
           </button>
         </div>

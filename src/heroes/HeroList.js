@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ButtonFooter from '../components/ButtonFooter';
+import CardContent from '../components/CardContent';
 
 class HeroList extends Component {
   selectHero = e => {
@@ -26,12 +27,7 @@ class HeroList extends Component {
         {heroes.map((hero, index) => (
           <li key={hero.id} role="presentation">
             <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  <div className="name">{hero.name}</div>
-                  <div className="description">{hero.description}</div>
-                </div>
-              </div>
+              <CardContent name={hero.name} description={hero.description} />
               <footer className="card-footer">
                 <ButtonFooter
                   className="delete-item"
