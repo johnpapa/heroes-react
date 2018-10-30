@@ -22,7 +22,7 @@ const List = ({ items, heroes, loadHeroes }) => (
     <div>
     {!items || items.length === 0 ? <NoItems /> : <Items items={items} />}
     {!heroes || heroes.length === 0 ? <NoHeroes />: <Items items={heroes} /> }
-    <button onClick={() => loadHeroes()} >Load heroes</button>
+    <button onClick={loadHeroes} >Load heroes</button>
     </div>
   </React.Fragment>
 );

@@ -96,7 +96,7 @@ class HeroDetail extends Component {
           </a>
           <a
             className="card-footer-item save-button"
-            onClick={() => this.handleSave()}
+            onClick={this.handleSave}
             aria-label="delete"
             role="button"
             tabIndex={0}
