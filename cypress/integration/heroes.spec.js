@@ -54,7 +54,7 @@ context('Heroes', () => {
     );
   });
 
-  context(`${hero.name} Details`, () => {
+  context(`${hero.name} has been Selected`, () => {
     beforeEach(() => {
       resetData().then(() => {
         cy.get(`.list .edit-item[data-id=${hero.id}]`).click();
@@ -67,6 +67,14 @@ context('Heroes', () => {
       cy.get('.editarea input[name=id]')
         .invoke('val')
         .should('match', match);
+    });
+
+    specify(`Hero List only shows ${hero.name}`, () => {
+      containsHeroes(1);
+      cy.get(`.list .delete-item[data-id=${heroToDelete.id}]`).should(
+        'not.exist'
+      );
+      cy.get(`.list .delete-item[data-id=${hero.id}]`).should('exist');
     });
 
     specify(`Saves changes to ${hero.name}`, () => {
