@@ -38,7 +38,7 @@ class HeroDetail extends Component {
     return (
       <div className="card editarea">
         <header className="card-header">
-          <p className="card-header-title">{hero.name} Details</p>
+          <p className="card-header-title">{hero.name}&nbsp;</p>
         </header>
         <div className="card-content">
           <div className="content">
