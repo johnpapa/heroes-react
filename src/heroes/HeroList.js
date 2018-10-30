@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import ButtonFooter from '../components/ButtonFooter';
+
 class HeroList extends Component {
   selectHero = e => {
     const index = +e.currentTarget.dataset.index;
@@ -31,30 +33,22 @@ class HeroList extends Component {
                 </div>
               </div>
               <footer className="card-footer">
-                <a
-                  className="card-footer-item delete-item"
-                  data-index={index}
-                  data-hero-id={hero.id}
+                <ButtonFooter
+                  className="delete-item"
+                  iconClasses="fas fa-trash"
                   onClick={this.deleteHero}
-                  aria-label="delete"
-                  role="button"
-                  tabIndex={0}
-                >
-                  <i className="fas fa-trash" aria-hidden="true"/>
-                  <span>Delete</span>
-                </a>
-                <a
-                  className="card-footer-item edit-item"
-                  data-index={index}
-                  data-hero-id={hero.id}
+                  label="Delete"
+                  dataIndex={index}
+                  dataId={hero.id}
+                />
+                <ButtonFooter
+                  className="edit-item"
+                  iconClasses="fas fa-edit"
                   onClick={this.selectHero}
-                  aria-label="edit"
-                  role="button"
-                  tabIndex={0}
-                >
-                  <i className="fas fa-edit" aria-hidden="true"/>
-                  <span>Edit</span>
-                </a>
+                  label="Edit"
+                  dataIndex={index}
+                  dataId={hero.id}
+                />
               </footer>
             </div>
           </li>

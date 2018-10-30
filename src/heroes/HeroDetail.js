@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import InputDetail from '../components/InputDetail';
+import ButtonFooter from '../components/ButtonFooter';
+
 class HeroDetail extends Component {
   constructor(props) {
     super(props);
@@ -39,71 +42,36 @@ class HeroDetail extends Component {
         </header>
         <div className="card-content">
           <div className="content">
-            {hero.id ? (
-              <div className="field">
-                <label className="label" htmlFor="id">
-                  id
-                </label>
-                <input
-                  name="id"
-                  className="input"
-                  type="text"
-                  defaultValue={hero.id}
-                  readOnly
-                />
-              </div>
-            ) : (
-              ''
+            {hero.id && (
+              <InputDetail name="id" value={hero.id} readOnly="true" />
             )}
-            <div className="field">
-              <label className="label" htmlFor="name">
-                name
-              </label>
-              <input
-                name="name"
-                className="input"
-                type="text"
-                placeholder="e.g Colleen"
-                defaultValue={hero.name}
-                onChange={this.handleNameChange}
-              />
-            </div>
-            <div className="field">
-              <label className="label" htmlFor="description">
-                description:
-              </label>
-              <input
-                name="description"
-                className="input"
-                type="text"
-                placeholder="e.g dance fight!"
-                defaultValue={hero.description}
-                onChange={this.handleDescriptionChange}
-              />
-            </div>
+            <InputDetail
+              name="name"
+              value={hero.name}
+              placeholder="e.g Colleen"
+              onChange={this.handleNameChange}
+            />
+            <InputDetail
+              name="description"
+              value={hero.description}
+              placeholder="e.g dance fight!"
+              onChange={this.handleDescriptionChange}
+            />
           </div>
         </div>
         <footer className="card-footer ">
-          <a
-            className="card-footer-item cancel-button"
+          <ButtonFooter
+            className="cancel-button"
+            iconClasses="fas fa-undo"
             onClick={handleCancelHero}
-            aria-label="select"
-            role="button"
-            tabIndex={0}
-          >
-            <i className="fas fa-undo" />
-            <span>Cancel</span>
-          </a>
-          <a
-            className="card-footer-item save-button"
+            label="Cancel"
+          />
+          <ButtonFooter
+            className="save-button"
+            iconClasses="fas fa-save"
             onClick={this.handleSave}
-            aria-label="delete"
-            role="button"
-            tabIndex={0}
-          >
-            <i className="fas fa-save" />
-            <span>Save</span>
-          </a>
+            label="Save"
+          />
         </footer>
       </div>
     );

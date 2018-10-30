@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../Modal';
+import ModalYesNo from '../components/ModalYesNo';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
 
@@ -113,25 +113,10 @@ class Heroes extends Component {
         </div>
 
         {showModal && (
-          <Modal>
-            <h1>Would you like to delete {heroToDelete.name}?</h1>
-            <div className="buttons">
-              <button
-                className="button is-light"
-                data-modal-response="yes"
-                onClick={this.handleModalReponse}
-              >
-                Yes
-              </button>
-              <button
-                className="button is-light"
-                data-modal-response="no"
-                onClick={this.handleModalReponse}
-              >
-                No
-              </button>
-            </div>
-          </Modal>
+          <ModalYesNo
+            message={`Would you like to delete ${heroToDelete.name}?`}
+            onClick={this.handleModalReponse}
+          />
         )}
       </div>
     );
