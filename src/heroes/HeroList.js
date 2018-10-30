@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import ButtonFooter from '../components/ButtonFooter';
+import CardContent from '../components/CardContent';
+
 class HeroList extends Component {
   selectHero = e => {
     const index = +e.currentTarget.dataset.index;
@@ -24,37 +27,24 @@ class HeroList extends Component {
         {heroes.map((hero, index) => (
           <li key={hero.id} role="presentation">
             <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  <div className="name">{hero.name}</div>
-                  <div className="description">{hero.description}</div>
-                </div>
-              </div>
+              <CardContent name={hero.name} description={hero.description} />
               <footer className="card-footer">
-                <a
-                  className="card-footer-item delete-item"
-                  data-index={index}
-                  data-hero-id={hero.id}
+                <ButtonFooter
+                  className="delete-item"
+                  iconClasses="fas fa-trash"
                   onClick={this.deleteHero}
-                  aria-label="delete"
-                  role="button"
-                  tabIndex={0}
-                >
-                  <i className="fas fa-trash" aria-hidden="true"/>
-                  <span>Delete</span>
-                </a>
-                <a
-                  className="card-footer-item edit-item"
-                  data-index={index}
-                  data-hero-id={hero.id}
+                  label="Delete"
+                  dataIndex={index}
+                  dataId={hero.id}
+                />
+                <ButtonFooter
+                  className="edit-item"
+                  iconClasses="fas fa-edit"
                   onClick={this.selectHero}
-                  aria-label="edit"
-                  role="button"
-                  tabIndex={0}
-                >
-                  <i className="fas fa-edit" aria-hidden="true"/>
-                  <span>Edit</span>
-                </a>
+                  label="Edit"
+                  dataIndex={index}
+                  dataId={hero.id}
+                />
               </footer>
             </div>
           </li>

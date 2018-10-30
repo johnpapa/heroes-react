@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../Modal';
+import ModalYesNo from '../components/ModalYesNo';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
 
@@ -76,13 +76,20 @@ class Heroes extends Component {
 
     return (
       <div className="content-container">
-
         <div className="content-title-group">
           <h2 className="title">Heroes</h2>
-          <button className="button add-button" onClick={this.addHero} aria-label="add">
+          <button
+            className="button add-button"
+            onClick={this.addHero}
+            aria-label="add"
+          >
             <i className="fas fa-plus" aria-hidden="true" />
           </button>
-          <button className="button" onClick={getHeroes} aria-label="refresh">
+          <button
+            className="button refresh-button"
+            onClick={getHeroes}
+            aria-label="refresh"
+          >
             <i className="fas fa-sync" aria-hidden="true" />
           </button>
         </div>
@@ -110,25 +117,10 @@ class Heroes extends Component {
         </div>
 
         {showModal && (
-          <Modal>
-            <h1>Would you like to delete {heroToDelete.name}?</h1>
-            <div className="buttons">
-              <button
-                className="button is-light"
-                data-modal-response="yes"
-                onClick={this.handleModalReponse}
-              >
-                Yes
-              </button>
-              <button
-                className="button is-light"
-                data-modal-response="no"
-                onClick={this.handleModalReponse}
-              >
-                No
-              </button>
-            </div>
-          </Modal>
+          <ModalYesNo
+            message={`Would you like to delete ${heroToDelete.name}?`}
+            onClick={this.handleModalReponse}
+          />
         )}
       </div>
     );

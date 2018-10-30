@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Heroes from './heroes/Heroes';
 import List from './containers/List';
-import Nav from './Nav';
+import Nav from './components/Nav';
 import './styles.scss';
 
 class App extends Component {
