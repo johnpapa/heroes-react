@@ -41,7 +41,7 @@ context('Heroes', () => {
   });
 
   specify(`Deletes ${heroToDelete.name}`, () => {
-    cy.get(`.list .delete-item[data-hero-id=${heroToDelete.id}]`).click();
+    cy.get(`.list .delete-item[data-id=${heroToDelete.id}]`).click();
     cy.get(`#modal [data-modal-response=yes]`).click();
 
     containsHeroes(heroCount - 1);
@@ -50,7 +50,7 @@ context('Heroes', () => {
   context(`${hero.name} Details`, () => {
     beforeEach(() => {
       resetData().then(() => {
-        cy.get(`.list .edit-item[data-hero-id=${hero.id}]`).click();
+        cy.get(`.list .edit-item[data-id=${hero.id}]`).click();
       });
     });
 
