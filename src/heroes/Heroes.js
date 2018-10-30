@@ -76,10 +76,13 @@ class Heroes extends Component {
 
     return (
       <div className="content-container">
-
         <div className="content-title-group">
           <h2 className="title">Heroes</h2>
-          <button className="button add-button" onClick={this.addHero} aria-label="add">
+          <button
+            className="button add-button"
+            onClick={this.addHero}
+            aria-label="add"
+          >
             <i className="fas fa-plus" aria-hidden="true" />
           </button>
           <button className="button" onClick={getHeroes} aria-label="refresh">
