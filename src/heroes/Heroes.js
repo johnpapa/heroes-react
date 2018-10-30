@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ModalYesNo from '../components/ModalYesNo';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
+// import { selectedHeroesOnly } from './hero.reducer';
 
 import { connect } from 'react-redux';
 import {
@@ -19,10 +20,6 @@ class Heroes extends Component {
     heroToDelete: null,
     showModal: false
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.getHeroes();
@@ -127,10 +124,20 @@ class Heroes extends Component {
   }
 }
 
+const selectedHeroesOnly = state => {
+  if (state.heroes && state.heroes.data && state.heroes.data.length) {
+    return state.heroes.data.filter(hero => {
+      return state.selectedHero ? hero.id === state.selectedHero.id : true;
+    });
+  }
+  return [];
+};
+
 // whatever is exposed here will become part of the components `props`
 const mapStateToProps = state => {
   return {
-    heroes: state.heroes.data,
+    heroes: selectedHeroesOnly(state),
+    // heroes: state.heroes.data,
     heroesLoading: state.heroes.loading,
     heroesLoadingError: state.heroes.error,
     selectedHero: state.selectedHero
