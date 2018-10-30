@@ -34,6 +34,8 @@ context('Heroes', () => {
     });
   });
 
+  after(() => resetData());
+
   specify(`Contains ${hero.name}`, () => {
     cy.get('.list .name').contains(hero.name);
   });
@@ -47,8 +49,9 @@ context('Heroes', () => {
     cy.get(`#modal [data-modal-response=yes]`).click();
 
     containsHeroes(heroCount - 1);
-    cy.get(`.list .delete-item[data-id=${heroToDelete.id}]`)
-      .should('not.exist');
+    cy.get(`.list .delete-item[data-id=${heroToDelete.id}]`).should(
+      'not.exist'
+    );
   });
 
   context(`${hero.name} Details`, () => {
