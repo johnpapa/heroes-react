@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './globe.png';
 
 class Header extends Component {
   render() {
@@ -11,7 +10,8 @@ class Header extends Component {
           aria-label="main navigation"
         >
           <div className="navbar-brand">
-            <a className="navbar-item" href="https://reactjs.org/">
+            <a className="navbar-item" href="https://reactjs.org/"
+              target="_blank" rel="noopener noreferrer">
               <i className="fab fa-react fa-2x" aria-hidden="true" />
             </a>
             <a className="navbar-item" href="/">
