@@ -11,7 +11,7 @@ const InputDetail = ({ name, value, placeholder, onChange, readOnly }) => (
       type="text"
       defaultValue={value}
       placeholder={placeholder}
-      readOnly={readOnly}
+      readOnly={!!readOnly}
       onChange={onChange}
     />
   </div>
