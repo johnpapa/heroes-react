@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 /* eslint-env mocha */
-/* global cy */
+/* global cy expect */
 
 import data from '../../db';
 
@@ -21,7 +21,8 @@ const containsHeroes = count =>
 
 const detailsAreVisible = visible => {
   const val = visible ? '' : 'not.';
-  return cy.get('.editarea input[name=id]').should(`${val}be.visible`);
+  // return cy.get('.editarea input[name=name]').should(`${val}be.visible`)
+  return cy.get('.editarea input[name=name]').should(`${val}exist`);
 };
 
 context('Heroes', () => {
@@ -56,9 +57,7 @@ context('Heroes', () => {
 
   context(`${hero.name} has been Selected`, () => {
     beforeEach(() => {
-      resetData().then(() => {
-        cy.get(`.list .edit-item[data-id=${hero.id}]`).click();
-      });
+      cy.get(`.list .edit-item[data-id=${hero.id}]`).click();
     });
 
     specify(`Shows Details for ${hero.name}`, () => {
@@ -79,6 +78,7 @@ context('Heroes', () => {
 
     specify(`Saves changes to ${hero.name}`, () => {
       const newDescription = 'slayer of javascript';
+      detailsAreVisible(true);
       cy.get('.editarea input[name=description]')
         .clear()
         .type(newDescription);
@@ -94,6 +94,7 @@ context('Heroes', () => {
 
     specify(`Cancels changes to ${hero.name}`, () => {
       const newDescription = 'slayer of javascript';
+      detailsAreVisible(true);
       cy.get('.editarea input[name=description]')
         .clear()
         .type(newDescription);
@@ -110,18 +111,50 @@ context('Heroes', () => {
 
   context(`Add New Hero`, () => {
     beforeEach(() => {
-      resetData().then(() => {
-        cy.get('.content-container .add-button').click();
-      });
+      cy.get('.content-container .add-button').click();
     });
 
     specify(`Saves changes to ${newHero.name}`, () => {
+      detailsAreVisible(true);
       cy.get('.editarea input[name=name]')
         .clear()
         .type(newHero.name);
       cy.get('.editarea input[name=description]')
         .clear()
         .type(newHero.description);
+      cy.get('.editarea .save-button').click();
+      detailsAreVisible(false);
+      cy.get('.list .description').contains(newHero.description);
+      containsHeroes(heroCount + 1);
+    });
+  });
+
+  context(`Direct Routing`, () => {
+    specify(`Routes to /heroes directly and see hero list`, () => {
+      cy.visit('http://localhost:3000');
+      cy.wait(1000);
+      cy.location().should(loc => {
+        expect(loc.host).to.eq('localhost:3000');
+        expect(loc.hostname).to.eq('localhost');
+        expect(loc.href).to.eq('http://localhost:3000/heroes');
+        expect(loc.origin).to.eq('http://localhost:3000');
+        expect(loc.port).to.eq('3000');
+        expect(loc.protocol).to.eq('http:');
+        expect(loc.toString()).to.eq('http://localhost:3000/heroes');
+      });
+      detailsAreVisible(false);
+      containsHeroes(heroCount);
+    });
+
+    specify(`Routes to /heroes/0 directly and adds a hero`, () => {
+      cy.visit('http://localhost:3000/heroes/0');
+      cy.wait(1000);
+      cy.location().should(loc => {
+        expect(loc.href).to.eq('http://localhost:3000/heroes/0');
+      });
+      detailsAreVisible(true);
+      cy.get('.editarea input[name=name]').type(newHero.name);
+      cy.get('.editarea input[name=description]').type(newHero.description);
       cy.get('.editarea .save-button').click();
       detailsAreVisible(false);
       cy.get('.list .description').contains(newHero.description);

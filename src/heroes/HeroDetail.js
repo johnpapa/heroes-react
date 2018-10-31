@@ -33,12 +33,16 @@ class HeroDetail extends Component {
   };
 
   render() {
-    let { hero, handleCancelHero } = this.props;
+    let { hero } = this.state;
+    let { handleCancelHero } = this.props;
 
     return (
       <div className="card editarea">
         <header className="card-header">
-          <p className="card-header-title">{hero.name}&nbsp;</p>
+          <p className="card-header-title">
+            {hero.name}
+            &nbsp;
+          </p>
         </header>
         <div className="card-content">
           <div className="content">

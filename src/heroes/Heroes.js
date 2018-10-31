@@ -113,12 +113,12 @@ class Heroes extends Component {
                 path="/heroes/:id"
                 component={() => {
                   return (
-                    selectedHero && (
+                    (
                       <HeroDetail
                         hero={selectedHero}
                         handleCancelHero={this.handleCancelHero}
                         handleSaveHero={this.handleSaveHero}
-                        key={selectedHero.id}
+                        key={selectedHero && selectedHero.id}
                       />
                     )
                   );
