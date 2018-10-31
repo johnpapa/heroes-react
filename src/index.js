@@ -11,6 +11,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import app from './store';
 import { rootSaga } from './heroes/hero.saga';
+import { rootSaga as villainSaga } from './villains/villain.saga';
 
 // create and configure reduxer middleware ( saga is a middleware )
 const sagaMiddleware = createSagaMiddleware();
@@ -28,6 +29,7 @@ const store = createStore(
 // trigger saga to start
 // sagaMiddleware.run(watchLoadingHeroesAsync);
 sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(villainSaga);
 
 ReactDOM.render(
   <Provider store={store}>

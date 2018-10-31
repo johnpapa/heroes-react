@@ -31,5 +31,11 @@
       "description": "daughter of Earl Herrauðr of Götaland"
     }
   ],
-  "villains": []
+  "villains": [
+    {
+      "id": "VillainMadelyn",
+      "name": "Madelyn",
+      "description": "chief of theatre props"
+    }
+  ]
 }

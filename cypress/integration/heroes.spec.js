@@ -146,19 +146,5 @@ context('Heroes', () => {
       containsHeroes(heroCount);
     });
 
-    specify(`Routes to /heroes/0 directly and adds a hero`, () => {
-      cy.visit('http://localhost:3000/heroes/0');
-      cy.wait(1000);
-      cy.location().should(loc => {
-        expect(loc.href).to.eq('http://localhost:3000/heroes/0');
-      });
-      detailsAreVisible(true);
-      cy.get('.editarea input[name=name]').type(newHero.name);
-      cy.get('.editarea input[name=description]').type(newHero.description);
-      cy.get('.editarea .save-button').click();
-      detailsAreVisible(false);
-      cy.get('.list .description').contains(newHero.description);
-      containsHeroes(heroCount + 1);
-    });
   });
 });

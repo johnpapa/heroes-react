@@ -2,5 +2,6 @@
   "/api/*": "/$1",
   "/hero/:id": "/heroes/:id",
   "/hero": "/heroes",
+  "/villain": "/villains",
   "/reset": "/reset"
 }

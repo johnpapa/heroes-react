@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import InputDetail from '../components/InputDetail';
 import ButtonFooter from '../components/ButtonFooter';
@@ -9,6 +10,10 @@ class HeroDetail extends Component {
     this.state = {
       hero: Object.assign({}, this.props.hero)
     };
+  }
+
+  componentDidMount() {
+    !this.props.hero && this.props.history.push('/'); // TODO: goes to / route
   }
 
   handleSave = () => {
@@ -82,4 +87,4 @@ class HeroDetail extends Component {
   }
 }
 
-export default HeroDetail;
+export default withRouter(HeroDetail);
