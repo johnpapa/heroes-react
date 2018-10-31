@@ -1,15 +1,11 @@
-import { Link } from '@reach/router';
-import React from 'react';
+// import React from 'react';
+// import { Link } from 'react-router-dom';
 
-const NavLink = props => (
-  <Link
-    {...props}
-    getProps={({ isCurrent }) => {
-      return {
-        className: isCurrent ? 'activeLink' : ''
-      };
-    }}
-  />
-);
+// const NavLink = props => (
+//   <Link
+//     // {...props}
+//         className: isCurrent ? 'activeLink' : ''
+//   />
+// );
 
-export default NavLink;
+// export default NavLink;

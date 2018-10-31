@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ModalYesNo from '../components/ModalYesNo';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
@@ -27,9 +29,11 @@ class Heroes extends Component {
 
   addHero = () => {
     this.props.selectHero({});
+    this.props.history.push('/heroes/0'); // TODO: goes to /heroes/0 route
   };
 
   handleCancelHero = () => {
+    this.props.history.push('/'); // TODO: goes to / route
     this.props.selectHero(null);
     this.setState({ heroToDelete: null });
   };
@@ -90,26 +94,37 @@ class Heroes extends Component {
             <i className="fas fa-sync" aria-hidden="true" />
           </button>
         </div>
-
         <div className="columns is-multiline is-variable">
           <div className="column is-6">
-            <HeroList
-              heroes={heroes}
-              selectedHero={selectedHero}
-              handleSelectHero={this.handleSelectHero}
-              handleDeleteHero={this.handleDeleteHero}
-            />
-          </div>
-
-          <div className={this.props.selectedHero ? 'column is-6' : ''}>
-            {this.props.selectedHero && (
-              <HeroDetail
-                hero={selectedHero}
-                handleCancelHero={this.handleCancelHero}
-                handleSaveHero={this.handleSaveHero}
-                key={selectedHero.id}
+            <Switch>
+              <Route
+                exact
+                path="/heroes"
+                component={() => (
+                  <HeroList
+                    heroes={heroes}
+                    selectedHero={selectedHero}
+                    handleSelectHero={this.handleSelectHero}
+                    handleDeleteHero={this.handleDeleteHero}
+                  />
+                )}
               />
-            )}
+              <Route
+                path="/heroes/:id"
+                component={() => {
+                  return (
+                    selectedHero && (
+                      <HeroDetail
+                        hero={selectedHero}
+                        handleCancelHero={this.handleCancelHero}
+                        handleSaveHero={this.handleSaveHero}
+                        key={selectedHero.id}
+                      />
+                    )
+                  );
+                }}
+              />
+            </Switch>
           </div>
         </div>
 
@@ -124,20 +139,10 @@ class Heroes extends Component {
   }
 }
 
-const selectedHeroesOnly = state => {
-  if (state.heroes && state.heroes.data && state.heroes.data.length) {
-    return state.heroes.data.filter(hero => {
-      return state.selectedHero ? hero.id === state.selectedHero.id : true;
-    });
-  }
-  return [];
-};
-
 // whatever is exposed here will become part of the components `props`
 const mapStateToProps = state => {
   return {
-    heroes: selectedHeroesOnly(state),
-    // heroes: state.heroes.data,
+    heroes: state.heroes.data,
     heroesLoading: state.heroes.loading,
     heroesLoadingError: state.heroes.error,
     selectedHero: state.selectedHero

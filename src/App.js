@@ -1,4 +1,4 @@
-import { Router } from '@reach/router';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { Component } from 'react';
 import Header from './Header';
 import Heroes from './heroes/Heroes';
@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import './styles.scss';
 import 'bulma/css/bulma.css';
 
-const NotFound = () => <p>Sorry, nothing here</p>;
+const NotFound = () => <h2>{`These aren't the bits you're looking for`}</h2>;
 
 class App extends Component {
   render() {
@@ -17,11 +17,12 @@ class App extends Component {
         <div className="section columns">
           <Nav />
           <main className="column">
-            <Router>
-              <Heroes path="heroes" />
-              <List path="villains" />
-              <NotFound default />
-            </Router>
+            <Switch>
+              <Redirect from="/" exact to="/heroes" />
+              <Route path="/heroes" component={Heroes} />
+              <Route exact path="/villains" component={List} />
+              <Route exact path="**" component={NotFound} />
+            </Switch>
           </main>
         </div>
       </div>

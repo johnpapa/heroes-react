@@ -2,7 +2,7 @@ $primary: #00b3e6;
 $link:  $primary; // #00b3e6; // #ff4081;
 @import 'bulma/bulma.sass';
 
-.menu-list a.activeLink {
+.menu-list .active-link {
   color: #fff;
   background-color: $link;
 }

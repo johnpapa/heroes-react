@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import ButtonFooter from '../components/ButtonFooter';
 import CardContent from '../components/CardContent';
@@ -10,6 +11,7 @@ class HeroList extends Component {
     const hero = heroes[index];
 
     this.props.handleSelectHero(hero);
+    this.props.history.push(`/heroes/${hero.id}`);
   };
 
   deleteHero = e => {
@@ -54,4 +56,4 @@ class HeroList extends Component {
   }
 }
 
-export default HeroList;
+export default withRouter(HeroList);

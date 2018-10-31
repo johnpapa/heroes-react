@@ -69,12 +69,12 @@ context('Heroes', () => {
         .should('match', match);
     });
 
-    specify(`Hero List only shows ${hero.name}`, () => {
-      containsHeroes(1);
+    specify(`Hero List is gone`, () => {
+      containsHeroes(0);
       cy.get(`.list .delete-item[data-id=${heroToDelete.id}]`).should(
         'not.exist'
       );
-      cy.get(`.list .delete-item[data-id=${hero.id}]`).should('exist');
+      cy.get(`.list .delete-item[data-id=${hero.id}]`).should('not.exist');
     });
 
     specify(`Saves changes to ${hero.name}`, () => {
