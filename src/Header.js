@@ -12,7 +12,7 @@ class Header extends Component {
           <div className="navbar-brand">
             <a className="navbar-item" href="https://reactjs.org/"
               target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-react fa-2x" aria-hidden="true" />
+              <i className="fab js-logo fa-react fa-2x" aria-hidden="true" />
             </a>
             <a className="navbar-item" href="/">
               <span className="tour">TOUR</span>

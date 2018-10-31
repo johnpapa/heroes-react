@@ -1,5 +1,13 @@
-$primary: #00b3e6;
-$link:  $primary; // #00b3e6; // #ff4081;
+$vue: #42b883;
+$vue-light: #42b883;
+$angular: #b52e31;
+$angular-light: #eb7a7c;
+$react: #00b3e6;
+$react-light: #61dafb;
+$primary: $react;
+$primary-light: $react-light;
+$link: $primary; // #00b3e6; // #ff4081;
+
 @import 'bulma/bulma.sass';
 
 .menu-list .active-link {
@@ -19,14 +27,14 @@ header {
       color: #ccc;
     }
     &.heroes {
-      color: $primary;
+      color: $primary-light;
     }
   }
   .fab {
     font-size: 24px;
-  }
-  .fa-react {
-    color: #61dafb;
+    &.js-logo {
+      color: $primary-light;
+    }
   }
   .buttons {
     i.fab {
@@ -34,7 +42,7 @@ header {
       margin-left: 20px;
       margin-right: 10px;
       &:hover {
-        color: $primary;
+        color: $primary-light;
       }
     }
   }
