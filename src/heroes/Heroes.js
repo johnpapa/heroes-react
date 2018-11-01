@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ModalYesNo } from '../components';
+import { ListHeader, ModalYesNo } from '../components';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
 import {
@@ -13,7 +13,7 @@ import {
 } from './hero.actions';
 
 const captains = console;
-
+ 
 class Heroes extends Component {
   state = {
     heroToDelete: null,
@@ -73,23 +73,11 @@ class Heroes extends Component {
 
     return (
       <div className="content-container">
-        <div className="content-title-group">
-          <h2 className="title">Heroes</h2>
-          <button
-            className="button add-button"
-            onClick={this.addHero}
-            aria-label="add"
-          >
-            <i className="fas fa-plus" aria-hidden="true" />
-          </button>
-          <button
-            className="button refresh-button"
-            onClick={getHeroes}
-            aria-label="refresh"
-          >
-            <i className="fas fa-sync" aria-hidden="true" />
-          </button>
-        </div>
+        <ListHeader
+          title="Heroes"
+          handleAdd={this.addHero}
+          handleRefresh={getHeroes}
+        />
         <div className="columns is-multiline is-variable">
           <div className="column is-6">
             <Switch>
@@ -106,7 +94,7 @@ class Heroes extends Component {
                 )}
               />
               <Route
-              exact
+                exact
                 path="/heroes/:id"
                 component={() => {
                   return (

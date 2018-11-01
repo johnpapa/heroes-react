@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ModalYesNo } from '../components';
+import { ListHeader, ModalYesNo } from '../components';
 import {
   loadVillainsAction,
   selectVillainAction,
@@ -73,23 +73,11 @@ class Villains extends Component {
 
     return (
       <div className="content-container">
-        <div className="content-title-group">
-          <h2 className="title">Villains</h2>
-          <button
-            className="button add-button"
-            onClick={this.addVillain}
-            aria-label="add"
-          >
-            <i className="fas fa-plus" aria-hidden="true" />
-          </button>
-          <button
-            className="button refresh-button"
-            onClick={getVillains}
-            aria-label="refresh"
-          >
-            <i className="fas fa-sync" aria-hidden="true" />
-          </button>
-        </div>
+        <ListHeader
+          title="Villains"
+          handleAdd={this.addVillain}
+          handleRefresh={getVillains}
+        />
         <div className="columns is-multiline is-variable">
           <div className="column is-6">
             <Switch>
