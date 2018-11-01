@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => (
   <header className="">
@@ -16,11 +17,12 @@ const Header = () => (
         >
           <i className="fab js-logo fa-react fa-2x" aria-hidden="true" />
         </a>
-        <a className="navbar-item" href="/">
+        <NavLink to="/" className="navbar-item nav-home">
+          {/* <a className="navbar-item" href="/"> */}
           <span className="tour">TOUR</span>
           <span className="of">OF</span>
           <span className="heroes">HEROES</span>
-        </a>
+        </NavLink>
         <a
           role="button"
           className="navbar-burger burger"

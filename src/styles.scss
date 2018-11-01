@@ -45,6 +45,14 @@ header {
       color: $primary-light;
     }
   }
+  .navbar-item.nav-home {
+    border: 3px solid transparent;
+    border-radius: 0%;
+    &:hover {
+      border-right: 3px solid $primary-light;
+      border-left: 3px solid $primary-light;
+    }
+  }
   .fab {
     font-size: 24px;
     &.js-logo {
@@ -95,6 +103,7 @@ header {
   .list {
     box-shadow: none;
     .card-content {
+      background-color: $shade-light;
       .name {
         font-size: 28px;
         color: #000;
@@ -108,9 +117,6 @@ header {
     .card {
       margin-bottom: 2em;
     }
-  }
-  .card-content {
-    background-color: $shade-light;
     .label {
       font-weight: normal;
     }
