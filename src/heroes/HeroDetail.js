@@ -41,7 +41,7 @@ class HeroDetail extends Component {
     let { handleCancelHero } = this.props;
 
     return (
-      <div className="card editarea">
+      <div className="card edit-detail">
         <header className="card-header">
           <p className="card-header-title">
             {hero.name}

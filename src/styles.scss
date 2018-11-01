@@ -8,6 +8,8 @@ $primary: $react;
 $primary-light: $react-light;
 $link: $primary; // #00b3e6; // #ff4081;
 
+$shade-light: #fafafa;
+
 @import 'bulma/bulma.sass';
 
 .menu-list .active-link {
@@ -61,6 +63,12 @@ header {
   }
 }
 
+.edit-detail {
+  .input[readonly] {
+    background-color: $shade-light;
+  }
+}
+
 .content-container {
   h2 {
     padding-top: 16px;
@@ -91,14 +99,14 @@ header {
         font-size: 20px;
         color: #999;
       }
-      background-color: #fafafa;
+      background-color: $shade-light;
     }
     .card {
       margin-bottom: 2em;
     }
   }
   .card-content {
-    background-color: #fafafa;
+    background-color: $shade-light;
     .label {
       font-weight: normal;
     }
