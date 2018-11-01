@@ -70,21 +70,23 @@ header {
 }
 
 .content-container {
-  h2 {
-    padding-top: 16px;
-    padding-right: 15px;
-    display: inline-block;
-  }
   .content-title-group {
+    margin-bottom: 16px;
     h2 {
+      border-left: 16px solid $primary;
+      padding-left: 8px;
+      padding-right: 16px;
+      display: inline-block;
       text-transform: uppercase;
       color: #555;
       letter-spacing: 0px;
+      &:hover {
+        color: $link;
+      }
     }
     button.button {
       border: 0;
       color: #999;
-      margin-top: 18px;
       &:hover {
         color: $link;
       }

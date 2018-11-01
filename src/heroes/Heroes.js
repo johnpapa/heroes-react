@@ -13,7 +13,7 @@ import {
 } from './hero.actions';
 
 const captains = console;
- 
+
 class Heroes extends Component {
   state = {
     heroToDelete: null,
@@ -77,6 +77,7 @@ class Heroes extends Component {
           title="Heroes"
           handleAdd={this.addHero}
           handleRefresh={getHeroes}
+          routePath="/heroes"
         />
         <div className="columns is-multiline is-variable">
           <div className="column is-6">

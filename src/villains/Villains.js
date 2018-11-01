@@ -77,6 +77,7 @@ class Villains extends Component {
           title="Villains"
           handleAdd={this.addVillain}
           handleRefresh={getVillains}
+          routePath="/villains"
         />
         <div className="columns is-multiline is-variable">
           <div className="column is-6">
