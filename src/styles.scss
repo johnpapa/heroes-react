@@ -76,9 +76,11 @@ header {
     display: inline-block;
   }
   .content-title-group {
-    text-transform: uppercase;
-    color: #555;
-    letter-spacing: -2px;
+    h2 {
+      text-transform: uppercase;
+      color: #555;
+      letter-spacing: 0px;
+    }
     button.button {
       border: 0;
       color: #999;
