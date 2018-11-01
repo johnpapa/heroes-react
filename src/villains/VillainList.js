@@ -3,48 +3,51 @@ import { withRouter } from 'react-router-dom';
 
 import { ButtonFooter, CardContent } from '../components';
 
-class HeroList extends Component {
-  selectHero = e => {
+class VillainList extends Component {
+  selectVillain = e => {
     const index = +e.currentTarget.dataset.index;
-    const { heroes } = this.props;
-    const hero = heroes[index];
+    const { villains } = this.props;
+    const villain = villains[index];
 
-    this.props.handleSelectHero(hero);
-    this.props.history.push(`/heroes/${hero.id}`);
+    this.props.handleSelectVillain(villain);
+    this.props.history.push(`/villains/${villain.id}`);
   };
 
-  deleteHero = e => {
+  deleteVillain = e => {
     const index = +e.currentTarget.dataset.index;
-    const { heroes } = this.props;
-    const hero = heroes[index];
-    this.props.handleDeleteHero(hero);
+    const { villains } = this.props;
+    const villain = villains[index];
+    this.props.handleDeleteVillain(villain);
   };
 
   render() {
-    let { heroes /* , selectedHero */ } = this.props;
+    let { villains /* , selectedVillain */ } = this.props;
 
     return (
       <ul className="list">
-        {heroes.map((hero, index) => (
-          <li key={hero.id} role="presentation">
+        {villains.map((villain, index) => (
+          <li key={villain.id} role="presentation">
             <div className="card">
-              <CardContent name={hero.name} description={hero.description} />
+              <CardContent
+                name={villain.name}
+                description={villain.description}
+              />
               <footer className="card-footer">
                 <ButtonFooter
                   className="delete-item"
                   iconClasses="fas fa-trash"
-                  onClick={this.deleteHero}
+                  onClick={this.deleteVillain}
                   label="Delete"
                   dataIndex={index}
-                  dataId={hero.id}
+                  dataId={villain.id}
                 />
                 <ButtonFooter
                   className="edit-item"
                   iconClasses="fas fa-edit"
-                  onClick={this.selectHero}
+                  onClick={this.selectVillain}
                   label="Edit"
                   dataIndex={index}
-                  dataId={hero.id}
+                  dataId={villain.id}
                 />
               </footer>
             </div>
@@ -55,4 +58,4 @@ class HeroList extends Component {
   }
 }
 
-export default withRouter(HeroList);
+export default withRouter(VillainList);

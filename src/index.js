@@ -10,7 +10,8 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import app from './store';
-import { rootSaga } from './heroes/hero.saga';
+import { rootSaga as heroSaga } from './heroes/hero.saga';
+import { rootSaga as villainSaga } from './villains/villain.saga';
 
 // create and configure reduxer middleware ( saga is a middleware )
 const sagaMiddleware = createSagaMiddleware();
@@ -20,14 +21,9 @@ const store = createStore(
   app,
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
-// const store = createStore(
-// app,
-// applyMiddleware(sagaMiddleware),
-// );
 
-// trigger saga to start
-// sagaMiddleware.run(watchLoadingHeroesAsync);
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(heroSaga);
+sagaMiddleware.run(villainSaga);
 
 ReactDOM.render(
   <Provider store={store}>

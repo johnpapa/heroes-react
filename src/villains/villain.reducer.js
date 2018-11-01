@@ -1,18 +1,18 @@
 import {
-  SELECT_HERO,
-  LOAD_HERO_SUCCESS,
-  LOAD_HERO,
-  LOAD_HERO_ERROR,
-  UPDATE_HERO,
-  UPDATE_HERO_SUCCESS,
-  UPDATE_HERO_ERROR,
-  DELETE_HERO,
-  DELETE_HERO_SUCCESS,
-  DELETE_HERO_ERROR,
-  ADD_HERO,
-  ADD_HERO_SUCCESS,
-  ADD_HERO_ERROR
-} from './hero.actions';
+  SELECT_VILLAIN,
+  LOAD_VILLAIN_SUCCESS,
+  LOAD_VILLAIN,
+  LOAD_VILLAIN_ERROR,
+  UPDATE_VILLAIN,
+  UPDATE_VILLAIN_SUCCESS,
+  UPDATE_VILLAIN_ERROR,
+  DELETE_VILLAIN,
+  DELETE_VILLAIN_SUCCESS,
+  DELETE_VILLAIN_ERROR,
+  ADD_VILLAIN,
+  ADD_VILLAIN_SUCCESS,
+  ADD_VILLAIN_ERROR
+} from './villain.actions';
 
 let initState = {
   loading: false,
@@ -20,16 +20,16 @@ let initState = {
   error: void 0
 };
 
-export const heroesReducer = (state = initState, action) => {
+export const villainsReducer = (state = initState, action) => {
   switch (action.type) {
-    case LOAD_HERO:
+    case LOAD_VILLAIN:
       return { ...state, loading: true, error: '' };
-    case LOAD_HERO_SUCCESS:
+    case LOAD_VILLAIN_SUCCESS:
       return { ...state, loading: false, data: [...action.payload] };
-    case LOAD_HERO_ERROR:
+    case LOAD_VILLAIN_ERROR:
       return { ...state, loading: false, error: action.payload };
 
-    case UPDATE_HERO:
+    case UPDATE_VILLAIN:
       return {
         ...state,
         data: state.data.map(h => {
@@ -39,12 +39,12 @@ export const heroesReducer = (state = initState, action) => {
           return h;
         })
       };
-    case UPDATE_HERO_SUCCESS:
-      return modifyHeroState(state, action.payload);
-    case UPDATE_HERO_ERROR:
+    case UPDATE_VILLAIN_SUCCESS:
+      return modifyVillainState(state, action.payload);
+    case UPDATE_VILLAIN_ERROR:
       return { ...state, loading: false, error: action.payload };
 
-    case DELETE_HERO: {
+    case DELETE_VILLAIN: {
       return {
         ...state,
         loading: true,
@@ -52,12 +52,12 @@ export const heroesReducer = (state = initState, action) => {
       };
     }
 
-    case DELETE_HERO_SUCCESS: {
+    case DELETE_VILLAIN_SUCCESS: {
       const result = { ...state, loading: false };
       return result;
     }
 
-    case DELETE_HERO_ERROR: {
+    case DELETE_VILLAIN_ERROR: {
       return {
         ...state,
         data: [...state.data, action.payload.requestData],
@@ -65,11 +65,11 @@ export const heroesReducer = (state = initState, action) => {
       };
     }
 
-    case ADD_HERO: {
+    case ADD_VILLAIN: {
       return { ...state, loading: true };
     }
 
-    case ADD_HERO_SUCCESS: {
+    case ADD_VILLAIN_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -77,7 +77,7 @@ export const heroesReducer = (state = initState, action) => {
       };
     }
 
-    case ADD_HERO_ERROR: {
+    case ADD_VILLAIN_ERROR: {
       return { ...state, loading: false };
     }
 
@@ -86,13 +86,13 @@ export const heroesReducer = (state = initState, action) => {
   }
 };
 
-const modifyHeroState = (heroState, heroChanges) => {
+const modifyVillainState = (villainState, villainChanges) => {
   return {
-    ...heroState,
+    ...villainState,
     loading: false,
-    data: heroState.data.map(h => {
-      if (h.id === heroChanges.id) {
-        return { ...h, ...heroChanges };
+    data: villainState.data.map(h => {
+      if (h.id === villainChanges.id) {
+        return { ...h, ...villainChanges };
       } else {
         return h;
       }
@@ -100,11 +100,11 @@ const modifyHeroState = (heroState, heroChanges) => {
   };
 };
 
-let initialSelectedHero = null;
+let initialSelectedVillain = null;
 
-export const selectedHeroReducer = (state = initialSelectedHero, action) => {
+export const selectedVillainReducer = (state = initialSelectedVillain, action) => {
   switch (action.type) {
-    case SELECT_HERO:
+    case SELECT_VILLAIN:
       return action.payload ? { ...action.payload } : null;
     default:
       return state;

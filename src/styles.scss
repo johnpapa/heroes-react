@@ -15,6 +15,19 @@ $link: $primary; // #00b3e6; // #ff4081;
   background-color: $link;
 }
 
+.not-found {
+  i {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  .title {
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-size: 24px;
+    text-transform: none;
+  }
+}
+
 header {
   font-weight: bold;
   font-family: Arial;

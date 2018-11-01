@@ -31,8 +31,19 @@ const heroes = [
   }
 ];
 
-const villains = []
+const villains = [
+  {
+    id: 'VillainMadelyn',
+    name: 'Madelyn',
+    description: 'chief of theatre props'
+  },
+  {
+    id: 'VillainHaley',
+    name: 'Haley',
+    description: 'pen wielder'
+  }
+];
 
-const data = { heroes: heroes, villains: villains}
+const data = { heroes: heroes, villains: villains };
 
 module.exports = data;

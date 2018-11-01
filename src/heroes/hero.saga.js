@@ -19,7 +19,6 @@ import {
   loadHeroesApi,
   updateHeroApi
 } from './hero.api';
-const captains = console;
 
 // Our worker Saga: will perform the async increment task
 export function* loadingHeroesAsync() {
@@ -27,7 +26,6 @@ export function* loadingHeroesAsync() {
     const data = yield call(loadHeroesApi);
     const heroes = [...data];
 
-    captains.log('Done with async work, dispatch data');
     yield put({ type: LOAD_HERO_SUCCESS, payload: heroes });
   } catch (err) {
     yield put({ type: LOAD_HERO_ERROR, payload: err.message });
@@ -36,7 +34,6 @@ export function* loadingHeroesAsync() {
 
 // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
 export function* watchLoadingHeroesAsync() {
-  captains.log(`I'm hit first`);
   yield takeEvery(LOAD_HERO, loadingHeroesAsync);
 }
 
@@ -45,7 +42,6 @@ export function* updatingHeroAsync({ payload }) {
     const data = yield call(updateHeroApi, payload);
     const updatedHero = data;
 
-    captains.log('Done with async work, dispatch data');
     yield put({ type: UPDATE_HERO_SUCCESS, payload: updatedHero });
   } catch (err) {
     yield put({ type: UPDATE_HERO_ERROR, payload: err.message });
@@ -53,7 +49,6 @@ export function* updatingHeroAsync({ payload }) {
 }
 
 export function* watchUpdatingHeroAsync() {
-  captains.log(`I'm hit too`);
   yield takeEvery(UPDATE_HERO, updatingHeroAsync);
 }
 
@@ -61,7 +56,6 @@ export function* deletingHeroAsync({ payload }) {
   try {
     yield call(deleteHeroApi, payload);
 
-    captains.log('Done with async work, dispatch data');
     yield put({ type: DELETE_HERO_SUCCESS, payload: null });
   } catch (err) {
     yield put({ type: DELETE_HERO_ERROR, payload: err.message });
@@ -77,7 +71,6 @@ export function* addingHeroAsync({ payload }) {
     const data = yield call(addHeroApi, payload);
     const addedHero = data;
 
-    captains.log('Done with async work, dispatch data');
     yield put({ type: ADD_HERO_SUCCESS, payload: addedHero });
   } catch (err) {
     yield put({ type: ADD_HERO_ERROR, payload: err.message });

@@ -3,65 +3,67 @@ import { withRouter } from 'react-router-dom';
 
 import { ButtonFooter, InputDetail } from '../components';
 
-class HeroDetail extends Component {
+class VillainDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hero: Object.assign({}, this.props.hero)
+      villain: Object.assign({}, this.props.villain)
     };
   }
 
   componentDidMount() {
-    !this.props.hero && this.props.history.push('/');
+    !this.props.villain && this.props.history.push('/villains');
   }
 
   handleSave = () => {
-    const hero = {
-      id: this.state.hero.id || null,
-      name: this.state.hero.name,
-      description: this.state.hero.description
+    const villain = {
+      id: this.state.villain.id || null,
+      name: this.state.villain.name,
+      description: this.state.villain.description
     };
-    this.props.handleSaveHero(hero);
+    this.props.handleSaveVillain(villain);
   };
 
   handleNameChange = e => {
-    let hero = Object.assign({}, this.state.hero, { name: e.target.value });
-    this.setState({ hero });
+    let villain = Object.assign({}, this.state.villain, {
+      name: e.target.value
+    });
+    this.setState({ villain });
   };
 
   handleDescriptionChange = e => {
-    let hero = Object.assign({}, this.state.hero, {
+    let villain = Object.assign({}, this.state.villain, {
       description: e.target.value
     });
-    this.setState({ hero });
+    this.setState({ villain });
   };
 
   render() {
-    let { hero } = this.state;
-    let { handleCancelHero } = this.props;
+    let { villain } = this.state;
+    let { handleCancelVillain } = this.props;
 
     return (
       <div className="card editarea">
         <header className="card-header">
           <p className="card-header-title">
-            {hero.name}
+            {villain.name}
             &nbsp;
           </p>
         </header>
         <div className="card-content">
           <div className="content">
-            {hero.id && (
-              <InputDetail name="id" value={hero.id} readOnly="true" />
+            {villain.id && (
+              <InputDetail name="id" value={villain.id} readOnly="true" />
             )}
             <InputDetail
               name="name"
-              value={hero.name}
+              value={villain.name}
               placeholder="e.g Colleen"
               onChange={this.handleNameChange}
             />
             <InputDetail
               name="description"
-              value={hero.description}
+              value={villain.description}
               placeholder="e.g dance fight!"
               onChange={this.handleDescriptionChange}
             />
@@ -71,7 +73,7 @@ class HeroDetail extends Component {
           <ButtonFooter
             className="cancel-button"
             iconClasses="fas fa-undo"
-            onClick={handleCancelHero}
+            onClick={handleCancelVillain}
             label="Cancel"
           />
           <ButtonFooter
@@ -86,4 +88,4 @@ class HeroDetail extends Component {
   }
 }
 
-export default withRouter(HeroDetail);
+export default withRouter(VillainDetail);

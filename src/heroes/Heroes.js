@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-import ModalYesNo from '../components/ModalYesNo';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { ModalYesNo } from '../components';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
-// import { selectedHeroesOnly } from './hero.reducer';
-
-import { connect } from 'react-redux';
 import {
   loadHeroesAction,
   selectHeroAction,
@@ -29,11 +26,11 @@ class Heroes extends Component {
 
   addHero = () => {
     this.props.selectHero({});
-    this.props.history.push('/heroes/0'); // TODO: goes to /heroes/0 route
+    this.props.history.push('/heroes/0');
   };
 
   handleCancelHero = () => {
-    this.props.history.push('/'); // TODO: goes to / route
+    this.props.history.push('/');
     this.props.selectHero(null);
     this.setState({ heroToDelete: null });
   };
@@ -46,7 +43,6 @@ class Heroes extends Component {
   handleSaveHero = hero => {
     const { addHero, selectedHero, updateHero } = this.props;
     if (selectedHero && selectedHero.name) {
-      // captains.log(this.state.selectedHero);
       captains.log(hero);
       updateHero(hero);
       this.handleCancelHero();
@@ -110,17 +106,16 @@ class Heroes extends Component {
                 )}
               />
               <Route
+              exact
                 path="/heroes/:id"
                 component={() => {
                   return (
-                    (
-                      <HeroDetail
-                        hero={selectedHero}
-                        handleCancelHero={this.handleCancelHero}
-                        handleSaveHero={this.handleSaveHero}
-                        key={selectedHero && selectedHero.id}
-                      />
-                    )
+                    <HeroDetail
+                      hero={selectedHero}
+                      handleCancelHero={this.handleCancelHero}
+                      handleSaveHero={this.handleSaveHero}
+                      key={selectedHero && selectedHero.id}
+                    />
                   );
                 }}
               />
@@ -139,7 +134,6 @@ class Heroes extends Component {
   }
 }
 
-// whatever is exposed here will become part of the components `props`
 const mapStateToProps = state => {
   return {
     heroes: state.heroes.data,
@@ -149,7 +143,6 @@ const mapStateToProps = state => {
   };
 };
 
-// whatever is exposed here will become part of the components `props`
 const mapDispatchToProps = dispatch => {
   return {
     getHeroes: () => {
