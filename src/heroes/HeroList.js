@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import ButtonFooter from '../components/ButtonFooter';
-import CardContent from '../components/CardContent';
+import { ButtonFooter, CardContent } from '../components';
 
 class HeroList extends Component {
   selectHero = e => {

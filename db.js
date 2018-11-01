@@ -36,6 +36,11 @@ const villains = [
     id: 'VillainMadelyn',
     name: 'Madelyn',
     description: 'chief of theatre props'
+  },
+  {
+    id: 'VillainHaley',
+    name: 'Haley',
+    description: 'pen wielder'
   }
 ];
 

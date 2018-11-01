@@ -1,36 +1,61 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const Items = ({ items }) => (
-  <div>
-    {items.map(item => (
-      <div key={item.id}>
-        <h2>{item.name}</h2>
-        <div>{item.description}</div>
-      </div>
-    ))}
-  </div>
-);
-
-const NoVillains = () => <div>No villains yet</div>;
+import { ButtonFooter, CardContent } from '../components';
 
 class VillainList extends Component {
-  componentDidMount = () => this.props.getVillains();
+  selectVillain = e => {
+    const index = +e.currentTarget.dataset.index;
+    const { villains } = this.props;
+    const villain = villains[index];
+
+    this.props.handleSelectVillain(villain);
+    this.props.history.push(`/villains/${villain.id}`);
+  };
+
+  deleteVillain = e => {
+    const index = +e.currentTarget.dataset.index;
+    const { villains } = this.props;
+    const villain = villains[index];
+    this.props.handleDeleteVillain(villain);
+  };
 
   render() {
-    const { villains, getVillains } = this.props;
+    let { villains /* , selectedVillain */ } = this.props;
+
     return (
-      <React.Fragment>
-        <div>
-          {!villains || villains.length === 0 ? (
-            <NoVillains />
-          ) : (
-            <Items items={villains} />
-          )}
-          <button onClick={getVillains}>Load villains</button>
-        </div>
-      </React.Fragment>
+      <ul className="list">
+        {villains.map((villain, index) => (
+          <li key={villain.id} role="presentation">
+            <div className="card">
+              <CardContent
+                name={villain.name}
+                description={villain.description}
+              />
+              <footer className="card-footer">
+                <ButtonFooter
+                  className="delete-item"
+                  iconClasses="fas fa-trash"
+                  onClick={this.deleteVillain}
+                  label="Delete"
+                  dataIndex={index}
+                  dataId={villain.id}
+                />
+                <ButtonFooter
+                  className="edit-item"
+                  iconClasses="fas fa-edit"
+                  onClick={this.selectVillain}
+                  label="Edit"
+                  dataIndex={index}
+                  dataId={villain.id}
+                />
+              </footer>
+            </div>
+          </li>
+        ))}
+      </ul>
     );
   }
 }
 
-export default VillainList;
+export default withRouter(VillainList);

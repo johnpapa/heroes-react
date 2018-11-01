@@ -34,8 +34,13 @@
   "villains": [
     {
       "id": "VillainMadelyn",
-      "name": "Madelyn",
+      "name": "Madelynasd",
       "description": "chief of theatre props"
+    },
+    {
+      "id": "VillainHaley",
+      "name": "Haley",
+      "description": "pen wielder"
     }
   ]
 }

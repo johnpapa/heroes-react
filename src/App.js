@@ -1,13 +1,10 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { Component } from 'react';
-import Header from './Header';
 import Heroes from './heroes/Heroes';
-import Nav from './components/Nav';
 import Villains from './villains/Villains';
+import { Header, Nav, NotFound } from './components';
 import './styles.scss';
 import 'bulma/css/bulma.css';
-
-const NotFound = () => <h2>{`These aren't the bits you're looking for`}</h2>;
 
 class App extends Component {
   render() {
@@ -20,7 +17,7 @@ class App extends Component {
             <Switch>
               <Redirect from="/" exact to="/heroes" />
               <Route path="/heroes" component={Heroes} />
-              <Route exact path="/villains" component={Villains} />
+              <Route path="/villains" component={Villains} />
               <Route exact path="**" component={NotFound} />
             </Switch>
           </main>

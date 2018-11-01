@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
-import { heroesReducer, heroReducer } from './heroes/hero.reducer';
-import { villainsReducer } from './villains/villain.reducer';
+import { heroesReducer, selectedHeroReducer } from './heroes/hero.reducer';
+import {
+  villainsReducer,
+  selectedVillainReducer
+} from './villains/villain.reducer';
 
 const store = combineReducers({
   villains: villainsReducer,
   heroes: heroesReducer,
-  selectedHero: heroReducer
+  selectedHero: selectedHeroReducer,
+  selectedVillain: selectedVillainReducer
 });
 
 export default store;
