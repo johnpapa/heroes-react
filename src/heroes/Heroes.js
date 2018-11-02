@@ -52,11 +52,6 @@ class Heroes extends Component {
     }
   };
 
-  handleSelectHero = selectedHero => {
-    this.props.selectHero(selectedHero);
-    captains.log(`you selected ${selectedHero.name}`);
-  };
-
   handleModalReponse = e => {
     const { deleteHero } = this.props;
     const confirmDelete = e.target.dataset.modalResponse === 'yes';
@@ -67,16 +62,26 @@ class Heroes extends Component {
     }
   };
 
+  handleSelectHero = selectedHero => {
+    this.props.selectHero(selectedHero);
+    captains.log(`you selected ${selectedHero.name}`);
+  };
+
+  handleRefresh = () => {
+    this.handleCancelHero();
+    this.props.getHeroes();
+  };
+
   render() {
     const { heroToDelete, showModal } = this.state;
-    const { heroes, selectedHero, getHeroes } = this.props;
+    const { heroes, selectedHero } = this.props;
 
     return (
       <div className="content-container">
         <ListHeader
           title="Heroes"
           handleAdd={this.addHero}
-          handleRefresh={getHeroes}
+          handleRefresh={this.handleRefresh}
           routePath="/heroes"
         />
         <div className="columns is-multiline is-variable">
