@@ -52,14 +52,15 @@ class Heroes extends Component {
     }
   };
 
-  handleModalReponse = e => {
-    const { deleteHero } = this.props;
-    const confirmDelete = e.target.dataset.modalResponse === 'yes';
+  handleCloseModal = () => {
     this.setState({ showModal: false });
-    if (confirmDelete) {
-      deleteHero(this.state.heroToDelete);
-      this.handleCancelHero();
-    }
+  };
+
+  handleDeleteFromModal = () => {
+    const { deleteHero } = this.props;
+    this.setState({ showModal: false });
+    deleteHero(this.state.heroToDelete);
+    this.handleCancelHero();
   };
 
   handleSelectHero = selectedHero => {
@@ -120,7 +121,8 @@ class Heroes extends Component {
         {showModal && (
           <ModalYesNo
             message={`Would you like to delete ${heroToDelete.name}?`}
-            onClick={this.handleModalReponse}
+            onNo={this.handleCloseModal}
+            onYes={this.handleDeleteFromModal}
           />
         )}
       </div>

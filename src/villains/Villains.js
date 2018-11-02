@@ -57,14 +57,15 @@ class Villains extends Component {
     captains.log(`you selected ${selectedVillain.name}`);
   };
 
-  handleModalReponse = e => {
-    const { deleteVillain } = this.props;
-    const confirmDelete = e.target.dataset.modalResponse === 'yes';
+  handleCloseModal = () => {
     this.setState({ showModal: false });
-    if (confirmDelete) {
-      deleteVillain(this.state.villainToDelete);
-      this.handleCancelVillain();
-    }
+  };
+
+  handleDeleteFromModal = () => {
+    const { deleteVillain } = this.props;
+    this.setState({ showModal: false });
+    deleteVillain(this.state.villainToDelete);
+    this.handleCancelVillain();
   };
 
   render() {
@@ -114,7 +115,8 @@ class Villains extends Component {
         {showModal && (
           <ModalYesNo
             message={`Would you like to delete ${villainToDelete.name}?`}
-            onClick={this.handleModalReponse}
+            onNo={this.handleCloseModal}
+            onYes={this.handleDeleteFromModal}
           />
         )}
       </div>
