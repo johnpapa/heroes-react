@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-free": "^5.4.1",
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
-    "node-sass": "^4.kw9.4",
+    "node-sass": "^4.9.4",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.0",
@@ -18,13 +18,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "quick": "concurrently \"npm run backend\" \"npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress": "npx cypress open",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "quick": "concurrently \"npm run backend\" \"npm start\"",
+    "cypress": "npx cypress open",
     "backend": "json-server --watch db.json --routes routes.json --port 8626 --middlewares ./node_modules/json-server-reset"
   },
   "eslintConfig": {
