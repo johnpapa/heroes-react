@@ -77,66 +77,66 @@ header {
   }
 }
 
-.content-container {
-  .content-title-group {
-    margin-bottom: 16px;
-    h2 {
-      border-left: 16px solid $primary;
-      padding-left: 8px;
-      padding-right: 16px;
-      display: inline-block;
-      text-transform: uppercase;
-      color: #555;
-      letter-spacing: 0px;
-      &:hover {
-        color: $link;
-      }
-    }
-    button.button {
-      border: 0;
-      color: #999;
-      &:hover {
-        color: $link;
-      }
-    }
-  }
-  .list {
-    box-shadow: none;
-    .card-content {
-      background-color: $shade-light;
-      .name {
-        font-size: 28px;
-        color: #000;
-      }
-      .description {
-        font-size: 20px;
-        color: #999;
-      }
-      background-color: $shade-light;
-    }
-    .card {
-      margin-bottom: 2em;
-    }
-    .label {
-      font-weight: normal;
-    }
-  }
-  .card-header-title {
-    background-color: $primary;
+.content-title-group {
+  margin-bottom: 16px;
+  h2 {
+    border-left: 16px solid $primary;
+    padding-left: 8px;
+    padding-right: 16px;
+    display: inline-block;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #fff;
-    display: block;
-    padding-left: 24px;
-  }
-  .card-footer a {
-    i {
-      margin-right: 10px;
-    }
-    color: #888;
+    color: #555;
+    letter-spacing: 0px;
     &:hover {
       color: $link;
     }
+  }
+  button.button {
+    border: 0;
+    color: #999;
+    &:hover {
+      color: $link;
+    }
+  }
+}
+ul.list {
+  box-shadow: none;
+}
+div.card-content {
+  background-color: $shade-light;
+  .name {
+    font-size: 28px;
+    color: #000;
+  }
+  .description {
+    font-size: 20px;
+    color: #999;
+  }
+  background-color: $shade-light;
+}
+.card {
+  margin-bottom: 2em;
+}
+
+label.label {
+  font-weight: normal;
+}
+
+p.card-header-title {
+  background-color: $primary;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #fff;
+  display: block;
+  padding-left: 24px;
+}
+.card-footer a {
+  i {
+    margin-right: 10px;
+  }
+  color: #888;
+  &:hover {
+    color: $link;
   }
 }
 
@@ -168,4 +168,8 @@ header {
 #modal .buttons button {
   display: inline-block;
   margin: auto;
+}
+
+.field {
+  margin-bottom: 0.75rem;
 }
