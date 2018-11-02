@@ -11,7 +11,7 @@ const ModalYesNo = ({ message, onYes, onNo }) => (
           <p className="modal-card-title">Confirm</p>
         </header>
         <section className="modal-card-body">{message}</section>
-        <footer className="modal-card-foot">
+        <footer className="modal-card-foot card-footer">
           <button
             className="button modal-no"
             onClick={onNo}
