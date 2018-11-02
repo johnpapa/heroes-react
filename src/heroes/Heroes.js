@@ -85,7 +85,7 @@ class Heroes extends Component {
           routePath="/heroes"
         />
         <div className="columns is-multiline is-variable">
-          <div className="column is-6">
+          <div className="column is-8">
             <Switch>
               <Route
                 exact
