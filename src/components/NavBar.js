@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Nav = props => (
+const NavBar = props => (
   <nav className="column is-2 menu">
     <p className="menu-label">Menu</p>
     <ul className="menu-list">
@@ -13,4 +13,4 @@ const Nav = props => (
   </nav>
 );
 
-export default Nav;
+export default NavBar;

@@ -79,7 +79,7 @@ export function* watchAddingVillainAsync() {
   yield takeEvery(ADD_VILLAIN, addingVillainAsync);
 }
 
-export function* rootSaga() {
+export function* villainSaga() {
   yield [
     fork(watchLoadingVillainsAsync),
     fork(watchUpdatingVillainAsync),

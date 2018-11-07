@@ -1,18 +1,18 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { Component } from 'react';
+import 'bulma/css/bulma.css';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { HeaderBar, NavBar, NotFound } from './components';
 import Heroes from './heroes/Heroes';
 import Villains from './villains/Villains';
-import { Header, Nav, NotFound } from './components';
 import './styles.scss';
-import 'bulma/css/bulma.css';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <HeaderBar />
         <div className="section columns">
-          <Nav />
+          <NavBar />
           <main className="column">
             <Switch>
               <Redirect from="/" exact to="/heroes" />

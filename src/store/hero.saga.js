@@ -81,7 +81,7 @@ export function* watchAddingHeroAsync() {
   yield takeEvery(ADD_HERO, addingHeroAsync);
 }
 
-export function* rootSaga() {
+export function* heroSaga() {
   yield [
     fork(watchLoadingHeroesAsync),
     fork(watchUpdatingHeroAsync),

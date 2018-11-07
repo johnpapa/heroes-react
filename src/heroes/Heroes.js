@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import { ListHeader, ModalYesNo } from '../components';
+import { addHeroAction, deleteHeroAction, loadHeroesAction, selectHeroAction, updateHeroAction } from '../store';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
-import {
-  loadHeroesAction,
-  selectHeroAction,
-  updateHeroAction,
-  deleteHeroAction,
-  addHeroAction
-} from './hero.actions';
 
 const captains = console;
 
