@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API = '/api';
+import { API } from './config';
 const captains = console;
 
 export const deleteVillainApi = async villain => {
