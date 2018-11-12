@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 
 import { ButtonFooter, CardContent } from '../components';
 
@@ -55,4 +54,4 @@ class HeroList extends Component {
   }
 }
 
-export default withRouter(HeroList);
+export default HeroList;
