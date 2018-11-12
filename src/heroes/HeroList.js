@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import { ButtonFooter, CardContent } from '../components';
 
@@ -54,4 +55,4 @@ class HeroList extends Component {
   }
 }
 
-export default HeroList;
+export default withRouter(HeroList);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import { ButtonFooter, CardContent } from '../components';
 
@@ -57,4 +58,4 @@ class VillainList extends Component {
   }
 }
 
-export default VillainList;
+export default withRouter(VillainList);

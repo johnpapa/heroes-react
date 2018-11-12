@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import { ButtonFooter, InputDetail } from '../components';
 
@@ -85,4 +86,4 @@ class HeroDetail extends Component {
   }
 }
 
-export default HeroDetail;
+export default withRouter(HeroDetail);
