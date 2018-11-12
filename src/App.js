@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import 'bulma/css/bulma.css';
 import './styles.scss';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { Async, HeaderBar, NavBar, NotFound } from './components';
+import { withRouter } from 'react-router';
+import { HeaderBar, NavBar, NotFound } from './components';
 
-const Heroes = () => import(/* webpackChunkName: "heroes" */ './heroes/Heroes');
-const Villains = () =>
-  import(/* webpackChunkName: "villains" */ './villains/Villains');
+const Heroes = withRouter(
+  lazy(() => import(/* webpackChunkName: "heroes" */ './heroes/Heroes'))
+);
+const Villains = withRouter(
+  lazy(() => import(/* webpackChunkName: "villains" */ './villains/Villains'))
+);
 
 class App extends Component {
   render() {
@@ -16,24 +20,18 @@ class App extends Component {
         <div className="section columns">
           <NavBar />
           <main className="column">
-            {/* <Suspense fallback={<div>Loading...</div>}> */}
-            <Switch>
-              <Redirect from="/" exact to="/heroes" />
-              <Route
-                path="/heroes"
-                component={() => <Async provider={Heroes} />}
-              />
-              <Route
-                path="/villains"
-                component={() => <Async provider={Villains} />}
-              />
-              {/* <Route
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <Redirect from="/" exact to="/heroes" />
+                <Route path="/heroes" component={Heroes} />
+                <Route path="/villains" component={Villains} />
+                {/* <Route
                 path="/about"
-                component={() => <Async provider={Villains} />}
+                component={Villains}
               /> */}
-              <Route exact path="**" component={NotFound} />
-            </Switch>
-            {/* </Suspense> */}
+                <Route exact path="**" component={NotFound} />
+              </Switch>
+            </Suspense>
           </main>
         </div>
       </div>
