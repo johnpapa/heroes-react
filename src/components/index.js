@@ -1,3 +1,4 @@
+import Async from './Async';
 import ButtonFooter from './ButtonFooter';
 import CardContent from './CardContent';
 import HeaderBar from './HeaderBar';
@@ -7,5 +8,14 @@ import ModalYesNo from './ModalYesNo';
 import NavBar from './NavBar';
 import NotFound from './NotFound';
 
-export { ButtonFooter, CardContent, HeaderBar, InputDetail, ListHeader, NavBar, NotFound, ModalYesNo };
-
+export {
+  Async,
+  ButtonFooter,
+  CardContent,
+  HeaderBar,
+  InputDetail,
+  ListHeader,
+  NavBar,
+  NotFound,
+  ModalYesNo
+};
