@@ -1,4 +1,3 @@
-import Async from './Async';
 import ButtonFooter from './ButtonFooter';
 import CardContent from './CardContent';
 import HeaderBar from './HeaderBar';
@@ -9,7 +8,6 @@ import NavBar from './NavBar';
 import NotFound from './NotFound';
 
 export {
-  Async,
   ButtonFooter,
   CardContent,
   HeaderBar,
