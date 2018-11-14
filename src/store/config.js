@@ -1,3 +1,1 @@
-export const PORT = '7777';
-// export const API = `http://localhost:${PORT}/api`;
-export const API = '/api'
+export const API = process.env.REACT_APP_API || `api`;
