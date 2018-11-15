@@ -25,4 +25,4 @@ export const loadHeroesApi = async () => {
   const response = await axios.get(`${API}/heroes`);
   if (response.status !== 200) throw Error(response.message);
   return response.data;
-}
+};

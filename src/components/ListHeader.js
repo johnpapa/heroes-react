@@ -12,14 +12,14 @@ const ListHeader = ({ title, handleAdd, handleRefresh, routePath }) => {
         onClick={handleAdd}
         aria-label="add"
       >
-        <i className="fas fa-plus" aria-hidden="true"></i>
+        <i className="fas fa-plus" aria-hidden="true" />
       </button>
       <button
         className="button refresh-button"
         onClick={handleRefresh}
         aria-label="refresh"
       >
-        <i className="fas fa-sync" aria-hidden="true"></i>
+        <i className="fas fa-sync" aria-hidden="true" />
       </button>
     </div>
   );
