@@ -16,9 +16,8 @@ const HeaderBarBrand = () => (
       <span className="of">OF</span>
       <span className="heroes">HEROES</span>
     </NavLink>
-    <a
-      role="button"
-      className="navbar-burger burger"
+    <button
+      className="link navbar-burger burger"
       aria-label="menu"
       aria-expanded="false"
       data-target="navbarBasicExample"
@@ -26,7 +25,7 @@ const HeaderBarBrand = () => (
       <span aria-hidden="true" />
       <span aria-hidden="true" />
       <span aria-hidden="true" />
-    </a>
+    </button>
   </div>
 );
 

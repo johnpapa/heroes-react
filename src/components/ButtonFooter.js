@@ -9,18 +9,17 @@ const ButtonFooter = ({
   dataId
 }) => {
   return (
-    <a
-      className={'card-footer-item ' + className}
+    <button
+      className={'link card-footer-item ' + className}
       aria-label={label}
-      role="button"
       tabIndex={0}
       onClick={onClick}
       data-index={dataIndex}
       data-id={dataId}
     >
-      <i className={iconClasses}></i>
+      <i className={iconClasses} />
       <span>{label}</span>
-    </a>
+    </button>
   );
 };
 
