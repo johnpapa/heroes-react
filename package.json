@@ -25,7 +25,7 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "quick": "concurrently \"npm run backend\" \"npm start\"",
     "cypress": "npx cypress open",
-    "backend": "json-server --watch db.json --routes routes.json --port 7626 --middlewares ./node_modules/json-server-reset"
+    "backend": "json-server --watch db.json --routes routes.json --port 8626 --middlewares ./node_modules/json-server-reset"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,7 +36,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:7626/",
+  "proxy": "http://localhost:8626/",
   "devDependencies": {
     "concurrently": "^4.0.1",
     "cypress": "^3.1.0",
