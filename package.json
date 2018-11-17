@@ -25,6 +25,7 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "quick": "concurrently \"npm run backend\" \"npm start\"",
     "cypress": "npx cypress open",
+    "e2e": "concurrently \"npm run quick\" \"npm run cypress\"",
     "backend": "json-server --watch db.json --routes routes.json --port 8627 --middlewares ./node_modules/json-server-reset"
   },
   "eslintConfig": {
