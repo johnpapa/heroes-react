@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  heroes-react:
+    image: heroes-react
+    build:
+      context: .
+      args:
+        REACT_APP_API: ${REACT_APP_API}
+    env_file:
+      - .env.development
+    ports:
+      - 8626:8626

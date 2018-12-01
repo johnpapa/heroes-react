@@ -16,7 +16,7 @@ import {
 import {
   addVillainApi,
   deleteVillainApi,
-loadVillainsApi,
+  loadVillainsApi,
   updateVillainApi
 } from './villain.api';
 

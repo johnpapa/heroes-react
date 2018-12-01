@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ListHeader, ModalYesNo } from '../components';
-import { addHeroAction, deleteHeroAction, loadHeroesAction, selectHeroAction, updateHeroAction } from '../store';
+import {
+  addHeroAction,
+  deleteHeroAction,
+  loadHeroesAction,
+  selectHeroAction,
+  updateHeroAction
+} from '../store';
 import HeroDetail from './HeroDetail';
 import HeroList from './HeroList';
 

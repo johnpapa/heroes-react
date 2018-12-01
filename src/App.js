@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import 'bulma/css/bulma.css';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { HeaderBar, NavBar, NotFound } from './components';
-import Heroes from './heroes/Heroes';
-import Villains from './villains/Villains';
 import './styles.scss';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { HeaderBar, NavBar, NotFound } from './components';
+
+const Heroes = withRouter(
+  lazy(() => import(/* webpackChunkName: "heroes" */ './heroes/Heroes'))
+);
+const Villains = withRouter(
+  lazy(() => import(/* webpackChunkName: "villains" */ './villains/Villains'))
+);
 
 class App extends Component {
   render() {
@@ -14,12 +20,18 @@ class App extends Component {
         <div className="section columns">
           <NavBar />
           <main className="column">
-            <Switch>
-              <Redirect from="/" exact to="/heroes" />
-              <Route path="/heroes" component={Heroes} />
-              <Route path="/villains" component={Villains} />
-              <Route exact path="**" component={NotFound} />
-            </Switch>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <Redirect from="/" exact to="/heroes" />
+                <Route path="/heroes" component={Heroes} />
+                <Route path="/villains" component={Villains} />
+                {/* <Route
+                path="/about"
+                component={Villains}
+              /> */}
+                <Route exact path="**" component={NotFound} />
+              </Switch>
+            </Suspense>
           </main>
         </div>
       </div>

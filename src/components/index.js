@@ -7,5 +7,13 @@ import ModalYesNo from './ModalYesNo';
 import NavBar from './NavBar';
 import NotFound from './NotFound';
 
-export { ButtonFooter, CardContent, HeaderBar, InputDetail, ListHeader, NavBar, NotFound, ModalYesNo };
-
+export {
+  ButtonFooter,
+  CardContent,
+  HeaderBar,
+  InputDetail,
+  ListHeader,
+  NavBar,
+  NotFound,
+  ModalYesNo
+};

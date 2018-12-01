@@ -102,7 +102,10 @@ const modifyVillainState = (villainState, villainChanges) => {
 
 let initialSelectedVillain = null;
 
-export const selectedVillainReducer = (state = initialSelectedVillain, action) => {
+export const selectedVillainReducer = (
+  state = initialSelectedVillain,
+  action
+) => {
   switch (action.type) {
     case SELECT_VILLAIN:
       return action.payload ? { ...action.payload } : null;
