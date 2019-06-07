@@ -2,20 +2,6 @@
   "name": "heroes-react",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.4.1",
-    "axios": "^0.18.0",
-    "bulma": "^0.7.2",
-    "node-sass": "^4.9.4",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-redux": "^5.1.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.5",
-    "redux": "^4.0.1",
-    "redux-saga": "^0.16.2",
-    "redux-thunk": "^2.3.0"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -38,6 +24,20 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:8627/",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.1",
+    "axios": "^0.18.0",
+    "bulma": "^0.7.2",
+    "node-sass": "^4.9.4",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.5",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.2",
+    "redux-thunk": "^2.3.0"
+  },
   "devDependencies": {
     "concurrently": "^4.0.1",
     "cypress": "^3.1.0",
