@@ -1,4 +1,4 @@
-import { put, takeEvery, call, fork } from 'redux-saga/effects';
+import { put, takeEvery, call, all } from 'redux-saga/effects';
 import {
   LOAD_VILLAIN,
   LOAD_VILLAIN_SUCCESS,
@@ -13,12 +13,7 @@ import {
   ADD_VILLAIN_SUCCESS,
   ADD_VILLAIN_ERROR
 } from './villain.actions';
-import {
-  addVillainApi,
-  deleteVillainApi,
-  loadVillainsApi,
-  updateVillainApi
-} from './villain.api';
+import { addVillainApi, deleteVillainApi, loadVillainsApi, updateVillainApi } from './villain.api';
 
 export function* loadingVillainsAsync() {
   try {
@@ -80,10 +75,10 @@ export function* watchAddingVillainAsync() {
 }
 
 export function* villainSaga() {
-  yield [
-    fork(watchLoadingVillainsAsync),
-    fork(watchUpdatingVillainAsync),
-    fork(watchDeletingVillainAsync),
-    fork(watchAddingVillainAsync)
-  ];
+  yield all([
+    watchLoadingVillainsAsync(),
+    watchUpdatingVillainAsync(),
+    watchDeletingVillainAsync(),
+    watchAddingVillainAsync()
+  ]);
 }
