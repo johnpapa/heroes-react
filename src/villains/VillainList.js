@@ -28,10 +28,7 @@ class VillainList extends Component {
         {villains.map((villain, index) => (
           <li key={villain.id} role="presentation">
             <div className="card">
-              <CardContent
-                name={villain.name}
-                description={villain.description}
-              />
+              <CardContent name={villain.name} description={villain.description} />
               <footer className="card-footer">
                 <ButtonFooter
                   className="delete-item"
