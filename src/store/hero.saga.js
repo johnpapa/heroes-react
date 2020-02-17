@@ -1,4 +1,4 @@
-import { put, takeEvery, call, fork } from 'redux-saga/effects';
+import { put, takeEvery, call, all } from 'redux-saga/effects';
 import {
   LOAD_HERO,
   LOAD_HERO_SUCCESS,
@@ -13,12 +13,7 @@ import {
   ADD_HERO_SUCCESS,
   ADD_HERO_ERROR
 } from './hero.actions';
-import {
-  addHeroApi,
-  deleteHeroApi,
-  loadHeroesApi,
-  updateHeroApi
-} from './hero.api';
+import { addHeroApi, deleteHeroApi, loadHeroesApi, updateHeroApi } from './hero.api';
 
 // Our worker Saga: will perform the async increment task
 export function* loadingHeroesAsync() {
@@ -82,10 +77,5 @@ export function* watchAddingHeroAsync() {
 }
 
 export function* heroSaga() {
-  yield [
-    fork(watchLoadingHeroesAsync),
-    fork(watchUpdatingHeroAsync),
-    fork(watchDeletingHeroAsync),
-    fork(watchAddingHeroAsync)
-  ];
+  yield all([watchLoadingHeroesAsync(), watchUpdatingHeroAsync(), watchDeletingHeroAsync(), watchAddingHeroAsync()]);
 }
