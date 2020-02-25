@@ -13,7 +13,12 @@ import {
   ADD_HERO_SUCCESS,
   ADD_HERO_ERROR
 } from './hero.actions';
-import { addHeroApi, deleteHeroApi, loadHeroesApi, updateHeroApi } from './hero.api';
+import {
+  addHeroApi,
+  deleteHeroApi,
+  loadHeroesApi,
+  updateHeroApi
+} from './hero.api';
 
 // Our worker Saga: will perform the async increment task
 export function* loadingHeroesAsync() {
@@ -77,5 +82,10 @@ export function* watchAddingHeroAsync() {
 }
 
 export function* heroSaga() {
-  yield all([watchLoadingHeroesAsync(), watchUpdatingHeroAsync(), watchDeletingHeroAsync(), watchAddingHeroAsync()]);
+  yield all([
+    watchLoadingHeroesAsync(),
+    watchUpdatingHeroAsync(),
+    watchDeletingHeroAsync(),
+    watchAddingHeroAsync()
+  ]);
 }

@@ -6,8 +6,12 @@ import { withRouter } from 'react-router';
 import { HeaderBar, NavBar, NotFound } from './components';
 import About from './About';
 
-const Heroes = withRouter(lazy(() => import(/* webpackChunkName: "heroes" */ './heroes/Heroes')));
-const Villains = withRouter(lazy(() => import(/* webpackChunkName: "villains" */ './villains/Villains')));
+const Heroes = withRouter(
+  lazy(() => import(/* webpackChunkName: "heroes" */ './heroes/Heroes'))
+);
+const Villains = withRouter(
+  lazy(() => import(/* webpackChunkName: "villains" */ './villains/Villains'))
+);
 
 class App extends Component {
   render() {

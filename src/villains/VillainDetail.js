@@ -52,8 +52,15 @@ class VillainDetail extends Component {
         </header>
         <div className="card-content">
           <div className="content">
-            {villain.id && <InputDetail name="id" value={villain.id} readOnly="true" />}
-            <InputDetail name="name" value={villain.name} placeholder="e.g Colleen" onChange={this.handleNameChange} />
+            {villain.id && (
+              <InputDetail name="id" value={villain.id} readOnly="true" />
+            )}
+            <InputDetail
+              name="name"
+              value={villain.name}
+              placeholder="e.g Colleen"
+              onChange={this.handleNameChange}
+            />
             <InputDetail
               name="description"
               value={villain.description}
@@ -69,7 +76,12 @@ class VillainDetail extends Component {
             onClick={handleCancelVillain}
             label="Cancel"
           />
-          <ButtonFooter className="save-button" iconClasses="fas fa-save" onClick={this.handleSave} label="Save" />
+          <ButtonFooter
+            className="save-button"
+            iconClasses="fas fa-save"
+            onClick={this.handleSave}
+            label="Save"
+          />
         </footer>
       </div>
     );

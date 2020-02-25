@@ -13,7 +13,10 @@ import app, { heroSaga, villainSaga } from './store';
 const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(app, composeEnhancers(applyMiddleware(sagaMiddleware)));
+const store = createStore(
+  app,
+  composeEnhancers(applyMiddleware(sagaMiddleware))
+);
 
 sagaMiddleware.run(heroSaga);
 sagaMiddleware.run(villainSaga);
