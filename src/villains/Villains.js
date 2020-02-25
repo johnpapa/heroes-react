@@ -148,9 +148,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const VillainsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Villains);
+const VillainsContainer = connect(mapStateToProps, mapDispatchToProps)(Villains);
 
 export default VillainsContainer;
