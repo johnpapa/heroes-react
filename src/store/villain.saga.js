@@ -13,7 +13,12 @@ import {
   ADD_VILLAIN_SUCCESS,
   ADD_VILLAIN_ERROR
 } from './villain.actions';
-import { addVillainApi, deleteVillainApi, loadVillainsApi, updateVillainApi } from './villain.api';
+import {
+  addVillainApi,
+  deleteVillainApi,
+  loadVillainsApi,
+  updateVillainApi
+} from './villain.api';
 
 export function* loadingVillainsAsync() {
   try {

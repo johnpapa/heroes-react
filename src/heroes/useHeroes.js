@@ -1,7 +1,13 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addHeroAction, deleteHeroAction, loadHeroesAction, selectHeroAction, updateHeroAction } from '../store';
+import {
+  addHeroAction,
+  deleteHeroAction,
+  loadHeroesAction,
+  selectHeroAction,
+  updateHeroAction
+} from '../store';
 
 /** Custom hook for accessing Hero state in redux store */
 function useHeroes() {

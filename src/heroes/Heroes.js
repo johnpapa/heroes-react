@@ -11,7 +11,15 @@ const captains = console;
 function Heroes({ history }) {
   const [heroToDelete, setHeroToDelete] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const { addHero, deleteHero, getHeroes, heroes, selectHero, selectedHero, updateHero } = useHeroes();
+  const {
+    addHero,
+    deleteHero,
+    getHeroes,
+    heroes,
+    selectHero,
+    selectedHero,
+    updateHero
+  } = useHeroes();
 
   useEffect(() => {
     getHeroes();
@@ -66,7 +74,12 @@ function Heroes({ history }) {
 
   return (
     <div className="content-container">
-      <ListHeader title="Heroes" handleAdd={addNewHero} handleRefresh={handleRefresh} routePath="/heroes" />
+      <ListHeader
+        title="Heroes"
+        handleAdd={addNewHero}
+        handleRefresh={handleRefresh}
+        routePath="/heroes"
+      />
       <div className="columns is-multiline is-variable">
         <div className="column is-8">
           <Switch>
@@ -87,7 +100,11 @@ function Heroes({ history }) {
               path="/heroes/:id"
               component={() => {
                 return (
-                  <HeroDetail hero={selectedHero} handleCancelHero={handleCancelHero} handleSaveHero={handleSaveHero} />
+                  <HeroDetail
+                    hero={selectedHero}
+                    handleCancelHero={handleCancelHero}
+                    handleSaveHero={handleSaveHero}
+                  />
                 );
               }}
             />

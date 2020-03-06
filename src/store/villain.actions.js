@@ -16,9 +16,21 @@ export const ADD_VILLAIN_ERROR = '[Villains] ADD_VILLAIN_ERROR';
 
 export const SELECT_VILLAIN = '[Villain] SELECT_VILLAIN';
 
-export const selectVillainAction = villain => ({ type: SELECT_VILLAIN, payload: villain });
+export const selectVillainAction = villain => ({
+  type: SELECT_VILLAIN,
+  payload: villain
+});
 export const loadVillainsAction = () => ({ type: LOAD_VILLAIN });
 
-export const updateVillainAction = villain => ({ type: UPDATE_VILLAIN, payload: villain });
-export const deleteVillainAction = villain => ({ type: DELETE_VILLAIN, payload: villain });
-export const addVillainAction = villain => ({ type: ADD_VILLAIN, payload: villain });
+export const updateVillainAction = villain => ({
+  type: UPDATE_VILLAIN,
+  payload: villain
+});
+export const deleteVillainAction = villain => ({
+  type: DELETE_VILLAIN,
+  payload: villain
+});
+export const addVillainAction = villain => ({
+  type: ADD_VILLAIN,
+  payload: villain
+});

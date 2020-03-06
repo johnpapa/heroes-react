@@ -1,156 +1,126 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import { ListHeader, ModalYesNo } from '../components';
-import {
-  addVillainAction,
-  deleteVillainAction,
-  loadVillainsAction,
-  selectVillainAction,
-  updateVillainAction
-} from '../store';
 import VillainDetail from './VillainDetail';
 import VillainList from './VillainList';
+import useVillains from './useVillains';
 
 const captains = console;
 
-class Villains extends Component {
-  state = {
-    villainToDelete: null,
-    showModal: false
-  };
+function Villains({ history }) {
+  const [villainToDelete, setVillainToDelete] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const {
+    addVillain,
+    deleteVillain,
+    getVillains,
+    villains,
+    selectVillain,
+    selectedVillain,
+    updateVillain
+  } = useVillains();
 
-  componentDidMount() {
-    this.props.getVillains();
+  useEffect(() => {
+    getVillains();
+  }, [getVillains]);
+
+  function addNewVillain() {
+    selectVillain({});
+    history.push('/villains/0');
   }
 
-  addVillain = () => {
-    this.props.selectVillain({});
-    this.props.history.push('/villains/0');
-  };
+  function handleCancelVillain() {
+    history.push('/villains');
+    selectVillain(null);
+    setVillainToDelete(null);
+  }
 
-  handleCancelVillain = () => {
-    this.props.history.push('/villains');
-    this.props.selectVillain(null);
-    this.setState({ villainToDelete: null });
-  };
+  function handleDeleteVillain(villain) {
+    selectVillain(null);
+    setVillainToDelete(villain);
+    setShowModal(true);
+  }
 
-  handleDeleteVillain = villain => {
-    this.props.selectVillain(null);
-    this.setState({ showModal: true, villainToDelete: villain });
-  };
-
-  handleSaveVillain = villain => {
-    const { addVillain, selectedVillain, updateVillain } = this.props;
+  function handleSaveVillain(villain) {
     if (selectedVillain && selectedVillain.name) {
       captains.log(villain);
       updateVillain(villain);
-      this.handleCancelVillain();
     } else {
       addVillain(villain);
-      this.handleCancelVillain();
     }
-  };
-
-  handleSelectVillain = selectedVillain => {
-    this.props.selectVillain(selectedVillain);
-    captains.log(`you selected ${selectedVillain.name}`);
-  };
-
-  handleCloseModal = () => {
-    this.setState({ showModal: false });
-  };
-
-  handleDeleteFromModal = () => {
-    const { deleteVillain } = this.props;
-    this.setState({ showModal: false });
-    deleteVillain(this.state.villainToDelete);
-    this.handleCancelVillain();
-  };
-
-  render() {
-    const { villainToDelete, showModal } = this.state;
-    const { villains, selectedVillain, getVillains } = this.props;
-
-    return (
-      <div className="content-container">
-        <ListHeader title="Villains" handleAdd={this.addVillain} handleRefresh={getVillains} routePath="/villains" />
-        <div className="columns is-multiline is-variable">
-          <div className="column is-6">
-            <Switch>
-              <Route
-                exact
-                path="/villains"
-                component={() => (
-                  <VillainList
-                    villains={villains}
-                    selectedVillain={selectedVillain}
-                    handleSelectVillain={this.handleSelectVillain}
-                    handleDeleteVillain={this.handleDeleteVillain}
-                  />
-                )}
-              />
-              <Route
-                path="/villains/:id"
-                component={() => {
-                  return (
-                    <VillainDetail
-                      villain={selectedVillain}
-                      handleCancelVillain={this.handleCancelVillain}
-                      handleSaveVillain={this.handleSaveVillain}
-                      key={selectedVillain && selectedVillain.id}
-                    />
-                  );
-                }}
-              />
-            </Switch>
-          </div>
-        </div>
-
-        {showModal && (
-          <ModalYesNo
-            message={`Would you like to delete ${villainToDelete.name}?`}
-            onNo={this.handleCloseModal}
-            onYes={this.handleDeleteFromModal}
-          />
-        )}
-      </div>
-    );
+    handleCancelVillain();
   }
+
+  function handleCloseModal() {
+    setShowModal(false);
+  }
+
+  function handleDeleteFromModal() {
+    setShowModal(false);
+    deleteVillain(villainToDelete);
+    handleCancelVillain();
+  }
+
+  function handleSelectVillain(selectedVillain) {
+    selectVillain(selectedVillain);
+    captains.log(`you selected ${selectedVillain.name}`);
+  }
+
+  function handleRefresh() {
+    handleCancelVillain();
+    getVillains();
+  }
+
+  return (
+    <div className="content-container">
+      <ListHeader
+        title="Villains"
+        handleAdd={addNewVillain}
+        handleRefresh={handleRefresh}
+        routePath="/villains"
+      />
+      <div className="columns is-multiline is-variable">
+        <div className="column is-8">
+          <Switch>
+            <Route
+              exact
+              path="/villains"
+              component={() => (
+                <VillainList
+                  villains={villains}
+                  selectedVillain={selectedVillain}
+                  handleSelectVillain={handleSelectVillain}
+                  handleDeleteVillain={handleDeleteVillain}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/villains/:id"
+              component={() => {
+                return (
+                  <VillainDetail
+                    villain={selectedVillain}
+                    handleCancelVillain={handleCancelVillain}
+                    handleSaveVillain={handleSaveVillain}
+                  />
+                );
+              }}
+            />
+          </Switch>
+        </div>
+      </div>
+
+      {showModal && (
+        <ModalYesNo
+          message={`Would you like to delete ${villainToDelete.name}?`}
+          onNo={handleCloseModal}
+          onYes={handleDeleteFromModal}
+        />
+      )}
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-  return {
-    villains: state.villains.data,
-    villainsLoading: state.villains.loading,
-    villainsLoadingError: state.villains.error,
-    selectedVillain: state.selectedVillain
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getVillains: () => {
-      dispatch(loadVillainsAction());
-    },
-    selectVillain: villain => {
-      dispatch(selectVillainAction(villain));
-    },
-    updateVillain: villain => {
-      dispatch(updateVillainAction(villain));
-    },
-    deleteVillain: villain => {
-      dispatch(deleteVillainAction(villain));
-    },
-    addVillain: villain => {
-      dispatch(addVillainAction(villain));
-    }
-  };
-};
-
-const VillainsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Villains);
-
-export default VillainsContainer;
+export default Villains;
