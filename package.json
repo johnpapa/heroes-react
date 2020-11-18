@@ -28,7 +28,7 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "axios": "^0.21.0",
     "bulma": "^0.9.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^4.13.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.2",
