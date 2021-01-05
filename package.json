@@ -26,7 +26,7 @@
   "proxy": "http://localhost:8627/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "bulma": "^0.9.1",
     "node-sass": "^4.13.1",
     "react": "^16.14.0",
