@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { ButtonFooter, InputDetail } from '../components';
 
@@ -7,15 +7,15 @@ function HeroDetail({
   hero: initHero,
   handleCancelHero,
   handleSaveHero,
-  history
 }) {
+  const navigate = useNavigate();
   const [hero, setHero] = useState(Object.assign({}, initHero));
 
   useEffect(() => {
     if (!hero) {
-      history.push('/'); // no hero, bail out of Details
+      navigate('/'); // no hero, bail out of Details
     }
-  }, [hero, history]);
+  }, [hero, navigate]);
 
   function handleSave() {
     const chgHero = { ...hero, id: hero.id || null };
@@ -73,4 +73,4 @@ function HeroDetail({
   );
 }
 
-export default withRouter(HeroDetail);
+export default HeroDetail;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { ButtonFooter, CardContent } from '../components';
 
@@ -7,12 +7,13 @@ function VillainList({
   handleDeleteVillain,
   handleSelectVillain,
   villains,
-  history
 }) {
+  const navigate = useNavigate();
+
   function selectVillain(e) {
     const villain = getSelectedVillain(e);
     handleSelectVillain(villain);
-    history.push(`/villains/${villain.id}`);
+    navigate(`/villains/${villain.id}`);
   }
 
   function deleteVillain(e) {
@@ -59,4 +60,4 @@ function VillainList({
   );
 }
 
-export default withRouter(VillainList);
+export default VillainList;

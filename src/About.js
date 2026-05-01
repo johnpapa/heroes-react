@@ -16,9 +16,9 @@ const About = () => (
       <h2 className="title">Why</h2>
       <p>
         I love JavaScript and the Web! One of the most common questions I hear
-        is "which framework is best?". I like to flip this around and ask you
-        "which is best for you?". The best way to know this is to try it for
-        yourself. I'll follow up with some articles on my experiences with these
+        is &ldquo;which framework is best?&rdquo;. I like to flip this around and ask you
+        &ldquo;which is best for you?&rdquo;. The best way to know this is to try it for
+        yourself. I&apos;ll follow up with some articles on my experiences with these
         frameworks but in the meantime, please try it for yourself to gain your
         own experience with each.
       </p>
