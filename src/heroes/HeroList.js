@@ -1,13 +1,15 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { ButtonFooter, CardContent } from '../components';
 
-function HeroList({ handleDeleteHero, handleSelectHero, heroes, history }) {
+function HeroList({ handleDeleteHero, handleSelectHero, heroes }) {
+  const navigate = useNavigate();
+
   function selectHero(e) {
     const hero = getSelectedHero(e);
     handleSelectHero(hero);
-    history.push(`/heroes/${hero.id}`);
+    navigate(`/heroes/${hero.id}`);
   }
 
   function deleteHero(e) {
@@ -51,4 +53,4 @@ function HeroList({ handleDeleteHero, handleSelectHero, heroes, history }) {
   );
 }
 
-export default withRouter(HeroList);
+export default HeroList;

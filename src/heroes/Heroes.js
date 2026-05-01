@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { ListHeader, ModalYesNo } from '../components';
 import HeroDetail from './HeroDetail';
@@ -8,7 +8,8 @@ import useHeroes from './useHeroes';
 
 const captains = console;
 
-function Heroes({ history }) {
+function Heroes() {
+  const navigate = useNavigate();
   const [heroToDelete, setHeroToDelete] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const {
@@ -27,11 +28,11 @@ function Heroes({ history }) {
 
   function addNewHero() {
     selectHero({});
-    history.push('/heroes/0');
+    navigate('/heroes/0');
   }
 
   function handleCancelHero() {
-    history.push('/');
+    navigate('/');
     selectHero(null);
     setHeroToDelete(null);
   }
@@ -82,33 +83,29 @@ function Heroes({ history }) {
       />
       <div className="columns is-multiline is-variable">
         <div className="column is-8">
-          <Switch>
+          <Routes>
             <Route
-              exact
-              path="/heroes"
-              component={() => (
+              index
+              element={
                 <HeroList
                   heroes={heroes}
                   selectedHero={selectedHero}
                   handleSelectHero={handleSelectHero}
                   handleDeleteHero={handleDeleteHero}
                 />
-              )}
+              }
             />
             <Route
-              exact
-              path="/heroes/:id"
-              component={() => {
-                return (
-                  <HeroDetail
-                    hero={selectedHero}
-                    handleCancelHero={handleCancelHero}
-                    handleSaveHero={handleSaveHero}
-                  />
-                );
-              }}
+              path=":id"
+              element={
+                <HeroDetail
+                  hero={selectedHero}
+                  handleCancelHero={handleCancelHero}
+                  handleSaveHero={handleSaveHero}
+                />
+              }
             />
-          </Switch>
+          </Routes>
         </div>
       </div>
 

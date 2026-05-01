@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { ButtonFooter, InputDetail } from '../components';
 
@@ -7,15 +7,15 @@ function VillainDetail({
   villain: initVillain,
   handleCancelVillain,
   handleSaveVillain,
-  history
 }) {
+  const navigate = useNavigate();
   const [villain, setVillain] = useState(Object.assign({}, initVillain));
 
   useEffect(() => {
     if (!villain) {
-      history.push('/villains'); // no villain, bail out of Details
+      navigate('/villains'); // no villain, bail out of Details
     }
-  }, [villain, history]);
+  }, [villain, navigate]);
 
   function handleSave() {
     const chgVillain = { ...villain, id: villain.id || null };
@@ -75,4 +75,4 @@ function VillainDetail({
   );
 }
 
-export default withRouter(VillainDetail);
+export default VillainDetail;

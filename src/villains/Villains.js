@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { ListHeader, ModalYesNo } from '../components';
 import VillainDetail from './VillainDetail';
@@ -8,7 +8,8 @@ import useVillains from './useVillains';
 
 const captains = console;
 
-function Villains({ history }) {
+function Villains() {
+  const navigate = useNavigate();
   const [villainToDelete, setVillainToDelete] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const {
@@ -27,11 +28,11 @@ function Villains({ history }) {
 
   function addNewVillain() {
     selectVillain({});
-    history.push('/villains/0');
+    navigate('/villains/0');
   }
 
   function handleCancelVillain() {
-    history.push('/villains');
+    navigate('/villains');
     selectVillain(null);
     setVillainToDelete(null);
   }
@@ -82,33 +83,29 @@ function Villains({ history }) {
       />
       <div className="columns is-multiline is-variable">
         <div className="column is-8">
-          <Switch>
+          <Routes>
             <Route
-              exact
-              path="/villains"
-              component={() => (
+              index
+              element={
                 <VillainList
                   villains={villains}
                   selectedVillain={selectedVillain}
                   handleSelectVillain={handleSelectVillain}
                   handleDeleteVillain={handleDeleteVillain}
                 />
-              )}
+              }
             />
             <Route
-              exact
-              path="/villains/:id"
-              component={() => {
-                return (
-                  <VillainDetail
-                    villain={selectedVillain}
-                    handleCancelVillain={handleCancelVillain}
-                    handleSaveVillain={handleSaveVillain}
-                  />
-                );
-              }}
+              path=":id"
+              element={
+                <VillainDetail
+                  villain={selectedVillain}
+                  handleCancelVillain={handleCancelVillain}
+                  handleSaveVillain={handleSaveVillain}
+                />
+              }
             />
-          </Switch>
+          </Routes>
         </div>
       </div>
 
