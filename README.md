@@ -1,5 +1,7 @@
 # Tour of Heroes
 
+[![AI-Ready](https://img.shields.io/badge/AI--Ready-true-green?logo=github-copilot)](https://github.com/johnpapa/heroes-react/blob/main/AGENTS.md)
+
 This project was created to help represent a fundamental app written with React. The heroes and villains theme is used throughout the app.
 
 by [John Papa](http://twitter.com/john_papa)
