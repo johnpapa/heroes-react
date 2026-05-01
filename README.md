@@ -1,5 +1,7 @@
 # Tour of Heroes
 
+[![AI Ready](https://img.shields.io/badge/AI--Ready-yes-brightgreen?style=flat)](https://github.com/johnpapa/ai-ready)
+
 This project was created to help represent a fundamental app written with React. The heroes and villains theme is used throughout the app.
 
 by [John Papa](http://twitter.com/john_papa)
@@ -125,3 +127,26 @@ Thank you to [Sarah Drasner](https://twitter.com/), [Brian Holt](https://twitter
 - [Debugging Angular in VS Code](https://code.visualstudio.com/docs/nodejs/angular-tutorial?WT.mc_id=javascript-0000-jopapa)
 - [Debugging React in VS Code](https://code.visualstudio.com/docs/nodejs/reactjs-tutorial?WT.mc_id=javascript-0000-jopapa)
 - [Debugging Vue in VS Code](https://code.visualstudio.com/docs/nodejs/vuejs-tutorial?WT.mc_id=javascript-0000-jopapa)
+
+## Contributing
+
+Contributions are welcome! You can use [Copilot CLI](https://github.com/johnpapa/ai-ready) to help:
+
+```
+Add a new feature module called "sidekicks" with CRUD operations
+```
+
+### Getting Started
+
+1. Fork and clone the repo
+2. Install dependencies: `npm install`
+3. Start the app: `npm run quick`
+4. Create a branch: `git checkout -b feat/my-feature`
+5. Make changes, then run lint and e2e tests:
+   ```bash
+   npm run lint
+   npm run cypress
+   ```
+6. Push and open a PR
+
+See [AGENTS.md](AGENTS.md) for the full contributor guide, architecture, and conventions.
