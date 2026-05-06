@@ -31,7 +31,7 @@
   },
   "proxy": "http://localhost:8627/",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "axios": "^1.7.9",
     "bulma": "^0.9.4",
     "react": "^18.3.1",
