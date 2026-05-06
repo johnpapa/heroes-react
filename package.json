@@ -47,7 +47,7 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "cypress": "^13.17.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.2.3",
     "json-server": "^0.17.4",
     "json-server-reset": "^1.6.0",
