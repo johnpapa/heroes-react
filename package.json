@@ -32,7 +32,7 @@
   "proxy": "http://localhost:8627/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "axios": "^1.7.9",
+    "axios": "^1.18.0",
     "bulma": "^0.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
